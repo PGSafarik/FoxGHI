@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<BrowseTracker_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="src/FXWindowController.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1751" topLine="13" />
+	</File>
+	<File name="include/FXWindowController.h" open="1" top="0" tabpos="4">
+		<Cursor position="702" topLine="0" />
+	</File>
+	<File name="include/FXGWindow.h" open="1" top="0" tabpos="3">
+		<Cursor position="504" topLine="0" />
+	</File>
+	<File name="include/fxghi.h" open="1" top="0" tabpos="1">
+		<Cursor position="617" topLine="0" />
+	</File>
+	<File name="include/icons.h" open="1" top="0" tabpos="7">
+		<Cursor position="374" topLine="0" />
+	</File>
+	<File name="src/FXGDialogBox.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="1673" topLine="0" />
+		<BrowseMarks positions="594" />
+	</File>
+	<File name="src/FXGWindow.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="1570" topLine="18" />
+	</File>
+	<File name="include/FXWindowHeader.h" open="1" top="0" tabpos="5">
+		<Cursor position="1318" topLine="0" />
+	</File>
+	<File name="include/FXGHI_defs.h" open="1" top="0" tabpos="2">
+		<Cursor position="639" topLine="0" />
+	</File>
+	<File name="include/FXGDialogBox.h" open="1" top="1" tabpos="6">
+		<Cursor position="622" topLine="0" />
+	</File>
+</BrowseTracker_layout_file>

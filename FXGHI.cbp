@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="FXGHI" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option show_notes="0">
+			<notes>
+				<![CDATA[Projekt Fox-Gnome3 je nadstavbou nad GUI knihovnou FOX a poskytuje okenni prvky rozhrani, jake je mozne pouzivat prave v GTK/Gnome 3. ]]>
+			</notes>
+		</Option>
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/debug/FXGHI" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-fPIC" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/FXGHI" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="include" />
+			<Add directory="/opt/foxlib/1.7/74/include" />
+		</Compiler>
+		<Linker>
+			<Add library="FOX-1.7" />
+			<Add library="CHART-1.7" />
+			<Add directory="/opt/foxlib/1.7/74/lib" />
+		</Linker>
+		<Unit filename="include/FXGDialogBox.h" />
+		<Unit filename="include/FXGHI_defs.h" />
+		<Unit filename="include/FXGWindow.h" />
+		<Unit filename="include/FXWindowController.h" />
+		<Unit filename="include/FXWindowHeader.h" />
+		<Unit filename="include/fxghi.h" />
+		<Unit filename="include/icons.h" />
+		<Unit filename="src/FXGDialogBox.cpp" />
+		<Unit filename="src/FXGWindow.cpp" />
+		<Unit filename="src/FXWindowController.cpp" />
+		<Unit filename="src/FXWindowHeader.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
