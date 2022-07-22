@@ -1,0 +1,12 @@
+bin/
+obj/
+
+
+FXGHI_build_log.html
+*.depend
+*.bmarks
+*.layout
+*.layout.*
+
+*~
+
