@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  08/09/2022 
+Fox Gnome Human Interface library (foxGHI)  08/09/2022 
 ============================================================
 
 GENERAL INFO:
@@ -24,8 +24,7 @@ the library also got its name.
 Please note that the library is currently under development and may change at any time, although there is a 
 certain effort to prevent this from happening, however, this cannot be guaranteed at this time
 
-![alt text](https://github.com/PGSafarik/FXGHI/blob/master/doc/images/01.png)
-
+Screenshot: https://github.com/PGSafarik/FXGHI/blob/master/doc/images/01.png
 
 Compilation and installation:
 =============================
