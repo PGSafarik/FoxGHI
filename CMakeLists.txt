@@ -20,7 +20,7 @@ LINK_DIRECTORIES(    "${LIB_FOX}/lib/" )        # foxlib shared
 
 # Add to the shared library
 ADD_LIBRARY( ${PROJECT_NAME} SHARED ${SOURCES} )  # Make project shared lib (.so)
-TARGET_LINK_LIBRARIES( ${PROJECT_NAME} FOX-1.7 )  # Lik with dependecies libs
+TARGET_LINK_LIBRARIES( ${PROJECT_NAME} FOX-1.7 )  # Linked project with dependecies libs
 
 # Install build project
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION lib/ ) # libray file(s)
