@@ -28,7 +28,7 @@ namespace FXGHI {
 enum WinControllerFlags {
   NOSEPARATING       = 0x00000010,	// No create separator for this box
   CONTROL_ICONIFY    = 0x00000020,	// Minimize / iconify window button
-  CONTROL_MAXIMIZE   = 0x00000040,	// Maximize window button
+  CONTROL_MAXIMIZE   = 0x00000040	// Maximize window button
   //CONTROL_FULLSCREEN = 0x00000040,
 };
 #define CONTROLS_NORMAL CONTROL_MAXIMIZE | CONTROL_ICONIFY
