@@ -88,12 +88,12 @@ FXbool FXGWindow::close( FXbool notify )
     // If there was another main level window still visible, that's all we do
     for( window = getRoot( )->getFirst( ); window; window = window->getNext( ) ) {
       if( window != this && window->isMemberOf( FXMETACLASS( FXGWindow ) ) ) {
-		// If is the chcked window signed as primary, no closing this aplication...
-	    if( dynamic_cast<FXGWindow*>( window )->isPrimary( ) ) {
-		  // I don't like jumping
-		  quit = false;
-		  break;
-	    }
+		  // If is the chcked window signed as primary, no closing this aplication...
+	      if( dynamic_cast<FXGWindow*>( window )->isPrimary( ) ) {
+		      // I don't like jumping
+		      quit = false;
+		      break;
+	      }
       }
     }
 

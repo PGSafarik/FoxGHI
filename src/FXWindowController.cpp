@@ -55,8 +55,9 @@ long FXWindowController::onCmd_WinMaximize( FXObject *sender, FXSelector sel, vo
 	m_maximizeBtn->setIcon( ic_maximize );
   }
   else {
-	 win->maximize( );
-	 m_maximizeBtn->setIcon( ic_restore );
+    /// FIXME 001: In some wm/environments (e.g. gnome) it doesn't work, win->maximize( ) behaves like win->restore( ). Find out why
+	bool r = win->maximize( true );
+	if ( r ) { m_maximizeBtn->setIcon( ic_restore ); }
   }
 
   m_maximizeBtn->update( );

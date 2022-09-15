@@ -61,7 +61,8 @@ public :
   // Gui events
   //
   enum {
-    WIN_MAXIMIZE = FXVerticalFrame::ID_LAST
+    WIN_MAXIMIZE = 1,
+    ID_LAST
   };
   long onCmd_WinMaximize( FXObject *sender, FXSelector sel, void *data );
 
