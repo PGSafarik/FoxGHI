@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  08/09/2022 
+﻿Fox Gnome Human Interface library (foxGHI)  15/09/2022 
 ============================================================
 
 Obsah:
