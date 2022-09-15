@@ -12,7 +12,7 @@
 <p align="center"><img src="doc/images/01.png?raw=true" width="49%" />  
 
 ## 1. GENERAL INFO:
-This very small library extends the FOX GUI Framework with several additional classes with the help of which
+This very small library extends the FOX GUI framework with several additional classes with the help of which
 you can use top-level windows without decoration with the so-called Header bar.
 
 The Header bar is a small bar at the top of the window that integrates the properties of the title bar,
