@@ -1,0 +1,12 @@
+-I/home/gabriel/Projects/Fox/FXGHI
+-I/home/gabriel/Projects/Fox/FXGHI/include
+-I/opt/foxlib/1.7/74/include
+-I/usr/include/c++/10
+-I/usr/include/x86_64-linux-gnu/c++/10
+-I/usr/include/c++/10/backward
+-I/usr/lib/gcc/x86_64-linux-gnu/10/include
+-I/usr/local/include
+-I/usr/include/x86_64-linux-gnu
+-I/usr/include
+-target
+x86_64-linux-gnu

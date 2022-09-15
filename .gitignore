@@ -1,12 +1,20 @@
 bin/
 obj/
-
+cmake-build-Debug/
+.build-debug/
+.codelite/
+.ctagsd/
 
 FXGHI_build_log.html
+compile_flags.txt
+FXGHI.txt
+Makefile
+
 *.depend
 *.bmarks
 *.layout
 *.layout.*
-
+*.save
+*.save.*
 *~
 

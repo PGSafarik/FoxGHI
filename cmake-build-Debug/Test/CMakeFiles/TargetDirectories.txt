@@ -1,0 +1,3 @@
+/home/gabriel/Projects/Fox/FXGHI/cmake-build-Debug/Test/CMakeFiles/rebuild_cache.dir
+/home/gabriel/Projects/Fox/FXGHI/cmake-build-Debug/Test/CMakeFiles/edit_cache.dir
+/home/gabriel/Projects/Fox/FXGHI/cmake-build-Debug/Test/CMakeFiles/Test.dir
