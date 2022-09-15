@@ -2,7 +2,7 @@
 -08/09/2022-
 
 *Content:*
-  1. General info
+  1. [General info](#general-info)
   2. Compilation and installation
   3. Known errors and bugs
   4. The project state and plans for the future
