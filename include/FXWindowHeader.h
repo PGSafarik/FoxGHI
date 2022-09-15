@@ -45,11 +45,13 @@ FXDECLARE( FXWindowHeader )
   FXPoint m_mwp;     // Ulozena pozice okna (Memory Window Position)
 
   // Text of bar
-  FXPoint   m_tcoord; // Pozice pro vykresleni titlku
-  FXPoint   m_scoord; // Pozice pro vykresleni subtitulku
-  FXString  m_stext;  // Subtitulek
-  FXFont   *m_tfnt;   // Font titulku
-  FXFont   *m_sfnt;   // Font subtitulku
+  FXPoint   m_tcoord;    // Pozice pro vykresleni titlku
+  FXPoint   m_scoord;    // Pozice pro vykresleni subtitulku
+  FXString  m_stext;     // Subtitulek
+  FXFont   *m_tfnt;      // Font titulku
+  FXFont   *m_sfnt;      // Font subtitulku
+  FXint     m_tlenght;   // Delka titulku
+  FXint     m_stlenght;  // Delka subtitulku
 
   //std::ofstream logger;
 

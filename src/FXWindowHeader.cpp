@@ -73,20 +73,53 @@ void FXWindowHeader::layout( )
 /* Calculate position to the headerBar text, with change to top-level window */
   FXHorizontalFrame::layout( );
 
-  FXString t_text = m_parent->getTitle( );
+  FXString t_text = this->getTitle( );
+  m_tlenght  = m_tfnt->getTextWidth( t_text );
+  m_stlenght = m_tfnt->getTextWidth( this->getText( ) );
+
   FXint wb_height = getHeight( );
   FXint wb_width  = getWidth( );
   FXint ft_height = m_tfnt->getFontHeight( );
   FXint pw        = wb_width / 2;
+  FXint _width    = 0;
+  FXint _left     = 0;
+  FXint _right    = 0;
 
+  // Corection a parent width, in depending on the title ( or subtitle) width
+  for( FXWindow *ch = getFirst( ); ch != NULL; ch = ch->getNext( ) ) {
+    if( ch ) { 
+      int x = ch->getX( );
+      int w = ch->getWidth( );
+
+      _width += w + DEFAULT_SPACING;
+      if ( _right == 0 ) {
+        if ( x + w < pw ) { _left = _width; } else { _right = x; }
+      }
+    }  
+  }
+  wb_width -= _width;
+
+  _width += ( m_tlenght >= m_stlenght ? m_tlenght : m_stlenght ) + 2* DEFAULT_SPACING;
+ 
+  if ( _width > getParent( )->getWidth( ) ) {
+    getParent( )->setWidth( _width );
+  }
+  
+  // Recalc Titile position
+  
+  pw = _left + _right / 2;
   if( m_stext.empty( ) ) {
-    m_tcoord.set( pw - ( m_tfnt->getTextWidth( t_text ) / 2 ), wb_height / 2 + ft_height / 3 );
+    m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 3 );
   }
   else {
     FXint offset = wb_height / 4 + getPadTop( );
-    m_tcoord.set( pw - ( m_tfnt->getTextWidth( t_text ) / 2 ),  offset );
-    m_scoord.set( pw - ( m_sfnt->getTextWidth( m_stext ) / 2 ), wb_height - offset + 3 * ( ft_height / 4 ) );
+    m_tcoord.set( pw - ( m_tlenght / 2 ),  offset );
+    m_scoord.set( pw - ( m_stlenght / 2 ), wb_height - offset + 3 * ( ft_height / 4 ) );
   }
+
+
+  std::cout << "_width      : " << _width << std::endl;
+  std::cout << "parent width: " << getParent( )->getWidth( ) << std::endl;
 }
 
 void FXWindowHeader::recolorize( )
@@ -209,6 +242,7 @@ long FXWindowHeader::onMotion( FXObject *sender, FXSelector sel, void *data )
 void FXWindowHeader::UpdateTitle( )
 {
   /* Aktualize and redraiw Header bar in changes titles text */
+
   layout( );
   update( );
   repaint( );
