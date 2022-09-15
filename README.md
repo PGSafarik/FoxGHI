@@ -43,12 +43,12 @@ certain effort to prevent this from happening, however, this cannot be guarantee
   cmake >= 3.10
   
 After downloading the project from Github (and possibly unzipping it), go to the folder with the project and enter the following command sequence:
-'''
+```
   mkdir build
   cd build && cmake .. 
   make
   sudo make install
-'''
+```
 After successfully compiling and building the project, the resulting library and header files will be installed into the
 address book /opt/foxGHI/0.1/1/
 
