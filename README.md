@@ -53,7 +53,7 @@ After successfully compiling and building the project, the resulting library and
 address book /opt/foxGHI/0.1/1/
 
 ## 3. KNOWN ERRORS AND BUGS
-*  10/09/2022 - Disfunct the "maximize" button - opened
+* ### 10/09/2022 - Disfunct the "maximize" button - opened
    On some WMs and DEs (eg Gnome, Cinnamon) the maximize button may not work. Probably it is a 
    faulty communication between the application and WM, or an error in the WM settings.
     
