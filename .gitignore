@@ -1,9 +1,11 @@
 bin/
 obj/
+build/
 cmake-build-Debug/
 .build-debug/
 .codelite/
 .ctagsd/
+.build/
 
 FXGHI_build_log.html
 compile_flags.txt

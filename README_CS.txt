@@ -30,6 +30,8 @@ Jak bylo řečeno výše, cílem teto knihovny není duplikovat Gnome 3, nicmén
 objektů se snažím vycházet z Gnome 3 Standardu "GHI - Gnome Human Interface", podle něhož tato
 knihovna získala také svůj název.
 
+Screenshot: https://github.com/PGSafarik/FXGHI/blob/master/doc/images/01.png
+
 2. PŘEKLAD A INSTALACE
 ========================
 Závislosti:
@@ -63,7 +65,7 @@ se v průběhu času změnit.
 
 V nejblyžší budoucnosti bude 
   1) Vytvořena dokumentace ke knihovně 
-  2) Examples & tests
+  2) Příklady & testy
   3) verzovazni knihovny  
   4) integrační boxy pro FXWindowHeader.
 
@@ -85,7 +87,7 @@ Spolu s foxGHI byste měli obdržet kopii GNU Lesser General Public License. Pok
 
 6. INTERNET: 
 ===============
-  Foxtoolkit home page:               http://fox-toolkit.org/
+  Webové stránky Foxtoolkitu:         http://fox-toolkit.org/
   Gnome Human Interace Guidelines:    https://developer.gnome.org/hig/
   Blog autora (CZ):                   http://bfuplusplus.blogspot.cz/
 
