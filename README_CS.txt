@@ -1,8 +1,16 @@
 ﻿Fox Gnome Human Interface library (foxGHI)  08/09/2022 
 ============================================================
 
-ZÁKLADNÍ INFORMACE:
-===================
+Obsah:
+  1. Základní informace
+  2. Překlad a instalace
+  3. Známé chyby a bugy
+  4. Stav projektu a plány do budoucna
+  5. Autor a licence
+  6. Internet
+  
+1. ZÁKLADNÍ INFORMACE:
+=======================
 Tato velmi malá knihovna rozšiřuje GUI Framework FOX o několik dodatečných tříd, s jejichž pomocí
 lze používat top-level okna bez dekorace s tzv. Header barem. 
 
@@ -22,11 +30,7 @@ Jak bylo řečeno výše, cílem teto knihovny není duplikovat Gnome 3, nicmén
 objektů se snažím vycházet z Gnome 3 Standardu "GHI - Gnome Human Interface", podle něhož tato
 knihovna získala také svůj název.
 
-Upozorňuji, ze knihovna je v současné době ve vývoji a může se kdykoliv změnit,
-i když existuje 
-určitá snaha, aby se tak nedělo, nicméně v tuto chvíli to zaručit nelze
-
-Překlad a instalace.
+2. PŘEKLAD A INSTALACE
 ========================
 Závislosti:
   Foxtoolkit 1.7.76 - GUI Framework http://fox-toolkit.org/ftp/fox-1.7.76.tar.gz
@@ -44,9 +48,28 @@ sekvenci příkazu:
 Po uspěšné kompilaci a sestaveni projektu bude výsledná knihovna a hlavičkové soubory nainstalováný do 
 adresáře /opt/foxGHI/0.1/1/  
 
-Autor a Licence
-===================
-Copyright (C) 2019 - 2022 Pavel Šafařík <drakarax@seznam.cz>
+3. ZNÁME CHYBY A BUGY
+======================
+1. 10/09/2022 - Nefunkcni tlacitko "Maximize" - otevřene
+  Na některých WM a DE (např. Gnome, Cinnamon) nemusí fungovat tlačítko maximalizace. Pravděpodobně 
+  jde o chybnou komunikaci mezi aplikaci a WM, nebo chybu v nastavení WM.   
+
+4. STAV PROJEKTU A PLÁNY DO BUDOUCNA
+======================================
+FoxGHI v tuto chvili implementuje základní funkcionalitu o kterou mi šlo - tzn. autonomní top-level 
+okno s integrovaným headerbarem ve stylu Gnome 3. Nicméně, je ještě co vylepšovat. Z toho důvodu 
+mějte prosím  na paměti, že projekt se stále nachází ve vývoji a muže jednak obsahovat bugy a může 
+se v průběhu času změnit. 
+
+V nejblyžší budoucnosti bude 
+  1) Vytvořena dokumentace ke knihovně 
+  2) Examples & tests
+  3) verzovazni knihovny  
+  4) integrační boxy pro FXWindowHeader.
+
+5. AUTOR A LICENCE
+=====================
+Copyright (C) 2019 - 2022 Pavel Šafařík <drakarax@seznam.cz> alias D.A.Tiger
 všechna práva vyhrazena.
 
 Tento soubor je součástí foxGHI.
@@ -59,6 +82,12 @@ foxGHI je distribuován v naději, že bude užitečný, ale BEZ JAKÉKOLI ZÁRU
 záruky PRODEJNOSTI nebo VHODNOSTI PRO KONKRÉTNÍ ÚČEL. Další podrobnosti najdete v GNU Lesser General Public License.
 
 Spolu s foxGHI byste měli obdržet kopii GNU Lesser General Public License. Pokud ne, podívejte se na <https://www.gnu.org/licenses/>.
+
+6. INTERNET: 
+===============
+  Foxtoolkit home page:               http://fox-toolkit.org/
+  Gnome Human Interace Guidelines:    https://developer.gnome.org/hig/
+  Blog autora (CZ):                   http://bfuplusplus.blogspot.cz/
 
 === KONEC ===
 
