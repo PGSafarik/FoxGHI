@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/gabriel/Projects/Fox/FXGHI/cmake-build-Debug/Test",
-  "command": "/usr/bin/c++  -I/home/gabriel/Projects/Examples/Test/Test/. -I/opt/foxlib/1.7/74/include -I/home/gabriel/Projects/Fox/FXGHI/include   -g -O0 -Wall  -g -O0 -Wall -o CMakeFiles/Test.dir/main.cpp.o -c /home/gabriel/Projects/Examples/Test/Test/main.cpp",
-  "file": "/home/gabriel/Projects/Examples/Test/Test/main.cpp"
-}
-]

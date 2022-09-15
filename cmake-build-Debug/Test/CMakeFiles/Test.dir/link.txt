@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/Test.dir/main.cpp.o -o /home/gabriel/Projects/Fox/FXGHI/cmake-build-Debug/output/Test   -L/home/gabriel/Projects/Examples/Test/Test/.  -L/opt/foxlib/1.7/74/lib  -L/home/gabriel/Projects/Fox/FXGHI/bin/debug  -Wl,-rpath,/home/gabriel/Projects/Examples/Test/Test/.:/opt/foxlib/1.7/74/lib:/home/gabriel/Projects/Fox/FXGHI/bin/debug -lFOX-1.7 -lFXGHI 
