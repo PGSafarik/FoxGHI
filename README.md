@@ -39,7 +39,7 @@ certain effort to prevent this from happening, however, this cannot be guarantee
 *Dependecies:*
   [Foxtoolkit 1.7.76](http://fox-toolkit.org/ftp/fox-1.7.76.tar.gz)
 
-*Aditional dependencies for kompilation:*
+*Aditional dependencies for compilation:*
   cmake >= 3.10
   
 After downloading the project from Github (and possibly unzipping it), go to the folder with the project and enter the following command sequence:
@@ -87,5 +87,5 @@ You should have received a copy of the GNU Lesser General Public License along w
 ## 6. INTERNET
   * [Foxtoolkitu home page](http://fox-toolkit.org/)
   * [Gnome Human Interace Guidelines](https://developer.gnome.org/hig/)
-  * [Autor's blog (CZ)](http://bfuplusplus.blogspot.cz/)
+  * [Author's blog (CZ)](http://bfuplusplus.blogspot.cz/)
 
