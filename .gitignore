@@ -17,6 +17,7 @@ FXGHI.*
 *.bmarks
 *.layout
 *.layout.*
+*.project
 *.save
 *.save.*
 *~
