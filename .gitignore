@@ -12,7 +12,7 @@ compile_flags.txt
 FXGHI.txt
 Makefile
 
-FXGHI.*
+FXGHI*
 *.depend
 *.bmarks
 *.layout

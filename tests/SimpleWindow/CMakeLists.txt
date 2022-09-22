@@ -35,7 +35,7 @@ include_directories(
     .
     .
     /opt/foxlib/1.7/74/include
-    /opt/foxghi/0.2/1/include
+    /home/gabriel/Projects/Fox/FXGHI/include
 
 )
 
@@ -55,7 +55,7 @@ endif(WIN32)
 # Library path
 link_directories(
     .
-    /opt/foxghi/0.2/1/lib
+    /home/gabriel/Projects/Fox/FXGHI/bin/debug
     /opt/foxlib/1.7/74/lib
 )
 

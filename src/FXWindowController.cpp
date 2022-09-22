@@ -48,18 +48,26 @@ void FXWindowController::create( )
 
 long FXWindowController::onCmd_WinMaximize( FXObject *sender, FXSelector sel, void *data )
 {
-  FXTopWindow *win = ( FXTopWindow* )m_parent->getParent( );
-
+  FXTopWindow *win = m_parent->getTopWindow( );
+  
   if( win && win->isMaximized( ) ) {
-	win->restore( );
-	m_maximizeBtn->setIcon( ic_maximize );
+	  if ( win->restore( ) ) { m_maximizeBtn->setIcon( ic_maximize ); }
   }
   else {
     /// FIXME 001: In some wm/environments (e.g. gnome) it doesn't work, win->maximize( ) behaves like win->restore( ). Find out why
-	bool r = win->maximize( true );
-	if ( r ) { m_maximizeBtn->setIcon( ic_restore ); }
+	  if ( win->maximize( true ) ) { m_maximizeBtn->setIcon( ic_restore ); }
   }
-
+  
+  /*
+  std::cout << "new" << std::endl;
+  if ( !win->maximize( ) ) {
+    m_maximizeBtn->setIcon( ic_maximize );
+  }
+  else {  
+    win->restore( ); 
+    m_maximizeBtn->setIcon( ic_restore );
+  } 
+  */ 
   m_maximizeBtn->update( );
   return 1;
 }

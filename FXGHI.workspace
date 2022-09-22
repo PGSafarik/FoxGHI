@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="FXGHI" Database="" Version="10000">
-  <Project Name="FXGHI" Path="FXGHI.project" Active="No"/>
+  <Project Name="FXGHI" Path="FXGHI.project" Active="Yes"/>
   <Project Name="SimpleWindow" Path="tests/SimpleWindow/SimpleWindow.project" Active="No"/>
-  <Project Name="FXLua" Path="../FXLua/FXLua.project" Active="Yes"/>
+  <Project Name="FXLua" Path="../FXLua/FXLua.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">
       <Environment/>
