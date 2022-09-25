@@ -1,0 +1,63 @@
+name      : Disfunkt Maximize/restor of window
+id        : CONTROLLER_001 
+status    : Opened  
+tags      : Behavior, Foxlib, Xlib 
+language  : C++
+version   : 0.1, 0.2
+create    : 10/09/2022
+Location  : FXWindowController::onCmd_WinMaximize( ), FXTopWindow::maximize( )
+
+Description :
+
+Code:
+/* Kod implementace metody pro maximalizaci a obnovu okna */
+long FXWindowController::onCmd_WinMaximize( FXObject *sender, FXSelector sel, void *data )
+{
+  FXTopWindow *win = ( FXTopWindow* )m_parent->getParent( );
+ 
+  if( win && win->isMaximized( ) ) {
+    win->restore( );
+    m_maximizeBtn->setIcon( ic_maximize );
+  }
+  else {
+    /// FIXME 001: In some wm/environments (e.g. gnome) it doesn't work, win->maximize( ) behaves like win->restore( ). Find out why
+    bool r = win->maximize( true );
+    if ( r ) { m_maximizeBtn->setIcon( ic_restore ); }
+  }
+ 
+  m_maximizeBtn->update( );
+  return 1;
+}
+ 
+/* Kod metody frameworku pro maximalizci okna */
+FXbool FXTopWindow::maximize(FXbool notify){
+  if(!isMaximized()){
+    if(xid){
+#ifdef WIN32
+      ShowWindow((HWND)xid,SW_MAXIMIZE);
+#else
+      XEvent se;
+      se.xclient.type=ClientMessage;
+      se.xclient.display=DISPLAY(getApp());
+      se.xclient.message_type=getApp()->wmNetState;
+      se.xclient.format=32;
+      se.xclient.window=xid;
+      se.xclient.data.l[0]=2;   // 0=_NET_WM_STATE_REMOVE, 1=_NET_WM_STATE_ADD, 2=_NET_WM_STATE_TOGGLE
+      se.xclient.data.l[1]=getApp()->wmNetHMaximized;
+      se.xclient.data.l[2]=getApp()->wmNetVMaximized;
+      se.xclient.data.l[3]=0;
+      se.xclient.data.l[4]=0;
+      XSendEvent(DISPLAY(getApp()),XDefaultRootWindow(DISPLAY(getApp())),false,SubstructureRedirectMask|SubstructureNotifyMask,&se);
+      XMapWindow(DISPLAY(getApp()),xid);
+#endif
+      }
+    if(notify && target){target->tryHandle(this,FXSEL(SEL_MAXIMIZE,message),NULL);}
+    return true;
+    }
+  return false;
+  }
+  
+  
+Solution:
+
+  

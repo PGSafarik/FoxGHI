@@ -1,1 +1,0 @@
-./obj/src_FXGDialogBox.cpp.o ./obj/src_FXGWindow.cpp.o ./obj/src_FXWindowController.cpp.o ./obj/src_FXWindowHeader.cpp.o

@@ -1,6 +1,7 @@
 bin/
 obj/
 build/
+tmp/
 cmake-build-Debug/
 .build-debug/
 .codelite/
