@@ -8,18 +8,5 @@ cmake-build-Debug/
 .ctagsd/
 .build/
 
-FXGHI_build_log.html
-compile_flags.txt
-FXGHI.txt
-Makefile
-
-FXGHI*
-*.depend
-*.bmarks
-*.layout
-*.layout.*
-*.project
-*.save
-*.save.*
 *~
 
