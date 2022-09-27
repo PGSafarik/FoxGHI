@@ -58,16 +58,6 @@ long FXWindowController::onCmd_WinMaximize( FXObject *sender, FXSelector sel, vo
 	  if ( win->maximize( true ) ) { m_maximizeBtn->setIcon( ic_restore ); }
   }
   
-  /*
-  std::cout << "new" << std::endl;
-  if ( !win->maximize( ) ) {
-    m_maximizeBtn->setIcon( ic_maximize );
-  }
-  else {  
-    win->restore( ); 
-    m_maximizeBtn->setIcon( ic_restore );
-  } 
-  */ 
   m_maximizeBtn->update( );
   return 1;
 }

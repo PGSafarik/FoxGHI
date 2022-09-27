@@ -21,6 +21,12 @@ FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( 
    m_parent = parent;
    m_opts   = opts;
 
+   m_box_tgt  = NULL;
+   m_box_opts = 0;
+   m_box_pl   = pl;
+   m_box_pr   = pr;
+   m_box_hs   = hs;
+   
    this->enable( );
    this->setTarget( tgt );
    this->setSelector( sel );
@@ -117,10 +123,11 @@ void FXWindowHeader::layout( )
   }
 }
 
-void FXWindowHeader::recolorize( )
+void FXWindowHeader::recolorize( FXWindow *target )
 {
+  FXWindow *t = ( target ? target : this );
   // Colorize all childerns
-  for( FXWindow *w = getFirst( ); w != NULL; w = w->getNext( ) )
+  for( FXWindow *w = t->getFirst( ); w != NULL; w = w->getNext( ) )
   {
   	if( w ) { w->setBackColor( getBackColor( ) ); }
   }

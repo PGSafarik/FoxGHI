@@ -53,6 +53,13 @@ FXDECLARE( FXWindowHeader )
   FXint     m_tlenght;   // Delka titulku
   FXint     m_stlenght;  // Delka subtitulku
 
+  // For Children
+  FXObject *m_box_tgt;     // ukazatel na objekt urceny jako univerzalni prijemce GUI zprav
+  FXuint    m_box_opts;    // Seznam voleb, ktere mohou byt vyuzity pro jednotne stylovani potomku
+  FXint     m_box_pl;      // Doporuceny odstup mezi prvky : Levy okraj 
+  FXint     m_box_pr;      // Doporuceny odstup mezi prvky : Pravy okraj
+  FXint     m_box_hs;      // Doporuceny odstup mezi prvky : Mezery
+   
   //std::ofstream logger;
 
 public:
@@ -67,21 +74,33 @@ public:
   //
   FXTopWindow* getTopWindow( ) { return m_parent; }
 
-  FXIcon*  getMiniIcon( )                    { return m_parent->getMiniIcon( ); }
-  void     setMiniIcon( FXIcon *mic )        { m_parent->setMiniIcon( mic );    }
-  FXIcon*  getIcon( )                        { return m_parent->getIcon( );     }
-  void     setIcon( FXIcon *ic )             { m_parent->setIcon( ic );         }
-  FXString getTitle( ) const                 { return m_parent->getTitle( );    }
-  void     setTitle( const FXString &text );  //{ m_parent->setTitle( text );      }
-  FXString getText( ) const                  { return m_stext;                  }
-  void     setText( const FXString &text );   //{ m_stext = text;                  }
+  FXIcon*   getMiniIcon( )                        { return m_parent->getMiniIcon( ); }
+  void      setMiniIcon( FXIcon *mic )            { m_parent->setMiniIcon( mic );    }
+  FXIcon*   getIcon( )                            { return m_parent->getIcon( );     }
+  void      setIcon( FXIcon *ic )                 { m_parent->setIcon( ic );         }
+  FXString  getTitle( ) const                     { return m_parent->getTitle( );    }
+  void      setTitle( const FXString &text );  
+  FXString  getText( ) const                      { return m_stext;                  }
+  void      setText( const FXString &text );                    
+
+  FXObject* getBoxTarget( )                  { return ( m_box_tgt ? m_box_tgt : m_parent ); }
+  void      setBoxTarget( FXObject *target ) { m_box_tgt = target; }
+  FXuint    getBoxOpts( )                    { return m_box_opts; }
+  void      setBoxOpts( FXuint opts )        { m_box_opts = opts; }
+  
+  FXint gedBoxPl( )             { return m_box_pl;  }
+  void  sedBoxPl( FXint value ) { m_box_pl = value; }
+  FXint gedBoxPr( )             { return m_box_pr; }
+  void  sedBoxPr( FXint value ) { m_box_pr = value; }
+  FXint gedBoxHs( )             { return m_box_hs; }
+  void  sedBoxHs( FXint value ) { m_box_hs = value; }
 
   ////////////////////////////////////////////////
   // Operations
   //
   virtual void create( );
   virtual void layout( );
-  void         recolorize( );
+  void         recolorize( FXWindow *target = NULL );
 
   ////////////////////////////////////////////////
   // GUI events and handlers
