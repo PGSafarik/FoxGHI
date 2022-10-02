@@ -5,15 +5,15 @@
 * Ovladaci prvek ve stylu Gnome 3, urcenych k integraci do FXWindowHeader. Objekt poskytuje sadu  *
 * prededefinovanych prvku pro ovladani stavu top-level okna (ikonifikace, maximalizace, zavreni). *
 * Dalsi informace viz dokumentace.                                                                *
-* Copyryght (C) 2019 - 2022 P.G.Safarik alias D.A.Tiger GNU GPL v3                                *
+* Copyryght (C) 2019 - 2022 P.G.Safarik alias D.A.Tiger                                           *
 **************************************************************************************************/
 #ifndef __GHI_CONTROLLER_
 #define __GHI_CONTROLLER_
 /*************************************************************************
 * This program is free software: you can redistribute it and/or modify   *
-* it under the terms of the GNU General Public License as published by   *
-* the Free Software Foundation, either version 3 of the License, or      *
-* (at your option) any later version.                                    *
+* it under the terms of the GNU Lesser General Public License as         *
+* published by the Free Software Foundation, either version 3 of the     *
+* License, or (at your option) any later version.                        *                              
 *                                                                        *
 * This program is distributed in the hope that it will be useful,        *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of         *
