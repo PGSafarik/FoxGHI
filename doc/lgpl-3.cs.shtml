@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <title>Český překlad licence GNU LGPL v.3</title>
+</head>
+
+<body>
+
+<div id="doc" class="yui-t5">
+
+        <div id="bd">
+                <div id="yui-main"
+
+<h1>Český překlad licence GNU LGPL v.3</h1>
+
+<blockquote>
+<p>This is an unofficial translation of the GNU Lesser General Public
+License into Czech. It was not published by the Free Software
+Foundation, and does not legally state the distribution terms for
+software that uses the GNU LGPL - only the original English text of the
+GNU LGPL does that. However, we hope that this translation will help
+Czech speakers understand the GNU LGPL better.</p>
+
+<p>Toto je neoficiální český překlad GNU Lesser General Public License.
+Tenhle překlad nebyl zveřejněn nadací Free Software Foundation a tak
+právně neupravuje distribuční podmínky softwaru, který je licencován pod
+GNU LGPL. Právně závazný je pouze anglický originál GNU LGPL. Doufáme
+ale, že překlad pomůže Čechům lépe porozumět GNU LGPL.</p>
+</blockquote>
+ 
+<h2>GNU Lesser General Public License</h2>
+
+<p>Copyright © 2007 Free Software Foundation, Inc.</p>
+
+<p>Verze 3, 29. červen 2007</p>
+
+<p>Každému je dovoleno kopírovat a distribuovat doslovné kopie tohoto
+licenčního dokumentu, ale jeho upravování je zakázáno.</p>
+
+<p>Tato verze licence GNU Lesser General Public License zahrnuje
+ustanovení a podmínky verze 3 licence  GNU General Public License,
+rozšířené o dodatečné povolení uvedené níže.</p>                                  
+
+<h3>0. Dodatečné definice.</h3>
+
+<p>Použití termínu „tato licence“ se v tomto textu vztahuje na verzi 3
+licence GNU Lesser General Public License  a použití termínu „GNU GPL“
+se vztahuje na verzi 3 licence GNU General Public License.</p>     
+
+<p>Termínem „knihovna“ se myslí chráněné dílo, na které se vztahuje tato
+licence, kromě aplikace nebo kombinovaného díla podle definice níže.</p>
+
+<p>Termínem „aplikace“ se rozumí jakékoli dílo, které využívá rozhraní
+poskytované knihovnou, ale které není jinak založeno na knihovně.
+Definování podtřídy na základě třídy, definované knihovnou, je
+považováno za způsob využití rozhraní poskytnutého knihovnou.</p>  
+
+<p>„Kombinovaným dílem“ se rozumí dílo vytvořené kombinováním nebo
+propojováním aplikace s knihovnou. Konkrétní verze knihovny, s kterou
+bylo kombinované dílo vytvořeno, se taktéž nazývá „navázaná verze“.</p>
+
+<p>„Minimálním zodpovídajícím zdrojem“ pro kombinované dílo se rozumí
+strojový kód a/nebo zdrojový kód pro aplikaci, včetně dat a pomocných
+programů potřebných na reprodukci kombinovaného díla z aplikace avšak s
+výnimkou systémových knihoven kombinovaného díla.</p>
+
+<p>„Zodpovídajícím kódem aplikace“  pro kombinované dílo se rozumí
+strojový kód a/nebo zdrojový kód pro aplikaci, včetně dat a pomocních
+programů potřebných na reprodukci kombinovaného díla z aplikace, avšak s
+výminkou systémových knihoven kombinovaného díla.</p>
+
+<h3>1. Výnimka z odstavce 3 licence GNU GPL.</h3>
+
+<p>Můžete postoupit chráněné dílo v souladu s odstavci  3 a 4 této
+licence bez toho, aby jste byli vázáni odstavcem 3 licence GNU GPL.</p>
+
+<h3>2. Postoupení upravených verzí. </h3>
+
+<p>Jestliže upravíte kopii knihovny a jestliže ve vašich úpravách
+odkazuje určitá služba na funkci nebo na údaje, které mají být dodané
+aplikací, která danou službu využívá (kromě argumentů, které jsou
+odeslané, když je služba vyvolána), můžete postoupit kopii takovéto
+upravené verze:</p>
+      <ul>
+	<li>a) na základě této licence, za předpokladu, že jste v dobré
+víře vyvinuli úsilí na zabezpečení, že v případe, že aplikace
+neposkytuje funkci nebo údaje, služba i nadále běží a vykonává jakoukoli
+část svého účelu, která zůstala i nadále smysluplná, nebo</li>
+	<li>b) na základě licence GNU GPL, bez žádných dodatečných
+povolení této licence, které jsou aplikovatelné na danou kopii.</li>
+      </ul>
+
+<h3>3. Strojový kód zahrnující materiál z hlavičkových souborů
+knihoven.</h3>
+
+<p>Strojový kód ve formě aplikace může zahrnovat materiál z hlavičkového
+souboru, který představuje část knihovny. Můžete takový strojový kód
+předat podle vlastních podmínek, za předpokladu, že jestli zahrnutý
+materiál není omezený na numerické parametry, návrhy datových struktur a
+accessory nebo malé makra, vložené (inline) funkce a šablony (dlouhé
+deset řádků nebo méně), vykonáte oboje následující body:</p>
+      <ul>
+	<li>a) Ke každé kopii strojového kódu dejte zřetelnou zmínku o
+tom, že v ní byla použitá knihovna a že knihovna a její použití jsou
+chráněné touto licencí.</li>
+	<li>b) Ke strojovému kódu připojte kopii licence GNU GPL a
+tohoto licenčního dokumentu.</li>
+      </ul>
+
+  <h3>4. Kombinované díla.</h3>
+    <p>Můžete postoupit kombinované dílo podle vlastních podmínek, které
+souhrnně neomezují upravování částí knihovny, která je zahrnutá v
+kombinovaném díle, ani reverzní inženýrství na ladění těchto úprav,
+jestli zároveň vykonáte každý z následujících bodů:</p>
+      <ul>
+	<li>a) Ke každé kopii kombinovaného díla dejte zřetelnou zmínku
+o tom, že v ní byla použitá knihovna a že knihovna a její použití jsou
+chráněné touto licencí.</li>
+	<li>b) Ke kombinovanému dílu připojte kopii licence GNU GPL a
+tohoto licenčního dokumentu.</li>
+	<li>c) Při kombinovaném díle, které zobrazuje zmínky o
+autorských právech, když je dílo spuštěno, zahrňte mezi tyto zmínky i
+zmínku o autorských právech pro knihovnu a stejně tak odkaz, který
+uživatele nasměruje ke kopiím licence GNU a GPL a tohoto licenčního
+dokumentu.</li>
+        <li>d) Vykonejte jeden z následujících bodů: </li>
+         <ul>
+	  <li>0) Předejte minimální zodpovídající zdroj podle podmínek
+této licence a zodpovídající kód aplikace za podmínek, které dovolují, a
+ve formě, která je vhodná na to, aby uživatel mohl znovu zkombinovat
+nebo znovu spojit aplikaci s upravenou verzí navázané verze, s cílem
+vytvoření upraveného kombinovaného díla, způsobem stanoveným v odstavci
+6 licence GNU GPL, který upravuje postoupení zodpovídajícího
+zdroje.</li>
+	  <li>1) Použijte vhodný mechanismus sdílených knihoven na
+propojení s knihovnou. Za vhodný mechanismus se považuje takový
+mechanismus, který (a) v průběhu používá  kopii knihovny, která je už
+přítomná v počítačovém systému uživatele, a která (b) bude správně
+fungovat s upravenou verzí knihovny, která má kompatibilní rozhraní s
+navázanou verzí.</li>
+         </ul> 
+	<li>e) Poskytněte instalační informace, ale jenom v případě,
+jestli byste měli poskytnout takovéto informace podle odstavce 6 licence
+GNU GPL a jenom v rozsahu, který je potřebný na instalaci a spuštění
+upravené verze kombinovaného díla, vytvořeného opětovným zkombinováním
+nebo opětovným spojením  aplikace s upravenou verzí navázané verze.
+(Jestli využijete možnost 4d0, instalační informace musí být přiloženy k
+minimálnímu zodpovídajícímu zdroji a zodpovídajícímu kódu aplikace.
+Jestli využijete možnost 4d1, instalační informace musí být poskytnuty
+způsobem stanoveným v odstavci 6 licence GNU GPL, který upravuje předání
+zodpovídajícímu zdroji.)</li>
+      </ul>    
+
+<h3>5. Kombinované knihovny.</h3>
+
+<p>Služby knihovny, které jsou dílem založeným na knihovně, můžete
+umístit společně v jedné knihovně s ostatními službami knihovny, které
+nejsou aplikacemi a nejsou pokryty touto licencí a postoupit tuto
+kombinovanou knihovnu podle vlastních podmínek, jestli vykonáte oba
+následující body:</p>
+<ul>
+  <li>a) Ke kombinované knihovně připojte kopii stejného díla,
+založeného na knihovně, nekombinovaného se žádnými jinými službami
+knihovny, postoupenými podle podmínek této licence.</li>
+  <li>b) Ke kombinované knihovně dejte zřetelnou zmínku o tom, že její
+část je dílem založeným na knihovně, s vysvětlením, kde je možné najít
+přiloženou nekombinovanou formu stejného díla.</li>
+</ul>
+
+<h3>6. Upravené verze licence GNU Lesser General Public License.</h3>
+
+<p>Free Software Foundation může z času na čas vydat upravené a/nebo
+nové verze licence GNU Lesser General Public License. Nové verze budou
+svou myšlenkou podobné současné verzi, ale v některých detailech se
+kvůli řešení nových problémů či zájmů mohou lišit.</p>
+
+<p>Každé verzi je přiděleno unikátní číslo verze. Jestliže knihovna,
+kterou jste dostali, stanovuje, že se na ní vztahuje určité číslo verze
+licence GNU Lesser General Public License „nebo jakákoli později vydaná
+verze“, máte možnost řídit se ustanoveními a podmínkami této nebo
+jakékoli pozdější verze, kterou Free Software Foundation vydala.
+Jestliže knihovna, kterou jste dostali, nestanovuje číslo verze licence
+GNU Lesser General Public License, máte možnost vybrat si jakoukoli
+verzi licence GNU Lesser General Public License, jakou Free Software
+Foundation vydala.</p>
+
+<p>Jestliže knihovna, kterou jste dostali, stanovuje, že o tom, jestli
+se budou uplatňovat budoucí verze licence GNU Lesser General Public
+License, rozhodne zástupce, veřejné vyhlášení daného zástupce o
+akceptaci jakékoli verze můžete považovat za trvalé povolení na použití
+dané knihovny.</p>
+
+<hr/>
+<p>Originally translated by Radovan Dzurcanin</p>
+<p>This work is licensed under the Creative Commons Attribution-NoDerivs
+License. To view a copy of this license, visit <a
+href="http://creativecommons.org/licenses/by-nd/2.0/"
+rel="nofollow">http://creativecommons.org/licenses/by-nd/2.0/</a> or
+send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford,
+California 94305, USA.</p>
+
+<p>Toto dílo podléha licenci Creative Commons Attribution-No Derivs
+License. Pokud chcete vidět kópii této lincence, navštivte <a
+href="http://creativecommons.org/licenses/by-nd/2.0/"
+rel="nofollow">http://creativecommons.org/licenses/by-nd/2.0/</a>  nebo
+pošlete dopis na adresu Creative Commons, 559 Nathan Abbott Way,
+Stanford, California 94305, USA.</p>
+
+                </div>
+        </div>
+<!-- <p>The <a href="http://www.defectivebydesign.org/drm-free/how-to-use-label">DRM-free label</a> by Defective by Design (<a href="/images/DRM-free%20label.en.svg">source</a>) is licensed under the <a rel="license" href="/cc-by-sa-3.txt">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p> -->
+
+<!--
+<p>The <a 
+href="https://commons.wikimedia.org/wiki/File:FSM_Logo.svg">Flying 
+Spaghetti Monster logo</a> has been released into the public 
+domain.</p>
+-->
+
+</div>
+
+</body>
+
+</html>
+
