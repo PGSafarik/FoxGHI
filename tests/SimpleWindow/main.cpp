@@ -7,6 +7,7 @@ int main(int argc, char **argv) {
 
   FXGWindow *win = new FXGWindow( &a, "Simple FoxGHI Window" );
   win->getHeader( )->setText( "Hello World!" ); 
+  new FXButton( win->getHeader( ), "\t\t TEST Button", win->getMenuIcon( ), NULL, 0 );
   
   a.create( );
   win->show( PLACEMENT_SCREEN );

@@ -113,6 +113,10 @@ public:
 protected:
   FXWindowHeader( ) { }
   void UpdateTitle( );
+
+  virtual void ReadConfig( );
+  virtual void WriteConfig( );
+  
 };
 
 }      /* FX */

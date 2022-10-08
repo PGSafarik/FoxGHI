@@ -34,14 +34,18 @@ FXIMPLEMENT( FXGWindow, FXTopWindow, PrimaryWindowMap, ARRAYNUMBER( PrimaryWindo
 
 /**************************************************************************************************/
 FXGWindow::FXGWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
-		      FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
-                  : FXTopWindow( app, title, ic, mi, DECOR_RESIZE , x, y, w, h, pl, pr, pt, pb, hs, vs )
+		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
+         : FXTopWindow( app, title, ic, mi, DECOR_RESIZE , x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
+  #ifdef DEBUG 
+  std::cout << "[ DEBUG - FXGWindow::FXGWindow ] !!!Library is building in DEBUG MODE!!!\n";
+  #endif
+
   w_opts = opts;
   w_grab = DRAG_NONE;
   w_rect.set( 0, 0, 0, 0 );
   w_last.set( 0, 0 );
-  w_header     = new FXWindowHeader( this, FXString::null, this, FXGWindow::ID_WINHEADER, WHEADER_STANDARD | WHEADER_DELEGATE  );
+  w_header     = new FXWindowHeader( this, FXString::null, this, FXGWindow::ID_WINHEADER, WHEADER_STANDARD | WHEADER_DELEGATE );
   w_controller = new FXWindowController( w_header, w_opts );
 
   this->enable( );
@@ -51,8 +55,8 @@ FXGWindow::FXGWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi,
 }
 
 FXGWindow::FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
-		      FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
-                  : FXTopWindow( owner, title, ic, mi, DECOR_RESIZE , x, y, w, h, pl, pr, pt, pb, hs, vs )
+		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
+         : FXTopWindow( owner, title, ic, mi, DECOR_RESIZE , x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   w_opts = opts;
   w_grab = DRAG_NONE;
@@ -78,14 +82,13 @@ void FXGWindow::create( )
   RecalculateSize( );
 
   if( ( w_opts & WINDOW_PRIMARY ) && xid ) {
-	FXApp *a = this->getApp( );
-	if( a->isInitialized( ) ) {
-	  #ifndef WIN32
-	  XSetCommand( DISPLAY( a ), xid, ( char** ) a->getArgv( ), a->getArgc( ) );
-	  #endif // WIN32
-	}
+	  FXApp *a = this->getApp( );
+	  if( a->isInitialized( ) ) {
+	    #ifndef WIN32
+	    XSetCommand( DISPLAY( a ), xid, ( char** ) a->getArgv( ), a->getArgc( ) );
+	    #endif // WIN32
+	  }
   }
-
 }
 
 FXbool FXGWindow::close( FXbool notify )
@@ -149,7 +152,7 @@ long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data 
   handle( this, FXSEL( SEL_FOCUS_SELF, 0 ), data );
 
   if( isEnabled( ) ) {
-	FXEvent *event = static_cast<FXEvent*>( data );
+	  FXEvent *event = static_cast<FXEvent*>( data );
     grab( );
 
     if( FXSELID( sel ) == FXGWindow::ID_WINHEADER ) { w_grab = DRAG_MOVE; }
@@ -160,7 +163,7 @@ long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data 
 
     Cursor_Change( );
 
-	resh = 1;
+	  resh = 1;
   }
 
   return resh;
@@ -172,15 +175,15 @@ long FXGWindow::onLeftButtonRelease( FXObject *sender, FXSelector sel, void *dat
   long resh = 0;
 
   if( isEnabled( ) ) {
-	ungrab( );
+	  ungrab( );
 
-	if( w_grab != DRAG_NONE ) {
-	  //position( w_rect.x, w_rect.y, w_rect.w, w_rect.h );
-	  w_grab = DRAG_NONE;
-	  w_last.set( 0, 0 );
-	  w_rect.set( 0, 0, 0, 0 );
-	  Cursor_Change( );
-	}
+	  if( w_grab != DRAG_NONE ) {
+	    //position( w_rect.x, w_rect.y, w_rect.w, w_rect.h );
+	    w_grab = DRAG_NONE;
+	    w_last.set( 0, 0 );
+	    w_rect.set( 0, 0, 0, 0 );
+	    Cursor_Change( );
+	  }
     resh = 1;
   }
 
@@ -200,13 +203,13 @@ long FXGWindow::onMotion( FXObject *sender, FXSelector sel, void *data )
 
     // Calculate for window position, if sending window header
     if( w_grab & DRAG_MOVE ) {
-	  w_rect.x -= offset.x;
-	  w_rect.y -= offset.y;
+	    w_rect.x -= offset.x;
+	    w_rect.y -= offset.y;
     }
     else {
       // Calculate window resize values on top and bottom side
       if( w_grab & DRAG_TOP ) {
-	    w_rect.y = w_rect.y - offset.y;
+	      w_rect.y = w_rect.y - offset.y;
         w_rect.h = w_rect.h + offset.y;
       }
       else if( w_grab & DRAG_BOTTOM ) {
@@ -262,7 +265,7 @@ void FXGWindow::Cursor_Change( )
     case DRAG_BOTTOMLEFT:
 		Cursor_Set( DEF_DRAGTR_CURSOR );
 		break;
-	case DRAG_MOVE:
+	  case DRAG_MOVE:
 		Cursor_Set( DEF_MOVE_CURSOR );
 		break;
     default:

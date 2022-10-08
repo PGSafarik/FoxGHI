@@ -42,13 +42,13 @@ FXDECLARE( FXGWindow )
 
 public:
   FXGWindow( FXApp *app, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
-		      FXint x = 0, FXint y = 0, FXint w = 400, FXint h = 200,
-		      FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING,
-		      FXint hs = HV_SPACING2, FXint vs = HV_SPACING2  );
+		         FXint x = 0, FXint y = 0, FXint w = 400, FXint h = 200,
+		         FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING,
+		         FXint hs = HV_SPACING2, FXint vs = HV_SPACING2  );
   FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
-		      FXint x = 0, FXint y = 0, FXint w = 400, FXint h = 200,
-		      FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING,
-		      FXint hs = HV_SPACING2, FXint vs = HV_SPACING2  );
+		         FXint x = 0, FXint y = 0, FXint w = 400, FXint h = 200,
+		         FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING,
+		         FXint hs = HV_SPACING2, FXint vs = HV_SPACING2  );
   virtual ~FXGWindow( );
 
   ////////////////////////////////////////////////

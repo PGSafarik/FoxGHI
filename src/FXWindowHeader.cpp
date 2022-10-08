@@ -32,7 +32,7 @@ FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( 
 
 /**************************************************************************************************/
  FXWindowHeader::FXWindowHeader( FXTopWindow *parent, const FXString &text, FXObject *tgt, FXSelector sel, FXuint opts,
-				 FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs )
+				         FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs )
                : FXHorizontalFrame( parent, opts, x, y, w, h, pl, pr, pt, pb, hs, vs )
  {
    m_parent = parent;
@@ -61,10 +61,16 @@ FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( 
    _fdes.weight     = FXFont::Bold;
    m_tfnt->setFontDesc( _fdes   );
 
+   #ifdef DEBUG 
+   std::cout << "[ DEBUG - FXGWindow::FXGWindowHeader ] Title font:  "    << m_sfnt->getFontDesc( ).getFont( ).text( ) << std::endl;
+   std::cout << "[ DEBUG - FXGWindow::FXGWindowHeader ] Subtitle font:  " << m_tfnt->getFontDesc( ).getFont( ).text( ) << std::endl;
+   #endif
+
+   
    // Header bar colorize
    FXint clr_offset = 30;
-   FXColor clr = getBackColor( );
-   clr -= FXRGB( clr_offset, clr_offset, clr_offset );
+   FXColor clr      = getBackColor( );
+   clr             -= FXRGB( clr_offset, clr_offset, clr_offset );
    setBackColor( clr );
  }
 
@@ -96,47 +102,51 @@ void FXWindowHeader::layout( )
 /* Calculate position to the headerBar text, with change to top-level window */
   FXHorizontalFrame::layout( );
 
-  FXString t_text = this->getTitle( );
-  m_tlenght  = m_tfnt->getTextWidth( t_text );
-  m_stlenght = m_tfnt->getTextWidth( this->getText( ) );
+  m_tlenght  = m_tfnt->getTextWidth( this->getTitle( ) );  // Sirka retezce titulku
+  m_stlenght = m_tfnt->getTextWidth( this->getText( ) );   // Sirka retezce podtitulku
 
-  FXint wb_height = getHeight( );
-  FXint wb_width  = getWidth( );
-  FXint ft_height = m_tfnt->getFontHeight( );
-  FXint pw        = wb_width / 2;
-  FXint _width    = 0;
-  FXint _left     = 0;
-  FXint _right    = 0;
+  FXint wb_height = getHeight( );                          // Delka WH
+  FXint wb_width  = getWidth( );                           // Sirka WH 
+  FXint pw        = wb_width / 2;                          // pomocna promenna
+  FXint ft_height = m_tfnt->getFontHeight( );              // Delka fontu
+  FXint _width    = 0;                                     // Potrebna sirka WH (tzn. delka vsech potomku + mezery + delka nejdelsiho textu titulku )
+  FXint _left     = 0;                                     // (pomocna promenna) Celkova delka vsech potomku na leve strane
+  FXint _right    = 0;                                     // (pomocna promenna) Pozice v ose X, kterou zacinaji potomci na pravo  
 
   // Corection a parent width, in depending on the title ( or subtitle) width and check size empty 
   // space for widow title  
-  for( FXWindow *ch = getFirst( ); ch != NULL; ch = ch->getNext( ) ) {
-    if( ch ) { 
-      int x = ch->getX( );
-      int w = ch->getWidth( );
+  FXint i = 0;
+  for( FXWindow *ch = getFirst( ); ch != NULL; ch = ch->getNext( ) ) { // Pro vsechny potomky
+    if( ch ) {                                                         // Pokud skutecne existuje
+      i++;  
+      int x = ch->getX( );                                             // Pozice potomka v ose X
+      int w = ch->getWidth( );                                         // Sirka potomka    
 
-      _width += w + DEFAULT_SPACING;
-      if ( _right == 0 ) {
-        if ( x + w < pw ) { _left = _width; } else { _right = x; }
+      _width += w + DEFAULT_SPACING;                                   // K pozadovane sirce panelu prictem sirku widgetu a odstup mezi widgety
+      if ( _right == 0 ) {                                             // Dokud nezacalo pocitani widgetu zprava
+        if ( x + w < pw ) { _left = _width; } else { _right = x; }     // Pokud pozice widgetu a jeho sirka nepresahne polovinu sirky baneru,   --
+                                                                       // sirka na levo je rovna celkove sirce. V opacnem pripade si ulozime    --
+                                                                       // pozici widgetu na pravou stranu. Timto postupem je urcen prostor mezi --
+                                                                       // potomky urceny pro texty titulku.  
       }
-    }  
+    }
   }
-  
-  _width += ( m_tlenght >= m_stlenght ? m_tlenght : m_stlenght ) + 2* DEFAULT_SPACING;
+
+  _width += ( m_tlenght >= m_stlenght ? m_tlenght : m_stlenght ) + 2 * DEFAULT_SPACING; // K pozadovane sice panelu prictem nejdelsi z obou radku titulku
  
-  if ( _width > getParent( )->getWidth( ) ) {
-    getParent( )->setWidth( _width );
+  if ( _width > getParent( )->getWidth( ) ) {  // Pokud pozadovana sirka presahne celkovou sirku potomka (top-lewel okna)
+    getParent( )->setWidth( _width );          // Nastvime sirku potomka shodnou se sirkou panelu
   }
   
   // Recalc Titile position
-  pw = _left + _right / 2;
-  if( m_stext.empty( ) ) {
-    m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 3 );
-  }
-  else {
-    FXint offset = wb_height / 4 + getPadTop( );
-    m_tcoord.set( pw - ( m_tlenght / 2 ),  offset );
-    m_scoord.set( pw - ( m_stlenght / 2 ), wb_height - offset + 3 * ( ft_height / 4 ) );
+  pw = _left + _right / 2;                                                 // Urcime stred prostoru pro titulek
+  if( m_stext.empty( ) ) {                                                 // Pokud neni nastaven subtitulek
+    m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 3 ); // Umistime titulek do stredu
+  } 
+  else {                                                                                 //
+    FXint offset = wb_height / 4 + getPadTop( );                                         // Odstup z vrchu
+    m_tcoord.set( pw - ( m_tlenght  / 2 ), offset );                                     // Vypocet pozice prvniho radku
+    m_scoord.set( pw - ( m_stlenght / 2 ), wb_height - offset + 3 * ( ft_height / 4 ) ); // Vypocet pozice druheho radku
   }
 }
 
@@ -188,7 +198,7 @@ long FXWindowHeader::onLeftBtnPress( FXObject *sender, FXSelector sel, void *dat
 
   if( m_opts & WHEADER_DELEGATE ) {
 	FXObject  *target   = getTarget( );
-    FXSelector selector = getSelector( );
+  FXSelector selector = getSelector( );
 
 	if( target ) { target->tryHandle( this, FXSEL( SEL_LEFTBUTTONPRESS, selector ), data ); }
   }
@@ -266,6 +276,21 @@ void FXWindowHeader::UpdateTitle( )
   update( );
   repaint( );
 }
+
+void FXWindowHeader::ReadConfig( )
+{
+   FXString Cf_header = "FoxGHI"; 
+     
+ 
+}
+
+void FXWindowHeader::WriteConfig( )
+{
+  FXString Cf_header = "FoxGHI";
+
+
+}
+
 
 } /* FXGHI */
 
