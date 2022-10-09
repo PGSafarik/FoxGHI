@@ -37,7 +37,8 @@ class FXWindowHeader : public FXHorizontalFrame {
 FXDECLARE( FXWindowHeader )
   FXTopWindow *m_parent; // Ukazatel na rodicovske okno
 
-  FXuint  m_opts; // Window HeaderBar options flags
+  FXuint  m_opts;     // Window HeaderBar options flags
+  FXColor m_sepcolor;  // Color of the bottom separator
 
   // Moving
   FXbool  m_dragged; // Priznak zachyceni okna mysi
@@ -45,13 +46,15 @@ FXDECLARE( FXWindowHeader )
   FXPoint m_mwp;     // Ulozena pozice okna (Memory Window Position)
 
   // Text of bar
-  FXPoint   m_tcoord;    // Pozice pro vykresleni titlku
-  FXPoint   m_scoord;    // Pozice pro vykresleni subtitulku
-  FXString  m_stext;     // Subtitulek
-  FXFont   *m_tfnt;      // Font titulku
-  FXFont   *m_sfnt;      // Font subtitulku
-  FXint     m_tlenght;   // Delka titulku
-  FXint     m_stlenght;  // Delka subtitulku
+  FXPoint   m_tcoord;           // Pozice pro vykresleni titlku
+  FXPoint   m_scoord;           // Pozice pro vykresleni subtitulku
+  FXString  m_stext;            // Subtitulek
+  FXString  m_fntspec_title;    //  
+  FXString  m_fntspec_subtitle; //
+  FXFont   *m_tfnt;             // Font titulku
+  FXFont   *m_sfnt;             // Font subtitulku
+  FXint     m_tlenght;          // Delka titulku
+  FXint     m_stlenght;         // Delka subtitulku
 
   // For Children
   FXObject *m_box_tgt;     // ukazatel na objekt urceny jako univerzalni prijemce GUI zprav
@@ -59,8 +62,10 @@ FXDECLARE( FXWindowHeader )
   FXint     m_box_pl;      // Doporuceny odstup mezi prvky : Levy okraj 
   FXint     m_box_pr;      // Doporuceny odstup mezi prvky : Pravy okraj
   FXint     m_box_hs;      // Doporuceny odstup mezi prvky : Mezery
-   
-  //std::ofstream logger;
+  
+  // Config
+  FXbool m_colorize;         // 0 = off; > 0 = base_color + colorize   
+  
 
 public:
   FXWindowHeader( FXTopWindow *parent, const FXString &text = FXString::null, FXObject *tgt = NULL, FXSelector sel = 0,  FXuint opts = WHEADER_STANDARD,
@@ -81,7 +86,12 @@ public:
   FXString  getTitle( ) const                     { return m_parent->getTitle( );    }
   void      setTitle( const FXString &text );  
   FXString  getText( ) const                      { return m_stext;                  }
-  void      setText( const FXString &text );                    
+  void      setText( const FXString &text ); 
+  FXFont*   getTitleFont( )                       { return m_tfnt; }
+  void      setTitleFont( const FXString &spec );
+  FXFont*   getSubtitleFont( )                    { return m_sfnt; }
+  void      setSubtitleFont( const FXString &spec );
+                    
 
   FXObject* getBoxTarget( )                  { return ( m_box_tgt ? m_box_tgt : m_parent ); }
   void      setBoxTarget( FXObject *target ) { m_box_tgt = target; }
@@ -113,6 +123,7 @@ public:
 protected:
   FXWindowHeader( ) { }
   void UpdateTitle( );
+  FXFont *CreateFont( const FXString &spec );
 
   virtual void ReadConfig( );
   virtual void WriteConfig( );

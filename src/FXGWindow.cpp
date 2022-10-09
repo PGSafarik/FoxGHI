@@ -72,11 +72,15 @@ FXGWindow::FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon
 }
 
 FXGWindow::~FXGWindow( )
-{  }
+{  
+  //WriteConfig( );
+}
 
 /**************************************************************************************************/
 void FXGWindow::create( )
 {
+  ReadConfig( );
+
   FXTopWindow::create( );
   w_controller->create( );
   RecalculateSize( );
@@ -135,10 +139,12 @@ long FXGWindow::onPaint( FXObject *sender, FXSelector sel, void *data )
 {
   /* Rendering of the line window border. Without it, it would look "sprawling" */
   long r = FXTopWindow::onPaint( sender, sel, data );
-
-  FXDCWindow dc( this );
-  dc.setForeground( FXRGB( 0, 0, 0 ) );
-  dc.drawRectangle( 0, 0, this->getWidth( ) - 1, this->getHeight( ) - 1 );
+  
+  if( w_border ) {
+    FXDCWindow dc( this );
+    dc.setForeground( FXRGB( 0, 0, 0 ) );
+    dc.drawRectangle( 0, 0, this->getWidth( ) - 1, this->getHeight( ) - 1 );
+  }
 
   return r;
 }
@@ -291,6 +297,28 @@ void FXGWindow::RecalculateSize( )
   FXint height = getPadTop( ) + getPadBottom( ) + getVSpacing( ) + getHeight( ) + w_header->getHeight( );
 
   this->resize( width, height );
+}
+
+void FXGWindow::ReadConfig( )
+{
+  FXString cf_prefix = CFG_WIDOW_PREFIX;  
+   
+  if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); }  
+
+   w_border = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", true );
+
+   #ifdef DEBUG 
+   std::cout << "[DEBUG - FXGWindow::ReadConfig] border:  "    << w_border << std::endl;
+   //std::cout << "[ DEBUG - Object::ReadConfig] Value entry:  " << entry << std::endl;
+   #endif
+
+}
+
+void FXGWindow::WriteConfig( )
+{
+  FXString cf_prefix = CFG_WIDOW_PREFIX; 
+
+  getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", w_border );
 }
 
 

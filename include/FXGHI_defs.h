@@ -50,6 +50,12 @@ enum {
 #define P_SPACING         3	// 5
 #define HV_SPACING2       2	// 2
 
+/*** CONFIGURATIONS *******************************************************************************/
+#define CFG_FXGHI             "FoxGHI"
+#define CFG_WIDOW_PREFIX      "Window"
+#define CFG_HEADER_PREFIX     "Header" 
+#define CFG_CONTROLLER_PREFIX "Controller"
+
 }      /* FXGHI       */
 #endif /* __GHI_DEFS_ */
 

@@ -40,6 +40,9 @@ FXDECLARE( FXGWindow )
 
   FXIcon *w_menuic;	// Standard menu icon;
 
+  // Configurations
+  FXbool w_border;  // If true, this window draw border
+
 public:
   FXGWindow( FXApp *app, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
 		         FXint x = 0, FXint y = 0, FXint w = 400, FXint h = 200,
@@ -57,12 +60,14 @@ public:
   inline FXWindowHeader* getHeader( ) { return w_header; }
   FXIcon* getMenuIcon( )              { return w_menuic; }
   FXbool  isPrimary( )                { return w_opts & WINDOW_PRIMARY; }
-
+  //FXbool  hasBorder( )                { return w_border; }
+  
   ////////////////////////////////////////////////
   // Operations
   //
   virtual void   create( );
   virtual FXbool close( FXbool notify = false );
+
 
   ////////////////////////////////////////////////
   // GUI messagess and handler
@@ -80,6 +85,9 @@ public:
 protected:
   FXGWindow( ) { }
 
+  virtual void ReadConfig( );
+  virtual void WriteConfig( );
+  
   ///////////////////////////////////////////////
   // Helpers methods
   //

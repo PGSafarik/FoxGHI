@@ -53,25 +53,9 @@ FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( 
    m_mmp.set( 0, 0 );
 
    // Title text
-   m_stext          = text;
-   m_sfnt           = this->getApp( )->getNormalFont( );
-   m_tfnt           = new FXFont( getApp( ), m_sfnt->getFontDesc( ) );
-   FXFontDesc _fdes = m_tfnt->getFontDesc( );
-   _fdes.size       = 100;
-   _fdes.weight     = FXFont::Bold;
-   m_tfnt->setFontDesc( _fdes   );
+   m_stext         = text;
+   m_tfnt = m_sfnt = NULL;
 
-   #ifdef DEBUG 
-   std::cout << "[ DEBUG - FXGWindow::FXGWindowHeader ] Title font:  "    << m_sfnt->getFontDesc( ).getFont( ).text( ) << std::endl;
-   std::cout << "[ DEBUG - FXGWindow::FXGWindowHeader ] Subtitle font:  " << m_tfnt->getFontDesc( ).getFont( ).text( ) << std::endl;
-   #endif
-
-   
-   // Header bar colorize
-   FXint clr_offset = 30;
-   FXColor clr      = getBackColor( );
-   clr             -= FXRGB( clr_offset, clr_offset, clr_offset );
-   setBackColor( clr );
  }
 
 FXWindowHeader::~FXWindowHeader( )
@@ -79,9 +63,30 @@ FXWindowHeader::~FXWindowHeader( )
 
 void FXWindowHeader::create( )
 {
-  FXHorizontalFrame::create( );
-  m_tfnt->create( );
+  ReadConfig( );
 
+  // Header bar colorize
+  if( m_colorize ) {
+    FXint clr_offset = 30;
+    FXColor clr      = getBackColor( );
+    clr             -= FXRGB( clr_offset, clr_offset, clr_offset );
+    setBackColor( clr );
+
+    // Calculate color for bottom separator
+    clr_offset += 10;
+    m_sepcolor = clr - FXRGB( clr_offset, clr_offset, clr_offset );
+  }
+  else { m_sepcolor = FXRGB( 0, 0, 0 ); }
+
+  // Creating
+  FXHorizontalFrame::create( );
+  
+  // Set header title fonts
+  setTitleFont( m_fntspec_title );
+  setSubtitleFont( m_fntspec_subtitle );
+  UpdateTitle( );
+
+  // Colorized children for this frame
   recolorize( );
 }
 
@@ -96,6 +101,19 @@ void FXWindowHeader::setText( const FXString &text )
   m_stext = text;
   UpdateTitle( );
 }
+
+void FXWindowHeader::setTitleFont( const FXString &spec )
+{
+  if( m_tfnt ) { delete m_tfnt; }
+  m_tfnt = CreateFont( spec );
+}
+
+void FXWindowHeader::setSubtitleFont( const FXString &spec )
+{
+  if( m_sfnt ) { delete m_sfnt; }
+  m_sfnt = CreateFont( spec );
+}
+
 
 void FXWindowHeader::layout( )
 {
@@ -152,11 +170,14 @@ void FXWindowHeader::layout( )
 
 void FXWindowHeader::recolorize( FXWindow *target )
 {
-  FXWindow *t = ( target ? target : this );
-  // Colorize all childerns
-  for( FXWindow *w = t->getFirst( ); w != NULL; w = w->getNext( ) )
-  {
-  	if( w ) { w->setBackColor( getBackColor( ) ); }
+  if( m_colorize ) {
+    FXWindow *t = ( target ? target : this );
+
+    // Colorize all childerns
+    for( FXWindow *w = t->getFirst( ); w != NULL; w = w->getNext( ) )
+    {
+  	  if( w ) { w->setBackColor( getBackColor( ) ); }
+    }
   }
 }
 
@@ -181,11 +202,8 @@ long FXWindowHeader::onPaint( FXObject *sender, FXSelector sel, void *data )
 
   /* Paint the Header bar bottom separator */
   FXint h = getHeight( ) - 1;
-  FXint w = getWidth( ) ;
-  FXint c_offset = 40;
-  FXColor clr = getBackColor( ) - FXRGB( c_offset, c_offset, c_offset );
-
-  dc.setForeground( clr );
+  FXint w = getWidth( );
+  dc.setForeground( m_sepcolor );
   dc.drawLine ( 0, h , w, h  );
 
   return resh;
@@ -258,7 +276,7 @@ long FXWindowHeader::onMotion( FXObject *sender, FXSelector sel, void *data )
       mpos.set( m_parent->getX( ) + ( e->root_x - m_mmp.x ), m_parent->getY( ) + ( e->root_y - m_mmp.y ) );
       m_mmp.set( e->root_x, e->root_y );
 
-      //std::cout << mpos.x << "x" << mpos.y << ";;" << e->root_x << "x" << e->root_y << "\n";
+     
       m_parent->move( mpos.x, mpos.y );  //XMoveWindow( DISPLAY( getApp( ) ), m_parent->id( ), mpos.x, mpos.y );
       res = 1;
   }
@@ -271,24 +289,46 @@ long FXWindowHeader::onMotion( FXObject *sender, FXSelector sel, void *data )
 void FXWindowHeader::UpdateTitle( )
 {
   /* Aktualize and redraiw Header bar in changes titles text */
-
-  layout( );
-  update( );
-  repaint( );
+  if( m_tfnt ) {
+    layout( );
+    update( );
+    repaint( );
+  }
 }
 
 void FXWindowHeader::ReadConfig( )
 {
-   FXString Cf_header = "FoxGHI"; 
-     
- 
+   FXString cf_prefix = CFG_HEADER_PREFIX;  
+   FXString fntspec_base;
+
+   if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); }  
+   fntspec_base = getApp( )->getNormalFont( )->getFont( );   
+
+   m_colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );  
+   m_fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
+   m_fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
+   
+   #ifdef DEBUG 
+   std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Enable colorize:  " << m_colorize << std::endl;
+   std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Title Font:  "      << m_fntspec_title.text( )  << std::endl;
+   std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Subtitle Font:  "   << m_fntspec_subtitle.text( )  << std::endl;
+   #endif 
 }
 
 void FXWindowHeader::WriteConfig( )
 {
-  FXString Cf_header = "FoxGHI";
+  FXString cf_prefix = CFG_HEADER_PREFIX;  
+  
+  getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", m_colorize ); 
+  getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       m_fntspec_title.text( ) ); 
+  getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    m_fntspec_subtitle.text( ) ); 
+}
 
-
+FXFont* FXWindowHeader::CreateFont( const FXString &spec )
+{
+   FXFont *fnt = new FXFont( getApp( ), spec );
+   fnt->create( );
+   return fnt;
 }
 
 

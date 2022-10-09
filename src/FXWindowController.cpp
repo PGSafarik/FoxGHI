@@ -50,7 +50,7 @@ FXWindowController::FXWindowController( FXWindowHeader *p, FXuint opts )
     m_iconifyBtn = new FXButton( m_parent, "\t Iconify Window", ic_iconify, win, FXTopWindow::ID_MINIMIZE, FRAME_NONE | LAYOUT_RIGHT | LAYOUT_CENTER_Y );
   }
 
-  new FXVerticalSeparator( m_parent, SEPARATOR_GROOVE|LAYOUT_FILL_Y | LAYOUT_RIGHT );
+  m_sep = new FXVerticalSeparator( m_parent, SEPARATOR_GROOVE|LAYOUT_FILL_Y | LAYOUT_RIGHT );
 }
 
 FXWindowController::~FXWindowController( )
@@ -59,9 +59,30 @@ FXWindowController::~FXWindowController( )
 /*************************************************************************************************/
 void FXWindowController::create( )
 {
+  RaedConfig( );
+
   ic_maximize->create( );
   ic_restore->create( );
+
+  if( m_hidden ) { this->hide( ); }
 }
+
+void FXWindowController::show( )
+{
+  m_closeBtn->show( );
+  m_maximizeBtn->show( );
+  m_iconifyBtn->show( );
+  m_sep->show( );
+}
+
+void FXWindowController::hide( )
+{
+  m_closeBtn->hide( );
+  if( m_maximizeBtn ) { m_maximizeBtn->hide( ); }
+  if( m_iconifyBtn ) { m_iconifyBtn->hide( ); }
+  m_sep->hide( );
+}
+
 
 long FXWindowController::onCmd_WinMaximize( FXObject *sender, FXSelector sel, void *data )
 {
@@ -77,6 +98,25 @@ long FXWindowController::onCmd_WinMaximize( FXObject *sender, FXSelector sel, vo
   
   m_maximizeBtn->update( );
   return 1;
+}
+
+void FXWindowController::RaedConfig( )
+{
+  FXString cf_prefix = CFG_CONTROLLER_PREFIX;
+  
+  m_hidden = m_parent->getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", false );
+
+  #ifdef DEBUG 
+  std::cout << "[DEBUG - FXWindowController::ReadConfig] Hidden:  "    << m_hidden << std::endl;
+  //std::cout << "[ DEBUG - Object::ReadConfig] Value entry:  " << entry << std::endl;
+  #endif
+}
+
+void FXWindowController::WriteConfig( )
+{
+  FXString cf_prefix = CFG_CONTROLLER_PREFIX;
+  m_parent->getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", m_hidden );
+     
 }
 
 } /* FXGHI */

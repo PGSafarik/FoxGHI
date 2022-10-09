@@ -36,11 +36,16 @@ FXDECLARE( FXWindowController )
   FXButton *m_closeBtn;      // Window close button
   FXButton *m_maximizeBtn;   // Window Maximize button
   FXButton *m_iconifyBtn;    // Window minimize/iconify button
+  
+  FXVerticalSeparator *m_sep; // The Controller content separator 
 
   FXIcon *ic_close;     // Close button icon
   FXIcon *ic_iconify;   // Iconify/minimize button icon
   FXIcon *ic_maximize;  // Maximalize button icon
   FXIcon *ic_restore;   // Restore button icon
+
+  // Configurations
+  FXbool m_hidden;       // Hidden controller buttons 
 
 public :
   FXWindowController( FXWindowHeader *p, FXuint opts = CONTROLS_NORMAL );
@@ -56,6 +61,8 @@ public :
   // Operations
   //
   virtual void create( );
+  void show( );
+  void hide( );
 
   ////////////////////////////////////////////////
   // Gui events
@@ -70,7 +77,9 @@ public :
 
 protected:
   FXWindowController( ) { }
-
+  
+  virtual void RaedConfig( );
+  virtual void WriteConfig( );
 };
 
 }      /* FXGHI */
