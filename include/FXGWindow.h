@@ -41,7 +41,9 @@ FXDECLARE( FXGWindow )
   FXIcon *w_menuic;	// Standard menu icon;
 
   // Configurations
-  FXbool w_border;  // If true, this window draw border
+  FXbool w_border;        // If true, this window draw border
+  FXbool w_SelfControl;   // If true, allows handling of window resizing and moved by mouse dragging 
+  FXbool w_WMControl;     // True value enabled a classical window decoiration and hendlig by Window Manager (Check the documentation - when it's ready ;)
 
 public:
   FXGWindow( FXApp *app, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
@@ -60,7 +62,7 @@ public:
   inline FXWindowHeader* getHeader( ) { return w_header; }
   FXIcon* getMenuIcon( )              { return w_menuic; }
   FXbool  isPrimary( )                { return w_opts & WINDOW_PRIMARY; }
-  //FXbool  hasBorder( )                { return w_border; }
+  //FXbool  hasBorder( )              { return w_border; }
   
   ////////////////////////////////////////////////
   // Operations

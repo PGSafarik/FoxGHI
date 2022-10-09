@@ -81,6 +81,10 @@ void FXGWindow::create( )
 {
   ReadConfig( );
 
+  if( w_WMControl ) {
+    setDecorations( DECOR_ALL );
+  }
+
   FXTopWindow::create( );
   w_controller->create( );
   RecalculateSize( );
@@ -157,7 +161,7 @@ long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data 
   flags &= ~FLAG_TIP;
   handle( this, FXSEL( SEL_FOCUS_SELF, 0 ), data );
 
-  if( isEnabled( ) ) {
+  if( isEnabled( ) && w_SelfControl ) {
 	  FXEvent *event = static_cast<FXEvent*>( data );
     grab( );
 
@@ -180,16 +184,17 @@ long FXGWindow::onLeftButtonRelease( FXObject *sender, FXSelector sel, void *dat
   /* Ungrab this window of left mouse button */
   long resh = 0;
 
-  if( isEnabled( ) ) {
-	  ungrab( );
-
+  if( isEnabled( ) && w_SelfControl ) {
+	  
 	  if( w_grab != DRAG_NONE ) {
+      ungrab( ); 
 	    //position( w_rect.x, w_rect.y, w_rect.w, w_rect.h );
 	    w_grab = DRAG_NONE;
 	    w_last.set( 0, 0 );
 	    w_rect.set( 0, 0, 0, 0 );
 	    Cursor_Change( );
 	  }
+
     resh = 1;
   }
 
@@ -305,11 +310,14 @@ void FXGWindow::ReadConfig( )
    
   if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); }  
 
-   w_border = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", true );
+   w_border      = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", true );
+   w_SelfControl = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".SelfControl",  true );
+   w_WMControl   = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".WMControl",    false );
 
    #ifdef DEBUG 
-   std::cout << "[DEBUG - FXGWindow::ReadConfig] border:  "    << w_border << std::endl;
-   //std::cout << "[ DEBUG - Object::ReadConfig] Value entry:  " << entry << std::endl;
+   std::cout << "[DEBUG - FXGWindow::ReadConfig] border: "                 << w_border      << std::endl;
+   std::cout << "[DEBUG - FXGWindow::ReadConfig] Window selfcontrol: "     << w_SelfControl << std::endl;
+   std::cout << "[DEBUG - FXGWindow::ReadConfig] Window Manager control: " << w_WMControl << std::endl;
    #endif
 
 }
@@ -319,6 +327,9 @@ void FXGWindow::WriteConfig( )
   FXString cf_prefix = CFG_WIDOW_PREFIX; 
 
   getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", w_border );
+  getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".SelfControl",  w_SelfControl );
+  getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".WMControl",    w_WMControl );
+
 }
 
 
