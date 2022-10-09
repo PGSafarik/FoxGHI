@@ -9,7 +9,7 @@
   5. [Author and project licencion](#5-Author-and-project-licencion)
   6. [Internet](#6-internet)
   
-<p align="center"><img src="doc/images/screenshot.png?raw=true" width="49%" />  
+<p align="center"><img src="doc/images/screenshot.png?raw=true" width="70%" />  
 
 ## 1. GENERAL INFO:
 This very small library extends the FOX GUI framework with several additional classes with the help of which
