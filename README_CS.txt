@@ -30,7 +30,22 @@ Jak bylo řečeno výše, cílem teto knihovny není duplikovat Gnome 3, nicmén
 objektů se snažím vycházet z Gnome 3 Standardu "GHI - Gnome Human Interface", podle něhož tato
 knihovna získala také svůj název.
 
-Screenshot: https://github.com/PGSafarik/FXGHI/blob/master/doc/images/01.png
+FoxGHI nabízí několik standardních voleb ve FOX Registrech, jejichž prostřednictvím lze ovlivnit
+chovaní a vzhled většiny widgetu v teto knihovně. Jsou sdruženy do skupiny "FoxGHI" a název volby 
+se skládá z identifikátoru objektu a nazvu vlastnosti, oddělené tečkou. Nastaveni je vidět i na 
+ilustračním screenshotu k projektu. Možnosti jsou následující:
+ * Window.EnableBorder   - Povolí/zakáže obkreslování okrajů okna tenkou černou linkou
+ * Window.SelfControl    - Povolí/zakáže vlastni obsluhu správy stavu okna
+ * Window.WMControl      - Povolí/zakáže rámování Window managerem (včetně obsluhy stavu okna)
+ * Header.EnableColorize - Povolí/zakáže dobarvováni Header baru a jeho potomků 
+ * Header.TitleFont      - Použije nastaveny font k zobrazeni titulku, je-li povolen
+ * Header.SubTitleFont   - Zadaný font bude využit k zobrazení doplňujícího textu hlavního titulku, 
+                           je-li povolen a nastaven.
+ * Controller.Hidden     - Zobrazí/skryje ovládací tlačítka okna na HeaderBaru 
+ 
+ 
+
+Screenshot: https://github.com/PGSafarik/FXGHI/blob/master/doc/images/screenshot.png
 
 2. PŘEKLAD A INSTALACE
 ========================
@@ -58,15 +73,21 @@ adresáře /opt/foxGHI/0.1/1/
 
 4. STAV PROJEKTU A PLÁNY DO BUDOUCNA
 ======================================
-FoxGHI v tuto chvili implementuje základní funkcionalitu o kterou mi šlo - tzn. autonomní top-level 
+FoxGHI v tuto chvíli implementuje základní funkcionalitu o kterou mi šlo - tzn. autonomní top-level 
 okno s integrovaným headerbarem ve stylu Gnome 3. Nicméně, je ještě co vylepšovat. Z toho důvodu 
 mějte prosím  na paměti, že projekt se stále nachází ve vývoji a muže jednak obsahovat bugy a může 
 se v průběhu času změnit. 
 
-V nejblyžší budoucnosti bude 
+09/10/2022 Dokončen základní koncept konfigurace FoxGHI
+FoxGHI nyní poskytuje možnost standardně nastavovat chování jednotlivých widgetů v rámci teto knihovny. 
+Samozřejmě, že jak se bude knihovna vyvíjet, přibudou další volby. V plánu je třída formuláře, jehož 
+prostřednictvím bude možné měnit chování FoxGHI přímo v aplikaci. Tentýž formulář bude využit na 
+vytvoření samostatné utilitky pro nastaveni FoxGHI aka FOX Control Panel. 
+
+V nejbližší budoucnosti bude 
   1) Vytvořena dokumentace ke knihovně 
   2) Příklady & testy
-  3) verzovazni knihovny  
+  3) verzování knihovny  
   4) integrační boxy pro FXWindowHeader.
 
 5. AUTOR A LICENCE

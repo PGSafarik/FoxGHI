@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--08/09/2022-
+-09/10/2022-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -33,7 +33,18 @@ the library also got its name.
 Please note that the library is currently under development and may change at any time, although there is a 
 certain effort to prevent this from happening, however, this cannot be guaranteed at this time
 
-
+FoxGHI offers several standard options in FOX Registers, through which you can influence behavior and 
+appearance of most widgets in this library. They are grouped into the "FoxGHI" group and the name 
+of the option consists of the object identifier and the property name, separated by a dot. The settings 
+can be seen in the illustrative screenshot of the project. The options are as follows:
+ * Window.EnableBorder - Enables/disables bordering of the window with a thin black line
+ * Window.SelfControl - Enables/disables the window state management
+ * Window.WMControl - Enables/disables Window manager framing (including window status handling)
+ * Header.EnableColorize - Enables/disables coloring of the Header bar and its children 
+ * Header.TitleFont - Uses the set font to display the title bar, if enabled
+ * Header.SubTitleFont - The specified font will be used to display the additional text of the main title, 
+                           if enabled and set.
+ * Controller.Hidden - Show/hide the window button controls on the HeaderBar 
 
 ## 2. COMPILATION AND INSTALLATION:
 *Dependecies:*
@@ -63,7 +74,14 @@ an integrated headerbar in the style of Gnome 3. However, there is still room fo
 that reason please keep in mind that the project is still under development and may contain bugs and 
 may change over time.
 
+  ### 09/10/2022 Basic concept of FoxGHI setup completed  
+FoxGHI now provides the ability to set the behavior of individual widgets within this library. Of 
+course, more options will be added as the library is developed. The plan is to add a formulary class, 
+whose to change the behavior of FoxGHI directly in the application. This form will be used for create 
+a separate utility for setting up FoxGHI aka FOX Control Panel. 
+
 It will be in the near future
+  0) Create a Settings form and settings utility for FoxGHI
   1) Create a documentations for this library
   2) Examples and tests
   3) Versioned
