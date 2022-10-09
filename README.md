@@ -80,7 +80,7 @@ course, more options will be added as the library is developed. The plan is to a
 whose to change the behavior of FoxGHI directly in the application. This form will be used for create 
 a separate utility for setting up FoxGHI aka FOX Control Panel. 
 
-It will be in the near future
+### It will be in the near future  
   0) Create a Settings form and settings utility for FoxGHI
   1) Create a documentations for this library
   2) Examples and tests
