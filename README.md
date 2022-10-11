@@ -9,7 +9,8 @@
   5. [Author and project licencion](#5-Author-and-project-licencion)
   6. [Internet](#6-internet)
   
-<p align="center"><img src="doc/images/screenshot.png?raw=true" width="85%" alt="An FoxGHI examples"/>  
+<p align="center"><img src="doc/images/screenshot.png?raw=true" width="85%"/> 
+- Img.1: An FoxGHI window examles -  
 
 ## 1. GENERAL INFO:
 This very small library extends the FOX GUI framework with several additional classes with the help of which
