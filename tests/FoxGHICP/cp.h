@@ -13,26 +13,54 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 
+#ifndef __CP_H
+#define __CP_H
 /*************************************************************************
-* main.cpp                                                               *
+* cp.h                                                                   *
 *                                                                        *
-* Example 01 - Simple main Window with FoxGHI                            *
-* Copyright (c) 18/03/2019 D.A.Tiger <drakarax@seznam.cz>                *
+* Deklarace FoxGHI Control Panel                                         *
+* Copyright (c) 10/10/2022 D.A.Tiger <drakarax@seznam.cz>                *
 *************************************************************************/
-
+#include<iostream>
 #include<fox-1.7/fx.h>
 #include<fxghi.h>
 
-int main(int argc, char **argv) {
-  FXApp a( "FXGHI_SimpleWindow", "fox-desktop" );
-  a.init( argc, argv );
 
-  FXGWindow *win = new FXGWindow( &a, "Simple FoxGHI Window" );
-  win->getHeader( )->setText( "Hello World!" ); 
-  new FXButton( win->getHeader( ), "\t\t TEST Button", win->getMenuIcon( ), NULL, 0 );
-  
-  a.create( );
-  win->show( PLACEMENT_SCREEN );
+class GHI_ControlPanel : public FXVerticalFrame {
+FXDECLARE( GHI_ControlPanel )  
+   // Header
+   FXTextField   *htf_tfont;
+   FXTextField   *htf_sfont; 
+   FXCheckButton *hcb_colorize;
+   // Window
+   FXCheckButton *wcb_wmcontrol;
+   FXCheckButton *wcb_selfcontrol;
+   FXCheckButton *wcb_border;
+   // Controller
+   FXCheckButton *ccb_hidden;
 
-  return a.run( );
-}
+public :
+  GHI_ControlPanel( FXComposite *p, FXuint opts = FRAME_NONE | LAYOUT_FILL );
+  ~GHI_ControlPanel( );
+
+  /* Operations */
+  virtual void create( );
+
+  virtual void readConfig( );
+  virtual void writeConfig( );
+
+  /* GUI Messages & Handlers */
+  enum {
+    SETTINGS_SAVE = FXVerticalFrame::ID_LAST,
+    SELECT_FONT,
+    ID_LAST,
+  };
+  long onCmd_Select( FXObject *sender, FXSelector sel, void *data );
+  long onCmd_Settings( FXObject *sender, FXSelector sel, void *data );
+
+protected :
+  GHI_ControlPanel( ) { }
+
+};
+
+#endif

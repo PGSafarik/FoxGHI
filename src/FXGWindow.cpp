@@ -306,7 +306,7 @@ void FXGWindow::RecalculateSize( )
 
 void FXGWindow::ReadConfig( )
 {
-  FXString cf_prefix = CFG_WIDOW_PREFIX;  
+  FXString cf_prefix = CFG_WINDOW_PREFIX;  
    
   if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); }  
 
@@ -324,7 +324,7 @@ void FXGWindow::ReadConfig( )
 
 void FXGWindow::WriteConfig( )
 {
-  FXString cf_prefix = CFG_WIDOW_PREFIX; 
+  FXString cf_prefix = CFG_WINDOW_PREFIX; 
 
   getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", w_border );
   getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".SelfControl",  w_SelfControl );

@@ -52,7 +52,7 @@ enum {
 
 /*** CONFIGURATIONS *******************************************************************************/
 #define CFG_FXGHI             "FoxGHI"
-#define CFG_WIDOW_PREFIX      "Window"
+#define CFG_WINDOW_PREFIX     "Window"
 #define CFG_HEADER_PREFIX     "Header" 
 #define CFG_CONTROLLER_PREFIX "Controller"
 
