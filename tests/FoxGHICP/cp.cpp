@@ -47,7 +47,7 @@ GHI_ControlPanel::GHI_ControlPanel( FXComposite *p, FXuint opts )
 
    FXLabel *lw = new FXLabel( this, "FoxGHI Window options:", NULL, LABEL_NORMAL | LAYOUT_FILL );
    lw->setBackColor( getApp( )->getShadowColor( ) );
-   wcb_border      = new FXCheckButton( this, "Disable window border", NULL, 0 );
+   wcb_border      = new FXCheckButton( this, "Enable window border", NULL, 0 );
    wcb_wmcontrol   = new FXCheckButton( this, "Enable WM frame", NULL, 0 );
    wcb_selfcontrol = new FXCheckButton( this, "Enable self control", NULL, 0 );
 }
