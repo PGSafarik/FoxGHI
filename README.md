@@ -35,6 +35,9 @@ the library also got its name.
 Please note that the library is currently under development and may change at any time, although there is a 
 certain effort to prevent this from happening, however, this cannot be guaranteed at this time
 
+_Img.2: The FoxGHI Control Panel_
+<p align="center"><img src="doc/images/ControlPanel.png?raw=true"/>  
+
 FoxGHI offers several standard options in FOX Registers, through which you can influence behavior and 
 appearance of most widgets in this library. They are grouped into the "FoxGHI" group and the name 
 of the option consists of the object identifier and the property name, separated by a dot. The settings 
