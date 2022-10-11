@@ -28,13 +28,6 @@ The goal of this library is not to create a complete „Gnome 3-Like style“ fo
 some - in my opinion - innovative and interesting techniques from this environment. At this time
 Simple Window (FXGWindow), Header bar (FXWindowHeader) and Window Control Panel (FXWindowController) are implemented.
 
-As stated above, the goal of this library is not to duplicate Gnome 3, but to implement those
-object, I am trying to start from the Gnome 3 Standard "GHI - Gnome Human Interface", according to this one
-the library also got its name.
-
-Please note that the library is currently under development and may change at any time, although there is a 
-certain effort to prevent this from happening, however, this cannot be guaranteed at this time
-
 _Img.2: The FoxGHI Control Panel_
 <p align="center"><img src="doc/images/ControlPanel.png?raw=true"/>  
 
@@ -51,6 +44,13 @@ can be seen in the illustrative screenshot of the project. The options are as fo
                            if enabled and set.
  * Controller.Hidden - Show/hide the window button controls on the HeaderBar 
 
+As stated above, the goal of this library is not to duplicate Gnome 3, but to implement those
+object, I am trying to start from the Gnome 3 Standard "GHI - Gnome Human Interface", according to this one
+the library also got its name.
+
+Please note that the library is currently under development and may change at any time, although there is a 
+certain effort to prevent this from happening, however, this cannot be guaranteed at this time
+ 
 ## 2. COMPILATION AND INSTALLATION:
 *Dependecies:*
   [Foxtoolkit 1.7.76](http://fox-toolkit.org/ftp/fox-1.7.76.tar.gz)
