@@ -9,7 +9,7 @@
   5. [Author and project licencion](#5-Author-and-project-licencion)
   6. [Internet](#6-internet)
 
-- Img.1: An FoxGHI window examles -  
+_Img.1: An FoxGHI window examles_
 <p align="center"><img src="doc/images/screenshot.png?raw=true" width="85%"/>  
   
 
