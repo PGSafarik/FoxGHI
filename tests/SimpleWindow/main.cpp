@@ -17,7 +17,7 @@
 * main.cpp                                                               *
 *                                                                        *
 * Example 01 - Simple main Window with FoxGHI                            *
-* Copyright (c) 18/03/2019 D.A.Tiger <drakarax@seznam.cz>                *
+* Copyright (c) 10/09/2022 D.A.Tiger <drakarax@seznam.cz>                *
 *************************************************************************/
 
 #include<fox-1.7/fx.h>

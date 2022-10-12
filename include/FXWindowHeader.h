@@ -84,8 +84,10 @@ public:
   FXIcon*   getIcon( )                            { return m_parent->getIcon( );     }
   void      setIcon( FXIcon *ic )                 { m_parent->setIcon( ic );         }
   FXString  getTitle( ) const                     { return m_parent->getTitle( );    }
+  FXbool    hasTitle( )                           { return getTitle( ).empty( );     }
   void      setTitle( const FXString &text );  
   FXString  getText( ) const                      { return m_stext;                  }
+  FXbool    hasText( )                            { return getText( ).empty( );      }
   void      setText( const FXString &text ); 
   FXFont*   getTitleFont( )                       { return m_tfnt; }
   void      setTitleFont( const FXString &spec );
