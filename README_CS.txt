@@ -112,6 +112,7 @@ Spolu s foxGHI byste měli obdržet kopii GNU Lesser General Public License. Pok
 ===============
   Webové stránky Foxtoolkitu:         http://fox-toolkit.org/
   Gnome Human Interace Guidelines:    https://developer.gnome.org/hig/
+  KDE iconove tema Oxygen:            https://github.com/KDE/oxygen-icons 
   Blog autora (CZ):                   http://bfuplusplus.blogspot.cz/
 
 === KONEC ===
