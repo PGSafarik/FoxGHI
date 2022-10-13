@@ -29,8 +29,12 @@ ADD_SUBDIRECTORY( "${PROJECT_SOURCE_DIR}/utils/FoxGHICP" )
 ADD_SUBDIRECTORY( "${PROJECT_SOURCE_DIR}/tests/SimpleWindow" )
 
 # Install build project
-#export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/lib
+#
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION lib/ ) # libray file(s)
 INSTALL( FILES ${HEADERS} DESTINATION include/ )    # API (C++ header files)
+INSTALL( FILES src/foxghi0.3.conf DESTINATION /etc/ld.so.conf.d/ )
 
+#export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/lib
+INSTALL( CODE "EXECUTE_PROCESS( COMMAND /usr/sbin/ldconfig )" )
+#EXECUTE_PROCESS( COMMAND /usr/sbin/ldconfig )
 ### END ###
