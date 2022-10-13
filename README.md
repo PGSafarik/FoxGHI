@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--09/10/2022-
+-13/10/2022-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -110,6 +110,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 
 ## 6. INTERNET
   * [Foxtoolkitu home page](http://fox-toolkit.org/)
+  * [Oxygen KDE icons theme, used in the FoxGHICP utility](https://github.com/KDE/oxygen-icons)
   * [Gnome Human Interace Guidelines](https://developer.gnome.org/hig/)
   * [Author's blog (CZ)](http://bfuplusplus.blogspot.cz/)
 
