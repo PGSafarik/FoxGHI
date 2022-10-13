@@ -86,11 +86,12 @@ whose to change the behavior of FoxGHI directly in the application. This form wi
 a separate utility for setting up FoxGHI aka FOX Control Panel. 
 
 ### It will be in the near future  
-  0) Create a Settings form and settings utility for FoxGHI
-  1) Create a documentations for this library
-  2) Examples and tests
-  3) Versioned
-  4) integration boxes for FXWindowHeader
+  1) Completion of the settings utility for FoxGHI and integration of the ControlPanel class into the library
+  2) Create a documentations for this library
+  3) Examples and tests
+  4) Versioned
+  5) integration boxes for FXWindowHeader
+  6) Side bar 
 
 ## 5. AUTHOR AND PROJECT LICENCION:
 Copyright (C) 2019 - 2022 Pavel Šafařík <drakarax@seznam.cz>

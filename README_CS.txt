@@ -85,10 +85,12 @@ prostřednictvím bude možné měnit chování FoxGHI přímo v aplikaci. Tent�
 vytvoření samostatné utilitky pro nastaveni FoxGHI aka FOX Control Panel. 
 
 V nejbližší budoucnosti bude 
-  1) Vytvořena dokumentace ke knihovně 
-  2) Příklady & testy
-  3) verzování knihovny  
-  4) integrační boxy pro FXWindowHeader.
+  1) Dokonceni konfiguracniho panelu a integrace jeho tridy do knihovny
+  2) Vytvořena dokumentace ke knihovně 
+  3) Příklady & testy
+  4) verzování knihovny  
+  5) integrační boxy pro FXWindowHeader.
+  6) Postrani subpanel tzv. "side bar" 
 
 5. AUTOR A LICENCE
 =====================
