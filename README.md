@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--13/10/2022-
+-18/10/2022-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -83,7 +83,10 @@ may change over time.
 FoxGHI now provides the ability to set the behavior of individual widgets within this library. Of 
 course, more options will be added as the library is developed. The plan is to add a formulary class, 
 whose to change the behavior of FoxGHI directly in the application. This form will be used for create 
-a separate utility for setting up FoxGHI aka FOX Control Panel. 
+a separate utility for setting up FoxGHI aka FOX Control Panel.
+
+  ### 18/10/2022 The control panel is almost finished
+It remains to sort out the default values and how the CP class will be available in the library  
 
 ### It will be in the near future  
   1) Completion of the settings utility for FoxGHI and integration of the ControlPanel class into the library
