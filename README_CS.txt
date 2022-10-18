@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  13/10/2022 
+﻿Fox Gnome Human Interface library (foxGHI)  18/10/2022 
 ============================================================
 
 Obsah:
@@ -83,6 +83,9 @@ FoxGHI nyní poskytuje možnost standardně nastavovat chování jednotlivých w
 Samozřejmě, že jak se bude knihovna vyvíjet, přibudou další volby. V plánu je třída formuláře, jehož 
 prostřednictvím bude možné měnit chování FoxGHI přímo v aplikaci. Tentýž formulář bude využit na 
 vytvoření samostatné utilitky pro nastaveni FoxGHI aka FOX Control Panel. 
+
+18/10/2022 Donkoncovani kontrolniho panelu
+Zbyva vyresit vychozi hodnoty a jakym zpusobem bude trida CP dostupna v knihovne
 
 V nejbližší budoucnosti bude 
   1) Dokonceni konfiguracniho panelu a integrace jeho tridy do knihovny
