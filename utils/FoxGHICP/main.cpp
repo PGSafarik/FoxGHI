@@ -35,8 +35,7 @@ public :
 
   /* operations */
   virtual void create( );
-   
-
+  
 protected :
   Config( ) { }
 
@@ -48,7 +47,7 @@ FXIMPLEMENT( Config, FXGWindow, NULL, 0 )
 
 /**************************************************************************************************/
 Config::Config( FXApp *a )
-      : FXGWindow( a, "FoxGHI Control Panel", NULL, NULL, CONTROLS_STATIC | WINDOW_PRIMARY | WINDOW_STATIC , 0, 0, 600, 250  ) 
+      : FXGWindow( a, "FoxGHI Control Panel", NULL, NULL, CONTROLS_STATIC | WINDOW_PRIMARY | WINDOW_STATIC , 0, 0, 550, 250  ) 
 {
   // Applications static iconspack (Oxygen)
   ics_big[ 0 ] = new FXPNGIcon( getApp( ), save22 );
@@ -76,7 +75,7 @@ Config::Config( FXApp *a )
   // Create menu
   FXMenuPane *MyMenu = new FXMenuPane( this );
   new FXMenuCommand( MyMenu, "Save",    ics_small[ 7 ], control, GHI_ControlPanel::SETTINGS_SAVE );
-  new FXMenuCommand( MyMenu, "Restore", ics_small[ 8 ], NULL, 0 );
+  new FXMenuCommand( MyMenu, "Restore", ics_small[ 8 ], control, GHI_ControlPanel::SETTINGS_RESTORE );
   new FXMenuSeparator( MyMenu );
   new FXMenuCommand( MyMenu, "Help",    ics_small[ 5 ], NULL, 0 );
   new FXMenuCommand( MyMenu, "About",   ics_small[ 0 ], NULL, 0 );
@@ -86,8 +85,8 @@ Config::Config( FXApp *a )
   // Control buttons for Window Header
   new FXMenuButton( getHeader( ), "\t\t Menu", getMenuIcon( ), MyMenu ); 
   new FXVerticalSeparator( getHeader( ) );
-  new FXButton( getHeader( ), "\t\t Ulozit",  ics_big[ 0 ], control, GHI_ControlPanel::SETTINGS_SAVE, BUTTON_TOOLBAR | LAYOUT_LEFT );
-  new FXButton( getHeader( ), "\t\t Obnovit", ics_big[ 1 ], NULL, 0, BUTTON_TOOLBAR | LAYOUT_LEFT );
+  new FXButton( getHeader( ), "\t\t Ulozit",  ics_big[ 0 ], control, GHI_ControlPanel::SETTINGS_SAVE,    BUTTON_TOOLBAR | LAYOUT_LEFT );
+  new FXButton( getHeader( ), "\t\t Obnovit", ics_big[ 1 ], control, GHI_ControlPanel::SETTINGS_RESTORE, BUTTON_TOOLBAR | LAYOUT_LEFT );
 }
 
 Config::~Config( )

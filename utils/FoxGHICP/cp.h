@@ -38,11 +38,20 @@ FXDECLARE( GHI_ControlPanel )
    FXCheckButton *wcb_border;
    // Controller
    FXCheckButton *ccb_hidden;
+    
+   // internal data
+   FXbool             m_change;
+   FXStringDictionary m_back;    // Original values backup
+   //FXStringDictionary m_def;   // Deafult values   
 
 public :
-  GHI_ControlPanel( FXComposite *p, FXuint opts = FRAME_NONE | LAYOUT_FILL );
+  GHI_ControlPanel( FXComposite *p, FXObject *tgt = NULL, FXSelector sel = 0, FXuint opts = FRAME_NONE | LAYOUT_FILL );
   ~GHI_ControlPanel( );
 
+  /* Access methods */
+  FXbool hasBackup( ) { return !m_back.empty( ); } 
+  FXbool isChange( )  { return m_change; }
+  
   /* Operations */
   virtual void create( );
 
@@ -52,15 +61,21 @@ public :
   /* GUI Messages & Handlers */
   enum {
     SETTINGS_SAVE = FXVerticalFrame::ID_LAST,
+    SETTINGS_RESTORE,
     SELECT_FONT,
+    ID_CHANGE,
     ID_LAST,
   };
   long onCmd_Select( FXObject *sender, FXSelector sel, void *data );
   long onCmd_Settings( FXObject *sender, FXSelector sel, void *data );
+  long onUpd_Settings( FXObject *sender, FXSelector sel, void *data );
+  long onCmd_Update( FXObject *sender, FXSelector sel, void *data );
 
 protected :
   GHI_ControlPanel( ) { }
 
+  /* Helpers methods */
+  void Notify( ) { if( target ) { target->tryHandle( this, FXSEL( SEL_CHANGED, message ), NULL ); } } 
 };
 
 #endif

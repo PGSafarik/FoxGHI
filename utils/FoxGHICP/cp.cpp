@@ -19,37 +19,46 @@
 
 /**************************************************************************************************/
 FXDEFMAP( GHI_ControlPanel ) CP_MAP[ ] = {
-  FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SELECT_FONT, GHI_ControlPanel::onCmd_Select ),
-  FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SETTINGS_SAVE, GHI_ControlPanel::onCmd_Settings )
+  FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SELECT_FONT,      GHI_ControlPanel::onCmd_Select   ),
+  FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SETTINGS_SAVE,    GHI_ControlPanel::onCmd_Settings ),
+  FXMAPFUNC( SEL_UPDATE,  GHI_ControlPanel::SETTINGS_SAVE,    GHI_ControlPanel::onUpd_Settings ),
+  FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SETTINGS_RESTORE, GHI_ControlPanel::onCmd_Settings ),
+  FXMAPFUNC( SEL_UPDATE,  GHI_ControlPanel::SETTINGS_RESTORE, GHI_ControlPanel::onUpd_Settings ),
+  FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::ID_CHANGE,        GHI_ControlPanel::onCmd_Update   )
 };
+
 FXIMPLEMENT( GHI_ControlPanel, FXVerticalFrame, CP_MAP, ARRAYNUMBER( CP_MAP ) )
 
 /**************************************************************************************************/
-GHI_ControlPanel::GHI_ControlPanel( FXComposite *p, FXuint opts )
+GHI_ControlPanel::GHI_ControlPanel( FXComposite *p, FXObject *tgt, FXSelector sel, FXuint opts )
                 : FXVerticalFrame( p, opts )  
 {
-   FXLabel *lh = new FXLabel( this, "FoxGHI Haeader bar options:", NULL, LABEL_NORMAL | LAYOUT_FILL );
+   FXLabel *lh = new FXLabel( this, "Haeader bar", NULL, LABEL_NORMAL | LAYOUT_FILL_X );
    lh->setBackColor( getApp( )->getShadowColor( ) );
    FXMatrix *m = new FXMatrix( this, 3, MATRIX_BY_COLUMNS | LAYOUT_FILL_X );   
    new FXLabel( m, "Main title font", NULL, LABEL_NORMAL );
-   htf_tfont = new FXTextField( m, 50, NULL, 0, TEXTFIELD_NORMAL | LAYOUT_FILL_X ); 
-   FXButton *tbtn = new FXButton( m, "...", NULL, this, GHI_ControlPanel::SELECT_FONT); 
+   htf_tfont = new FXTextField( m, 51, this, GHI_ControlPanel::ID_CHANGE, TEXTFIELD_NORMAL | LAYOUT_FILL_X ); 
+   FXButton *tbtn = new FXButton( m, "...", NULL, this, GHI_ControlPanel::SELECT_FONT ); 
    tbtn->setUserData( htf_tfont );
    new FXLabel( m, "Subtitle font", NULL, LABEL_NORMAL );
-   htf_sfont = new FXTextField( m, 50, NULL, 0, TEXTFIELD_NORMAL | LAYOUT_FILL_X  ); 
+   htf_sfont = new FXTextField( m, 51, this, GHI_ControlPanel::ID_CHANGE, TEXTFIELD_NORMAL | LAYOUT_FILL_X  ); 
    FXButton *sbtn = new FXButton( m, "...", NULL, this, GHI_ControlPanel::SELECT_FONT );
    sbtn->setUserData( htf_sfont );
-   hcb_colorize = new FXCheckButton( this, "Header colorize", NULL, 0 );   
+   hcb_colorize = new FXCheckButton( this, "Header colorize", this, GHI_ControlPanel::ID_CHANGE );   
 
-   FXLabel *lc = new FXLabel( this, "FoxGHI Controller options:", NULL, LABEL_NORMAL | LAYOUT_FILL ); 
+   FXLabel *lc = new FXLabel( this, "Controller", NULL, LABEL_NORMAL | LAYOUT_FILL_X ); 
    lc->setBackColor( getApp( )->getShadowColor( ) );
-   ccb_hidden = new FXCheckButton( this, "Hide Controller", NULL, 0 );
+   ccb_hidden = new FXCheckButton( this, "Hide Controller", this, GHI_ControlPanel::ID_CHANGE );
 
-   FXLabel *lw = new FXLabel( this, "FoxGHI Window options:", NULL, LABEL_NORMAL | LAYOUT_FILL );
+   FXLabel *lw = new FXLabel( this, "Window", NULL, LABEL_NORMAL | LAYOUT_FILL_X );
    lw->setBackColor( getApp( )->getShadowColor( ) );
-   wcb_border      = new FXCheckButton( this, "Enable window border", NULL, 0 );
-   wcb_wmcontrol   = new FXCheckButton( this, "Enable WM frame", NULL, 0 );
-   wcb_selfcontrol = new FXCheckButton( this, "Enable self control", NULL, 0 );
+   wcb_border      = new FXCheckButton( this, "Enable window border", this, GHI_ControlPanel::ID_CHANGE );
+   wcb_wmcontrol   = new FXCheckButton( this, "Enable WM frame", this, GHI_ControlPanel::ID_CHANGE );
+   wcb_selfcontrol = new FXCheckButton( this, "Enable self control", this, GHI_ControlPanel::ID_CHANGE );
+
+   target = tgt;
+   message = sel;
+   m_change = false;
 }
 
 GHI_ControlPanel::~GHI_ControlPanel( )
@@ -62,6 +71,9 @@ GHI_ControlPanel::~GHI_ControlPanel( )
 void GHI_ControlPanel::create( )
 {
   readConfig( );
+  m_change = false;
+  Notify( );
+
   FXVerticalFrame::create( );
 }
 
@@ -94,20 +106,25 @@ void GHI_ControlPanel::readConfig( )
 
 void GHI_ControlPanel::writeConfig( )
 {
+  FXApp *a = getApp( );
+
+  // Vytvoreni zalohy
+  if( a->reg( ).existingSection( CFG_FXGHI ) ) { m_back = a->reg( ).at( CFG_FXGHI ); }
+ 
   FXString cf_prefix = CFG_HEADER_PREFIX;
-  getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", hcb_colorize->getCheck( ) );
-  getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       htf_tfont->getText( ).text( ) );
-  getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    htf_sfont->getText( ).text( ) );
+  a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", hcb_colorize->getCheck( ) );
+  a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       htf_tfont->getText( ).text( ) );
+  a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    htf_sfont->getText( ).text( ) );
 
   cf_prefix = CFG_CONTROLLER_PREFIX;
-  getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", ccb_hidden->getCheck( ) );
+  a->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", ccb_hidden->getCheck( ) );
 
   cf_prefix = CFG_WINDOW_PREFIX;
-  getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", wcb_border->getCheck( ) );
-  getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".SelfControl",  wcb_selfcontrol->getCheck( ) );
-  getApp( )->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".WMControl",    wcb_wmcontrol->getCheck( ) );
+  a->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", wcb_border->getCheck( ) );
+  a->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".SelfControl",  wcb_selfcontrol->getCheck( ) );
+  a->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".WMControl",    wcb_wmcontrol->getCheck( ) );
 
-  getApp( )->reg( ).write( );
+  a->reg( ).write( );
 }
 
 /**************************************************************************************************/
@@ -118,15 +135,71 @@ long GHI_ControlPanel::onCmd_Select( FXObject *sender, FXSelector sel, void *dat
 
   FXFontDialog *dialog = new FXFontDialog( this, "Select font" );
   dialog->setFont( field->getText( ) );
-  if( dialog->execute( ) ) { field->setText( dialog->getFont( ) ); }
+  if( dialog->execute( ) ) { field->setText( dialog->getFont( ), true ); }
   
  return 1;
 }
 
 long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *data )
 {
-  writeConfig( ); 
+  FXuint id = FXSELID( sel );
+
+  switch( id ) {
+    case GHI_ControlPanel::SETTINGS_SAVE :
+    {
+      writeConfig( ); 
+      m_change = false;
+      Notify( );
+
+      break;
+    }
+    case GHI_ControlPanel::SETTINGS_RESTORE :
+    {
+      if( !m_back.empty( ) )
+      {
+        if( FXMessageBox::question( this, MBOX_YES_NO, "Obnovit", "Chcete obnovit puvodni nastaveni?" ) == MBOX_CLICKED_YES ) {
+          getApp( )->reg( ).at( CFG_FXGHI ) = m_back;
+          m_back.clear( );  
+          readConfig( );
+          m_change = true;
+          Notify( );
+          
+        }  
+      }
+      else { FXMessageBox::warning( this, MBOX_OK, "Obnovit", "Bohuzel nejsou zadna data k obnoveni" ); } 
+      break; 
+    }
+  }
+
   return 1;
+}
+
+long GHI_ControlPanel::onUpd_Settings( FXObject *sender, FXSelector sel, void *data )
+{
+  FXWindow *actor = static_cast<FXWindow*>( sender );
+  
+  switch( FXSELID( sel ) ) {
+    case GHI_ControlPanel::SETTINGS_SAVE : 
+    { 
+      m_change ? actor->enable( ) : actor->disable( ) ;
+      break;
+    }
+    case GHI_ControlPanel::SETTINGS_RESTORE :  
+    { 
+      ( !m_back.empty( ) ) ? actor->enable( ) : actor->disable( ) ;
+      break;
+    }
+  }
+
+  return 1;
+}
+
+long GHI_ControlPanel::onCmd_Update( FXObject *sender, FXSelector sel, void *data )
+{
+  m_change = true;
+  Notify( );
+
+  return 1; 
 }
 
 /*** END ******************************************************************************************/
