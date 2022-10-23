@@ -76,6 +76,7 @@ Config::Config( FXApp *a )
   FXMenuPane *MyMenu = new FXMenuPane( this );
   new FXMenuCommand( MyMenu, "Save",    ics_small[ 7 ], control, GHI_ControlPanel::SETTINGS_SAVE );
   new FXMenuCommand( MyMenu, "Restore", ics_small[ 8 ], control, GHI_ControlPanel::SETTINGS_RESTORE );
+  new FXMenuCommand( MyMenu, "Default", NULL,           control, GHI_ControlPanel::SETTINGS_DEFAULT );
   new FXMenuSeparator( MyMenu );
   new FXMenuCommand( MyMenu, "Help",    ics_small[ 5 ], NULL, 0 );
   new FXMenuCommand( MyMenu, "About",   ics_small[ 0 ], NULL, 0 );

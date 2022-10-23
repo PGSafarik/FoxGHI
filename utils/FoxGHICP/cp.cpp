@@ -24,6 +24,7 @@ FXDEFMAP( GHI_ControlPanel ) CP_MAP[ ] = {
   FXMAPFUNC( SEL_UPDATE,  GHI_ControlPanel::SETTINGS_SAVE,    GHI_ControlPanel::onUpd_Settings ),
   FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SETTINGS_RESTORE, GHI_ControlPanel::onCmd_Settings ),
   FXMAPFUNC( SEL_UPDATE,  GHI_ControlPanel::SETTINGS_RESTORE, GHI_ControlPanel::onUpd_Settings ),
+  FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SETTINGS_DEFAULT, GHI_ControlPanel::onCmd_Settings ),
   FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::ID_CHANGE,        GHI_ControlPanel::onCmd_Update   )
 };
 
@@ -157,7 +158,7 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
     {
       if( !m_back.empty( ) )
       {
-        if( FXMessageBox::question( this, MBOX_YES_NO, "Obnovit", "Chcete obnovit puvodni nastaveni?" ) == MBOX_CLICKED_YES ) {
+        if( FXMessageBox::question( this, MBOX_YES_NO, "Restore FoxGHI settings", "Do you really want to restore the original settings?" ) == MBOX_CLICKED_YES ) {
           getApp( )->reg( ).at( CFG_FXGHI ) = m_back;
           m_back.clear( );  
           readConfig( );
@@ -166,10 +167,21 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
           
         }  
       }
-      else { FXMessageBox::warning( this, MBOX_OK, "Obnovit", "Bohuzel nejsou zadna data k obnoveni" ); } 
+      else { FXMessageBox::warning( this, MBOX_OK, "Restore FoxGHI settings", "Unfortunately there is no data available for recovery." ); } 
       break; 
     }
+    case GHI_ControlPanel::SETTINGS_DEFAULT :
+    {
+      if( FXMessageBox::question( this, MBOX_YES_NO, "Predefined FoxGHI settings", "Do you really want predefined settings?" ) == MBOX_CLICKED_YES ) {
+        if( getApp( )->reg( ).existingSection( CFG_FXGHI ) ) { getApp( )->reg( ).deleteSection( CFG_FXGHI ); }
+        readConfig( );
+        m_change = true;
+        Notify( );
+      }
+      break;
+    }
   }
+
 
   return 1;
 }

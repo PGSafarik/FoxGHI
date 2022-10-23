@@ -62,6 +62,7 @@ public :
   enum {
     SETTINGS_SAVE = FXVerticalFrame::ID_LAST,
     SETTINGS_RESTORE,
+    SETTINGS_DEFAULT,
     SELECT_FONT,
     ID_CHANGE,
     ID_LAST,
