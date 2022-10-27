@@ -70,7 +70,7 @@ Config::Config( FXApp *a )
   getHeader( )->setText( ( getApp( )->getAppName( ) + " : " + getApp( )->getVendorName( ) ) );  
 
   // Create control panel frame
-  GHI_ControlPanel *control = new GHI_ControlPanel( this );  
+  GHI_ControlPanel *control = new GHI_ControlPanel( this, this, Config::ID_RECONFIGURE );  
 
   // Create menu
   FXMenuPane *MyMenu = new FXMenuPane( this );

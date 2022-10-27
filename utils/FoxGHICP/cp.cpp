@@ -73,9 +73,9 @@ void GHI_ControlPanel::create( )
 {
   readConfig( );
   m_change = false;
-  Notify( );
 
   FXVerticalFrame::create( );
+  //Notify( );
 }
 
 /**************************************************************************************************/
@@ -209,7 +209,7 @@ long GHI_ControlPanel::onUpd_Settings( FXObject *sender, FXSelector sel, void *d
 long GHI_ControlPanel::onCmd_Update( FXObject *sender, FXSelector sel, void *data )
 {
   m_change = true;
-  Notify( );
+  //Notify( );
 
   return 1; 
 }

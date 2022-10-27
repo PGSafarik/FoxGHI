@@ -37,8 +37,9 @@ class FXWindowHeader : public FXHorizontalFrame {
 FXDECLARE( FXWindowHeader )
   FXTopWindow *m_parent; // Ukazatel na rodicovske okno
 
-  FXuint  m_opts;     // Window HeaderBar options flags
+  FXuint  m_opts;      // Window HeaderBar options flags
   FXColor m_sepcolor;  // Color of the bottom separator
+  FXColor m_backcolor; // Backcolor for header bar   
 
   // Moving
   FXbool  m_dragged; // Priznak zachyceni okna mysi
@@ -117,10 +118,16 @@ public:
   ////////////////////////////////////////////////
   // GUI events and handlers
   //
+  enum {
+    ID_RECONFIGURE = FXHorizontalFrame::ID_LAST,
+    ID_LAST
+  };
+
   long onPaint( FXObject *sender, FXSelector sel, void *data );
   long onLeftBtnPress( FXObject *sender, FXSelector sel, void *data );
   long onLeftBtnRelease( FXObject *sender, FXSelector sel, void *data );
   long onMotion( FXObject *sender, FXSelector sel, void *data );
+  long onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data );
 
 protected:
   FXWindowHeader( ) { }

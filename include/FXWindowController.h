@@ -56,6 +56,7 @@ public :
   //
   FXuint getOptions( ) { return 0; }
   void   setOptions( FXuint opts ) { }
+  FXbool isHidden( ) { return m_hidden; } 
 
   ////////////////////////////////////////////////
   // Operations
@@ -69,17 +70,18 @@ public :
   //
   enum {
     WIN_MAXIMIZE = 1,
+    ID_RECONFIGURE,
     ID_LAST
   };
   long onCmd_WinMaximize( FXObject *sender, FXSelector sel, void *data );
-
-
+  long onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data );
 
 protected:
   FXWindowController( ) { }
-  
-  virtual void RaedConfig( );
+
+  virtual void ReadConfig( );
   virtual void WriteConfig( );
+  
 };
 
 }      /* FXGHI */

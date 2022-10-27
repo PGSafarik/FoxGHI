@@ -62,7 +62,8 @@ public:
   inline FXWindowHeader* getHeader( ) { return w_header; }
   FXIcon* getMenuIcon( )              { return w_menuic; }
   FXbool  isPrimary( )                { return w_opts & WINDOW_PRIMARY; }
-  //FXbool  hasBorder( )              { return w_border; }
+  //FXbool  hasBorder( )                { return w_border; }
+  
   
   ////////////////////////////////////////////////
   // Operations
@@ -76,6 +77,7 @@ public:
   //
   enum {
     ID_WINHEADER = FXTopWindow::ID_LAST, // Using for handled a window headerbar events
+    ID_RECONFIGURE,
     ID_LAST
   };
 
@@ -83,6 +85,7 @@ public:
   long onLeftButtonPress( FXObject *sender, FXSelector sel, void *data );
   long onLeftButtonRelease( FXObject *sender, FXSelector sel, void *data );
   long onMotion( FXObject *sender, FXSelector sel, void *data );
+  long onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data );
 
 protected:
   FXGWindow( ) { }

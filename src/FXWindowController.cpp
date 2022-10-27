@@ -23,10 +23,11 @@ using namespace FXGHI;
 namespace FXGHI {
 
 FXDEFMAP( FXWindowController ) WindowController[ ] = {
-  FXMAPFUNC( SEL_COMMAND, FXWindowController::WIN_MAXIMIZE, FXWindowController::onCmd_WinMaximize )
+  FXMAPFUNC( SEL_COMMAND, FXWindowController::WIN_MAXIMIZE,   FXWindowController::onCmd_WinMaximize ),
+  FXMAPFUNC( SEL_CHANGED, FXWindowController::ID_RECONFIGURE, FXWindowController::onCmd_Reconfigure )
 };
-FXIMPLEMENT( FXWindowController, FXObject, WindowController, ARRAYNUMBER( WindowController ) )
 
+FXIMPLEMENT( FXWindowController, FXObject, WindowController, ARRAYNUMBER( WindowController ) )
 /*************************************************************************************************/
 FXWindowController::FXWindowController( FXWindowHeader *p, FXuint opts )
 {
@@ -59,9 +60,11 @@ FXWindowController::~FXWindowController( )
 /*************************************************************************************************/
 void FXWindowController::create( )
 {
-  RaedConfig( );
+  ReadConfig( );
 
+  ic_close->create( );
   ic_maximize->create( );
+  ic_iconify->create( );
   ic_restore->create( );
 
   if( m_hidden ) { this->hide( ); }
@@ -69,15 +72,15 @@ void FXWindowController::create( )
 
 void FXWindowController::show( )
 {
-  m_closeBtn->show( );
-  m_maximizeBtn->show( );
-  m_iconifyBtn->show( );
+  if( m_closeBtn )    { m_closeBtn->show( ); }
+  if( m_maximizeBtn ) { m_maximizeBtn->show( ); }
+  if( m_iconifyBtn )  { m_iconifyBtn->show( ); }
   m_sep->show( );
 }
 
 void FXWindowController::hide( )
 {
-  m_closeBtn->hide( );
+  if( m_closeBtn ) { m_closeBtn->hide( ); }
   if( m_maximizeBtn ) { m_maximizeBtn->hide( ); }
   if( m_iconifyBtn ) { m_iconifyBtn->hide( ); }
   m_sep->hide( );
@@ -100,10 +103,21 @@ long FXWindowController::onCmd_WinMaximize( FXObject *sender, FXSelector sel, vo
   return 1;
 }
 
-void FXWindowController::RaedConfig( )
+long FXWindowController::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data ) 
 {
-  FXString cf_prefix = CFG_CONTROLLER_PREFIX;
+  #ifdef DEBUG 
+  std::cout << "[DEBUG - FXGWindowController::onCmd_Reconfigure] "  << std::endl;
+  #endif
+
+  ReadConfig( );
+  ( isHidden( ) ? hide( ) : show( ) );
   
+  return 1;
+}
+
+void FXWindowController::ReadConfig( )
+{
+  FXString cf_prefix = CFG_CONTROLLER_PREFIX;  
   m_hidden = m_parent->getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", false );
 
   #ifdef DEBUG 

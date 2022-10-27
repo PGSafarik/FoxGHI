@@ -23,10 +23,11 @@ using namespace FXGHI;
 namespace FXGHI {
 // Event map and object implementation
 FXDEFMAP( FXWindowHeader ) FXWindowHeaderMap[] = {
-  FXMAPFUNC( SEL_PAINT,             0, FXWindowHeader::onPaint ),
-  FXMAPFUNC( SEL_MOTION,            0, FXWindowHeader::onMotion ),
-  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   0, FXWindowHeader::onLeftBtnPress ),
-  FXMAPFUNC( SEL_LEFTBUTTONRELEASE, 0, FXWindowHeader::onLeftBtnRelease ),
+  FXMAPFUNC( SEL_PAINT,             0,                              FXWindowHeader::onPaint ),
+  FXMAPFUNC( SEL_MOTION,            0,                              FXWindowHeader::onMotion ),
+  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   0,                              FXWindowHeader::onLeftBtnPress ),
+  FXMAPFUNC( SEL_LEFTBUTTONRELEASE, 0,                              FXWindowHeader::onLeftBtnRelease ),
+  FXMAPFUNC( SEL_CHANGED,           FXWindowHeader::ID_RECONFIGURE, FXWindowHeader::onCmd_Reconfigure ) 
 };
 FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( FXWindowHeaderMap ) )
 
@@ -65,18 +66,22 @@ void FXWindowHeader::create( )
 {
   ReadConfig( );
 
+  FXint clr_offset = 30;
+  m_backcolor      = getApp( )->getBaseColor( );
+  m_backcolor     -= FXRGB( clr_offset, clr_offset, clr_offset );
+
   // Header bar colorize
   if( m_colorize ) {
-    FXint clr_offset = 30;
-    FXColor clr      = getBackColor( );
-    clr             -= FXRGB( clr_offset, clr_offset, clr_offset );
-    setBackColor( clr );
+    setBackColor( m_backcolor );
 
     // Calculate color for bottom separator
-    clr_offset += 10;
-    m_sepcolor = clr - FXRGB( clr_offset, clr_offset, clr_offset );
+    clr_offset += 30;
+    m_sepcolor = getApp( )->getBaseColor( ) - FXRGB( clr_offset, clr_offset, clr_offset );
   }
-  else { m_sepcolor = FXRGB( 0, 0, 0 ); }
+  else { 
+    m_sepcolor = getApp( )->getBorderColor( ); 
+    setBackColor( getApp( )->getBaseColor( ) );
+  }
 
   // Creating
   FXHorizontalFrame::create( );
@@ -283,6 +288,35 @@ long FXWindowHeader::onMotion( FXObject *sender, FXSelector sel, void *data )
   else { res = FXHorizontalFrame::onMotion( sender, sel, data ); }
 
   return res;
+}
+
+long FXWindowHeader::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data )
+{
+  ReadConfig( );
+
+  // Header bar colorize
+  if( m_colorize ) {
+    setBackColor( m_backcolor );
+
+    // Calculate color for bottom separator
+    FXint clr_offset = 60;
+    m_sepcolor = getApp( )->getBorderColor( ) - FXRGB( clr_offset, clr_offset, clr_offset );
+    }
+  else { 
+    m_sepcolor = getApp( )->getBorderColor( ); 
+    setBackColor( getApp( )->getBaseColor( ) );
+  }
+
+
+  // Update title
+  setTitleFont( m_fntspec_title );
+  setSubtitleFont( m_fntspec_subtitle );
+  UpdateTitle( );
+
+  // Colorized children for this frame
+  recolorize( );
+
+  return 1;
 }
 
 /**************************************************************************************************/

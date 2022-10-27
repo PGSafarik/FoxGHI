@@ -24,11 +24,12 @@ using namespace FXGHI;
 namespace FXGHI {
 
 FXDEFMAP( FXGWindow ) PrimaryWindowMap[ ] = {
-  FXMAPFUNC( SEL_PAINT,             0,                       FXGWindow::onPaint ),
-  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   0,                       FXGWindow::onLeftButtonPress ),
-  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   FXGWindow::ID_WINHEADER, FXGWindow::onLeftButtonPress ),
-  FXMAPFUNC( SEL_LEFTBUTTONRELEASE, 0,                       FXGWindow::onLeftButtonRelease ),
-  FXMAPFUNC( SEL_MOTION,            0,                       FXGWindow::onMotion )
+  FXMAPFUNC( SEL_PAINT,             0,                         FXGWindow::onPaint ),
+  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   0,                         FXGWindow::onLeftButtonPress ),
+  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   FXGWindow::ID_WINHEADER,   FXGWindow::onLeftButtonPress ),
+  FXMAPFUNC( SEL_LEFTBUTTONRELEASE, 0,                         FXGWindow::onLeftButtonRelease ),
+  FXMAPFUNC( SEL_MOTION,            0,                         FXGWindow::onMotion ),
+  FXMAPFUNC( SEL_CHANGED,           FXGWindow::ID_RECONFIGURE, FXGWindow::onCmd_Reconfigure)           
 };
 FXIMPLEMENT( FXGWindow, FXTopWindow, PrimaryWindowMap, ARRAYNUMBER( PrimaryWindowMap ) )
 
@@ -163,19 +164,20 @@ long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data 
 
   if( isEnabled( ) && w_SelfControl ) {
 	  FXEvent *event = static_cast<FXEvent*>( data );
-    grab( );
 
     if( FXSELID( sel ) == FXGWindow::ID_WINHEADER ) { w_grab = DRAG_MOVE; }
     else { w_grab = Where( event->win_x, event->win_y ); }
 
-    w_rect.set( getX( ), getY( ), getWidth( ), getHeight( ) );
-    w_last.set( event->root_x, event->root_y );
+    if( w_grab != DRAG_NONE ) {   
+      grab( );
+      w_rect.set( getX( ), getY( ), getWidth( ), getHeight( ) );
+      w_last.set( event->root_x, event->root_y );
 
-    Cursor_Change( );
+      Cursor_Change( );
+    }
 
 	  resh = 1;
   }
-
   return resh;
 }
 
@@ -243,6 +245,24 @@ long FXGWindow::onMotion( FXObject *sender, FXSelector sel, void *data )
 
   return res;
 }
+
+long FXGWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data )
+{
+  #ifdef DEBUG 
+  std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure] "  << std::endl;
+  #endif
+  
+  ReadConfig( );
+
+  if( w_WMControl ) { setDecorations( DECOR_ALL ); }
+  
+  w_controller->tryHandle( this, FXSEL( SEL_CHANGED, FXWindowController::ID_RECONFIGURE ), NULL );
+  w_header->tryHandle(     this, FXSEL( SEL_CHANGED, FXWindowHeader::ID_RECONFIGURE ),     NULL );
+
+  return 1;
+}
+
+
 /*************************************************************************************************/
 FXuint FXGWindow::Where( FXint pos_x, FXint pos_y )
 {
@@ -308,7 +328,7 @@ void FXGWindow::ReadConfig( )
 {
   FXString cf_prefix = CFG_WINDOW_PREFIX;  
    
-  if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); }  
+  if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); } 
 
    w_border      = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".EnableBorder", true );
    w_SelfControl = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".SelfControl",  true );
