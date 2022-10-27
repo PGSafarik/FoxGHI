@@ -23,7 +23,8 @@
 *************************************************************************/
 #include<iostream>
 #include<fox-1.7/fx.h>
-#include<fxghi.h>
+#include<FXGHI_defs.h>
+//#include<fxghi.h>
 
 
 class GHI_ControlPanel : public FXVerticalFrame {

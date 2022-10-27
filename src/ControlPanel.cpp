@@ -15,7 +15,7 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 
-#include "cp.h" 
+#include "ControlPanel.h" 
 
 /**************************************************************************************************/
 FXDEFMAP( GHI_ControlPanel ) CP_MAP[ ] = {

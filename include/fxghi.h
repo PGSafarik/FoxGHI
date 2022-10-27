@@ -24,6 +24,7 @@
 #include<FXGWindow.h>
 #include<FXGDialogBox.h>
 #include<FXWindowHeader.h>
+#include<ControlPanel.h>
 /*************************************************************************
 * GHI - Gnome Human Interface                                            *
 * HIG - (Gnome) Human Interace Guidelines                                *

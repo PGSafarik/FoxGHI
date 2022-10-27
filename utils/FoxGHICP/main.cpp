@@ -17,7 +17,7 @@
 
 #include <fox-1.7/fx.h>
 #include <fxghi.h>
-#include "cp.h"
+//#include "cp.h"
 #include "icons.h"
 
 /*** UTILS ****************************************************************************************/
