@@ -73,9 +73,7 @@ FXGWindow::FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon
 }
 
 FXGWindow::~FXGWindow( )
-{  
-  //WriteConfig( );
-}
+{ }
 
 /**************************************************************************************************/
 void FXGWindow::create( )
@@ -102,6 +100,7 @@ void FXGWindow::create( )
 
 FXbool FXGWindow::close( FXbool notify )
 {
+  /* Close this window */
   // Reimplement from FXTopWindow so that this function accept a primary FXGWindow like the FXMainWidow
   FXWindow *window;
   FXbool    quit = true;
@@ -156,7 +155,7 @@ long FXGWindow::onPaint( FXObject *sender, FXSelector sel, void *data )
 
 long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data )
 {
-  /* Grab this window of left mouse button */
+  /* Grab this window of left mouse button, begin on move or resize this window */
   long resh = 0;
 
   flags &= ~FLAG_TIP;
@@ -183,7 +182,7 @@ long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data 
 
 long FXGWindow::onLeftButtonRelease( FXObject *sender, FXSelector sel, void *data )
 {
-  /* Ungrab this window of left mouse button */
+  /* Ungrab this window of left mouse button, end of move or resize this window */
   long resh = 0;
 
   if( isEnabled( ) && w_SelfControl ) {
@@ -205,6 +204,7 @@ long FXGWindow::onLeftButtonRelease( FXObject *sender, FXSelector sel, void *dat
 
 long FXGWindow::onMotion( FXObject *sender, FXSelector sel, void *data )
 {
+  /* Moving the window */
   long res = 0;
 
   if( w_grab != DRAG_NONE ) {
@@ -248,14 +248,14 @@ long FXGWindow::onMotion( FXObject *sender, FXSelector sel, void *data )
 
 long FXGWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data )
 {
+  /* request to change window settings */
   #ifdef DEBUG 
   std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure] "  << std::endl;
   #endif
   
   ReadConfig( );
+  setDecorations( ( w_WMControl ? DECOR_ALL : DECOR_RESIZE ) );
 
-  if( w_WMControl ) { setDecorations( DECOR_ALL ); }
-  
   w_controller->tryHandle( this, FXSEL( SEL_CHANGED, FXWindowController::ID_RECONFIGURE ), NULL );
   w_header->tryHandle(     this, FXSEL( SEL_CHANGED, FXWindowHeader::ID_RECONFIGURE ),     NULL );
 
@@ -266,6 +266,7 @@ long FXGWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data 
 /*************************************************************************************************/
 FXuint FXGWindow::Where( FXint pos_x, FXint pos_y )
 {
+  /* Check out exactly where the window is captured by the mouse (from FXWM)*/
   FXuint s = DRAG_NONE;
   if( !( w_opts & WINDOW_STATIC ) ) {
     if( pos_x < getPadLeft( ) )                   { s |= DRAG_LEFT; }
@@ -279,6 +280,7 @@ FXuint FXGWindow::Where( FXint pos_x, FXint pos_y )
 
 void FXGWindow::Cursor_Change( )
 {
+  /* Determine the necessary mouse cursor change (from FXWM) */
   switch( w_grab ) {
     case DRAG_TOP :
     case DRAG_BOTTOM:
@@ -306,11 +308,13 @@ void FXGWindow::Cursor_Change( )
 
 void FXGWindow::Cursor_Revert( )
 {
+  /* Return the to default mouse cursor (from FXWM) */
   Cursor_Set( DEF_ARROW_CURSOR );
 }
 
 void FXGWindow::Cursor_Set( FXDefaultCursor cursor_id )
 {
+  /* Set the mouse cursor (from FXWM) */ 
   FXCursor *cursor = getApp( )->getDefaultCursor( cursor_id );
   setDefaultCursor( cursor );
   setDragCursor( cursor );
