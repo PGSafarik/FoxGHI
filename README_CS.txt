@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  18/10/2022 
+﻿Fox Gnome Human Interface library (foxGHI)  29/10/2022 
 ============================================================
 
 Obsah:
@@ -8,7 +8,10 @@ Obsah:
   4. Stav projektu a plány do budoucna
   5. Autor a licence
   6. Internet
-  
+
+Screenshot1: https://github.com/PGSafarik/FXGHI/blob/master/doc/images/screenshot.png
+Screenshot2: https://github.com/PGSafarik/FXGHI/blob/master/doc/images/ControlPanel
+
 1. ZÁKLADNÍ INFORMACE:
 =======================
 Tato velmi malá knihovna rozšiřuje GUI Framework FOX o několik dodatečných tříd, s jejichž pomocí
@@ -20,15 +23,6 @@ případně další. Umožňuje též pohyb s oknem pomoci myši. Stejně jako t
 zobrazovat název aplikace a libovolný dodatečný text. Dále poskytuje prostor pro nástrojová tlačítka, 
 různé ukazatele a podobně, ve své podstatě lze použít téměř jakýkoliv widget. o Header bar často
 obsahuje také tlačítko s roletovým hlavním menu aplikace. 
-
-Cílem teto knihovny není vytvořit kompletní „Gnome 3-Like style“ pro Fox, pouze implementovat jen
-některé - podle mého názoru - inovativní a zajímavé techniky z tohoto prostředí. V tuto chvíli
-Je implementováno Simple Window  (FXGWindow), Header bar (FXWindowHeader) a Panel pro ovládání 
-okna (FXWindowController). 
-
-Jak bylo řečeno výše, cílem teto knihovny není duplikovat Gnome 3, nicméně při implementaci těchto 
-objektů se snažím vycházet z Gnome 3 Standardu "GHI - Gnome Human Interface", podle něhož tato
-knihovna získala také svůj název.
 
 FoxGHI nabízí několik standardních voleb ve FOX Registrech, jejichž prostřednictvím lze ovlivnit
 chovaní a vzhled většiny widgetu v teto knihovně. Jsou sdruženy do skupiny "FoxGHI" a název volby 
@@ -42,10 +36,26 @@ ilustračním screenshotu k projektu. Možnosti jsou následující:
  * Header.SubTitleFont   - Zadaný font bude využit k zobrazení doplňujícího textu hlavního titulku, 
                            je-li povolen a nastaven.
  * Controller.Hidden     - Zobrazí/skryje ovládací tlačítka okna na HeaderBaru 
- 
- 
 
-Screenshot: https://github.com/PGSafarik/FXGHI/blob/master/doc/images/screenshot.png
+K usnadnění konfigurace knihovny, FoxGHI nabízí třídu ControlPanel, která implementuje GUI wraper 
+FoxGHI konfigurace. ControlPanel je navržen tak, aby jej bylo snadné integrovat do libovolného projektu 
+využívajícího FoxGHI, nebo, bude-li to vývojář považovat za vhodné, ji lze využít v samostatné 
+konfigurační utilitě. Ukázkou jak lze s touto třídou pracovat je program FoxGHICP v adresáři utility 
+projektu. Tato malá utilitka je tak poskytována též jako nezávislý nástroj pro konfiguraci ve stylu 
+FOX Control Panel. 
+ 
+Cílem teto knihovny není vytvořit kompletní „Gnome 3-Like style“ pro Fox, pouze implementovat jen
+některé - podle mého názoru - inovativní a zajímavé techniky z tohoto prostředí, které chci sám 
+používat ve svých vlastních projektech. V tuto chvíli je implementováno Simple Window  (FXGWindow), 
+Header bar (FXWindowHeader), Panel pro ovládání okna (FXWindowController) a wraper pro ovládání 
+nastavení FoxGHI (FXGHI_ControllPanel). 
+
+Jak bylo řečeno výše, cílem teto knihovny není duplikovat Gnome 3, nicméně při implementaci těchto 
+objektů se snažím vycházet z Gnome 3 Standardu "GHI - Gnome Human Interface", podle něhož tato
+knihovna získala také svůj název.
+ 
+Vezměte prosím na vědomí, že knihovna je v současné době ve vývoji a může se kdykoli změnit.
+
 
 2. PŘEKLAD A INSTALACE
 ========================
@@ -73,6 +83,8 @@ adresáře /opt/foxGHI/0.1/1/
 
 4. STAV PROJEKTU A PLÁNY DO BUDOUCNA
 ======================================
+Současná verze: 0.3.1 ALPHA
+
 FoxGHI v tuto chvíli implementuje základní funkcionalitu o kterou mi šlo - tzn. autonomní top-level 
 okno s integrovaným headerbarem ve stylu Gnome 3. Nicméně, je ještě co vylepšovat. Z toho důvodu 
 mějte prosím  na paměti, že projekt se stále nachází ve vývoji a muže jednak obsahovat bugy a může 
@@ -87,8 +99,12 @@ vytvoření samostatné utilitky pro nastaveni FoxGHI aka FOX Control Panel.
 18/10/2022 Donkoncovani kontrolniho panelu
 Zbyva vyresit vychozi hodnoty a jakym zpusobem bude trida CP dostupna v knihovne
 
+29/10/2022 Dokoncena implementace tridy FXGHI_ControlPanel 
+Třída poskytující GUI pro nastaveni vlastností FoxGHI je dokončena a integrována do knihovny. Nyní
+už budou pouze přibývat případné konfigurační volby s tím, jak bude postupovat vývoj projektu. S touto třídou
+byla také dokončena konfigurační utilita FoxGHICP. Odebírám tedy tento bod ze seznamu plánovaných cílů vývoje.
+
 V nejbližší budoucnosti bude 
-  1) Dokonceni konfiguracniho panelu a integrace jeho tridy do knihovny
   2) Vytvořena dokumentace ke knihovně 
   3) Příklady & testy
   4) verzování knihovny  

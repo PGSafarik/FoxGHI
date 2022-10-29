@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--18/10/2022-
+-29/10/2022-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -24,13 +24,6 @@ display the app name and some additional text. It also provides space for tool b
 different indicators and the like, basically almost any widget can be used. Often Header bar
 also contains a button with a roll-up main menu of the application.
 
-The goal of this library is not to create a complete „Gnome 3-Like style“ for Fox, only to implement it
-some - in my opinion - innovative and interesting techniques from this environment. At this time
-Simple Window (FXGWindow), Header bar (FXWindowHeader) and Window Control Panel (FXWindowController) are implemented.
-
-_Img.2: The FoxGHI Control Panel_
-<p align="center"><img src="doc/images/ControlPanel.png?raw=true"/>  
-
 FoxGHI offers several standard options in FOX Registers, through which you can influence behavior and 
 appearance of most widgets in this library. They are grouped into the "FoxGHI" group and the name 
 of the option consists of the object identifier and the property name, separated by a dot. The settings 
@@ -43,6 +36,21 @@ can be seen in the illustrative screenshot of the project. The options are as fo
  * Header.SubTitleFont - The specified font will be used to display the additional text of the main title, 
                            if enabled and set.
  * Controller.Hidden - Show/hide the window button controls on the HeaderBar 
+ 
+To facilitate library configuration, FoxGHI provides a ControlPanel class that implements a GUI wrapper 
+FoxGHI configuration. ControlPanel is designed to be easily integrated into any project 
+using FoxGHI, or, if the developer deems it appropriate, it can be used in a standalone 
+configuration utility. An example of how to work with this class is the FoxGHICP program in the utility directory 
+project directory. This small utility is thus also provided as an independent configuration tool in the style 
+FOX Control Panel. 
+
+_Img.2: The FoxGHICP - FoxGHI Control Panel utility_
+<p align="center"><img src="doc/images/ControlPanel.png?raw=true"/>  
+
+The goal of this library is not to create a complete „Gnome 3-Like style“ for Fox, only to implement it
+some - in my opinion - innovative and interesting techniques from this environment, that I want alone to 
+use in my own projects. At this time Simple Window (FXGWindow), Header bar (FXWindowHeader), 
+Window Control Panel (FXWindowController) and FoxGHI Settings wraper (FXGHI_ControllPanel) are implemented.
 
 As stated above, the goal of this library is not to duplicate Gnome 3, but to implement those
 object, I am trying to start from the Gnome 3 Standard "GHI - Gnome Human Interface", according to this one
@@ -66,7 +74,7 @@ After downloading the project from Github (and possibly unzipping it), go to the
   sudo make install
 ```
 After successfully compiling and building the project, the resulting library and header files will be installed into the
-address book /opt/foxGHI/0.1/1/
+address book /opt/foxGHI/0.3/1/
 
 ## 3. KNOWN ERRORS AND BUGS
 * ### 10/09/2022 - Disfunct the "maximize" button - opened
@@ -74,6 +82,8 @@ address book /opt/foxGHI/0.1/1/
    faulty communication between the application and WM, or an error in the WM settings.
     
 ## 4. PROJECT STATE AND PLANS FOR THE FUTHURE
+Actual version: 0.3.1 ALPHA
+
 FoxGHI currently implements the basic, intended functionality - i.e. autonomous top-level window with
 an integrated headerbar in the style of Gnome 3. However, there is still room for improvement. For 
 that reason please keep in mind that the project is still under development and may contain bugs and 
@@ -88,13 +98,17 @@ a separate utility for setting up FoxGHI aka FOX Control Panel.
   ### 18/10/2022 The control panel is almost finished
 It remains to sort out the default values and how the CP class will be available in the library  
 
+  ### 29/10/2022 Implementation of FXGHI_ControlPanel class completed 
+The class providing the GUI for setting FoxGHI properties is finished and integrated into the library. Now
+will only add any configuration options as the project progresses. With this class
+FoxGHICP configuration utility has also been completed. I am therefore removing this item from the list of planned development goals.  
+
 ### It will be in the near future  
-  1) Completion of the settings utility for FoxGHI and integration of the ControlPanel class into the library
-  2) Create a documentations for this library
-  3) Examples and tests
-  4) Versioned
-  5) integration boxes for FXWindowHeader
-  6) Side bar 
+  1) Create a documentations for this library
+  2) Examples and tests
+  3) Versioned
+  4) integration boxes for FXWindowHeader
+  5) Side bar 
 
 ## 5. AUTHOR AND PROJECT LICENCION:
 Copyright (C) 2019 - 2022 Pavel Šafařík <drakarax@seznam.cz>
