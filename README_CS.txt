@@ -104,12 +104,18 @@ Třída poskytující GUI pro nastaveni vlastností FoxGHI je dokončena a integ
 už budou pouze přibývat případné konfigurační volby s tím, jak bude postupovat vývoj projektu. S touto třídou
 byla také dokončena konfigurační utilita FoxGHICP. Odebírám tedy tento bod ze seznamu plánovaných cílů vývoje.
 
+30/10/2022 Zakladní koncept dokovacich boxu 
+Přidána třída horizontálního panelu, koncipovaná pro tvorbu malych komplexnich widgetu (Boxu) do 
+Header Baru. Jeji použití je zamýšleno jako pro sdružení několika podobných prvku s podobným zaměřením 
+(např. toolboxy) nebo samostatné widgety, kde je výhodné použití nějakého dokovacího podkladu (třeba 
+menu).
+
 V nejbližší budoucnosti bude 
-  2) Vytvořena dokumentace ke knihovně 
-  3) Příklady & testy
-  4) verzování knihovny  
-  5) integrační boxy pro FXWindowHeader.
-  6) Postrani subpanel tzv. "side bar" 
+  0) Dokovací boxy pro FXWindowHeader.
+  1) Vytvořena dokumentace ke knihovně 
+  2) Příklady & testy
+  3) verzování knihovny  
+  4) Postrani subpanel tzv. "side bar" 
 
 5. AUTOR A LICENCE
 =====================

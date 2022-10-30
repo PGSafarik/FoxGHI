@@ -103,12 +103,18 @@ The class providing the GUI for setting FoxGHI properties is finished and integr
 will only add any configuration options as the project progresses. With this class
 FoxGHICP configuration utility has also been completed. I am therefore removing this item from the list of planned development goals.  
 
+  ### 30/10/2022 Include basic concept of docking boxes
+Added horizontal panel class, designed for creating small complex widgets (Boxes) to 
+Header Bar. Its use is intended as a grouping of several similar elements with a similar focus 
+(e.g. toolboxes) or standalone widgets where it is convenient to use some kind of docking base (e.g. 
+menu).  
+
 ### It will be in the near future  
+  0) Docking boxes for FXWindowHeader
   1) Create a documentations for this library
   2) Examples and tests
   3) Versioned
-  4) integration boxes for FXWindowHeader
-  5) Side bar 
+  4) Side bar 
 
 ## 5. AUTHOR AND PROJECT LICENCION:
 Copyright (C) 2019 - 2022 Pavel Šafařík <drakarax@seznam.cz>
