@@ -101,12 +101,12 @@ public:
   FXuint    getBoxOpts( )                    { return m_box_opts; }
   void      setBoxOpts( FXuint opts )        { m_box_opts = opts; }
   
-  FXint gedBoxPl( )             { return m_box_pl;  }
-  void  sedBoxPl( FXint value ) { m_box_pl = value; }
-  FXint gedBoxPr( )             { return m_box_pr; }
-  void  sedBoxPr( FXint value ) { m_box_pr = value; }
-  FXint gedBoxHs( )             { return m_box_hs; }
-  void  sedBoxHs( FXint value ) { m_box_hs = value; }
+  FXint getBoxPl( )             { return m_box_pl;  }
+  void  setBoxPl( FXint value ) { m_box_pl = value; }
+  FXint getBoxPr( )             { return m_box_pr; }
+  void  setBoxPr( FXint value ) { m_box_pr = value; }
+  FXint getBoxHs( )             { return m_box_hs; }
+  void  setBoxHs( FXint value ) { m_box_hs = value; }
 
   ////////////////////////////////////////////////
   // Operations
@@ -139,5 +139,5 @@ protected:
   
 };
 
-}      /* FX */
+}      /* FXGHI */
 #endif /*__GNOME3_HEADER_ */

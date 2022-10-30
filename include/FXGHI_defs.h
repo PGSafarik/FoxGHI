@@ -55,6 +55,7 @@ enum {
 #define CFG_WINDOW_PREFIX     "Window"
 #define CFG_HEADER_PREFIX     "Header" 
 #define CFG_CONTROLLER_PREFIX "Controller"
+#define CFG_BOXES_PREFIX      "Box"
 
 }      /* FXGHI       */
 #endif /* __GHI_DEFS_ */
