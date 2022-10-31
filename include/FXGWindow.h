@@ -38,7 +38,8 @@ FXDECLARE( FXGWindow )
   FXWindowHeader     *w_header;		// The window header widget
   FXWindowController *w_controller;	// The window controller widget
 
-  FXIcon *w_menuic;	// Standard menu icon;
+  FXIcon *w_menuic;	   // Standard menu icon;
+  FXIcon *w_omenuic;   // Overflov menu icon;
 
   // Configurations
   FXbool w_border;        // If true, this window draw border
@@ -59,8 +60,8 @@ public:
   ////////////////////////////////////////////////
   // Access methods
   //
-  inline FXWindowHeader* getHeader( ) { return w_header; }
-  FXIcon* getMenuIcon( )              { return w_menuic; }
+  inline FXWindowHeader* getHeader( )            { return w_header; }
+  FXIcon* getMenuIcon( FXbool overflov = false ) { return ( overflov ? w_omenuic : w_menuic ); }
   FXbool  isPrimary( )                { return w_opts & WINDOW_PRIMARY; }
   //FXbool  hasBorder( )                { return w_border; }
   

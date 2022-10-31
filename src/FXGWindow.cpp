@@ -52,7 +52,8 @@ FXGWindow::FXGWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi,
   this->enable( );
   if( opts & WINDOW_CLIENTSIZE ) { RecalculateSize( ); }
 
-  w_menuic = new FXPNGIcon( getApp( ), window_menu_icdata );
+  w_menuic  = new FXPNGIcon( getApp( ), window_menu_icdata );
+  w_omenuic = new FXPNGIcon( getApp( ), overflow_menu_icdata );
 }
 
 FXGWindow::FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
@@ -70,6 +71,7 @@ FXGWindow::FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon
   if( opts & WINDOW_CLIENTSIZE ) { RecalculateSize( ); }
 
   w_menuic = new FXPNGIcon( getApp( ), window_menu_icdata );
+  w_omenuic = new FXPNGIcon( getApp( ), overflow_menu_icdata );
 }
 
 FXGWindow::~FXGWindow( )
