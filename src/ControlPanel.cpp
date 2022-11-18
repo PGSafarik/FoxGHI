@@ -211,7 +211,7 @@ long GHI_ControlPanel::onUpd_Settings( FXObject *sender, FXSelector sel, void *d
 long GHI_ControlPanel::onCmd_Update( FXObject *sender, FXSelector sel, void *data )
 {
   m_change = true;
-  //Notify( );
+  Notify( SEL_COMMAND );
 
   return 1; 
 }

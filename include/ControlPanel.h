@@ -77,7 +77,7 @@ protected :
   GHI_ControlPanel( ) { }
 
   /* Helpers methods */
-  void Notify( ) { if( target ) { target->tryHandle( this, FXSEL( SEL_CHANGED, message ), NULL ); } } 
+  void Notify( FXuint t = SEL_CHANGED ) { if( target ) { target->tryHandle( this, FXSEL( t, message ), NULL ); } } 
 };
 
 #endif
