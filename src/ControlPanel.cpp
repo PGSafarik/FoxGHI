@@ -148,10 +148,12 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
   switch( id ) {
     case GHI_ControlPanel::SETTINGS_SAVE :
     {
-      writeConfig( ); 
-      m_change = false;
-      Notify( );
-
+      if( m_change ) {
+        writeConfig( ); 
+        m_change = false;
+        Notify( );
+      }
+ 
       break;
     }
     case GHI_ControlPanel::SETTINGS_RESTORE :
