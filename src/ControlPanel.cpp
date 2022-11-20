@@ -63,10 +63,7 @@ GHI_ControlPanel::GHI_ControlPanel( FXComposite *p, FXObject *tgt, FXSelector se
 }
 
 GHI_ControlPanel::~GHI_ControlPanel( )
-{
-
-
-}
+{ }
 
 
 void GHI_ControlPanel::create( )
@@ -75,7 +72,6 @@ void GHI_ControlPanel::create( )
   m_change = false;
 
   FXVerticalFrame::create( );
-  //Notify( );
 }
 
 /**************************************************************************************************/
@@ -149,6 +145,9 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
     case GHI_ControlPanel::SETTINGS_SAVE :
     {
       if( m_change ) {
+        #ifdef DEBUG 
+        std::cout << "[DEBUG - GHI_ControlPanel::onCmd_Settings ] Notification an settings changes\n";
+        #endif
         writeConfig( ); 
         m_change = false;
         Notify( );
