@@ -25,6 +25,7 @@ namespace FXGHI {
 
 FXDEFMAP( FXGWindow ) PrimaryWindowMap[ ] = {
   FXMAPFUNC( SEL_PAINT,             0,                         FXGWindow::onPaint ),
+  FXMAPFUNC( SEL_CONFIGURE,         0,                         FXGWindow::onConfigure ),
   FXMAPFUNC( SEL_LEFTBUTTONPRESS,   0,                         FXGWindow::onLeftButtonPress ),
   FXMAPFUNC( SEL_LEFTBUTTONPRESS,   FXGWindow::ID_WINHEADER,   FXGWindow::onLeftButtonPress ),
   FXMAPFUNC( SEL_LEFTBUTTONRELEASE, 0,                         FXGWindow::onLeftButtonRelease ),
@@ -39,7 +40,7 @@ FXGWindow::FXGWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi,
          : FXTopWindow( app, title, ic, mi, DECOR_RESIZE , x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   #ifdef DEBUG 
-  std::cout << "[ DEBUG - FXGWindow::FXGWindow ] !!!Library is building in DEBUG MODE!!!\n";
+  std::cout << "[DEBUG - FXGWindow::FXGWindow ] !!!Library is building in DEBUG MODE!!!\n";
   #endif
 
   w_opts = opts;
@@ -248,11 +249,25 @@ long FXGWindow::onMotion( FXObject *sender, FXSelector sel, void *data )
   return res;
 }
 
+long FXGWindow::onConfigure( FXObject *sender, FXSelector sel, void *data )
+{
+  /* handler for a FXWindow configure type notify */
+  // #ifdef DEBUG 
+  // std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure]: Configure Handler for " << getClassName( ) <<  std::endl;
+  // #endif
+
+  FXTopWindow::onConfigure( sender, sel, data );
+  w_controller->handle( this, FXSEL( SEL_CONFIGURE, 0 ), NULL );
+  w_header->handle( this, FXSEL( SEL_CONFIGURE, 0 ), NULL );
+  
+  return 1;
+}
+
 long FXGWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data )
 {
   /* request to change window settings */
   #ifdef DEBUG 
-  std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure] "  << std::endl;
+  std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure] " << getClassName( )  << std::endl;
   #endif
   
   ReadConfig( );

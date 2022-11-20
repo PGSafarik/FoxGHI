@@ -62,16 +62,13 @@ public:
   //
   inline FXWindowHeader* getHeader( )            { return w_header; }
   FXIcon* getMenuIcon( FXbool overflov = false ) { return ( overflov ? w_omenuic : w_menuic ); }
-  FXbool  isPrimary( )                { return w_opts & WINDOW_PRIMARY; }
-  //FXbool  hasBorder( )                { return w_border; }
-  
+  FXbool  isPrimary( )                           { return w_opts & WINDOW_PRIMARY; }
   
   ////////////////////////////////////////////////
   // Operations
   //
   virtual void   create( );
   virtual FXbool close( FXbool notify = false );
-
 
   ////////////////////////////////////////////////
   // GUI messagess and handler
@@ -83,6 +80,7 @@ public:
   };
 
   long onPaint( FXObject *sender, FXSelector sel, void *data );
+  long onConfigure( FXObject *sender, FXSelector sel, void *data );
   long onLeftButtonPress( FXObject *sender, FXSelector sel, void *data );
   long onLeftButtonRelease( FXObject *sender, FXSelector sel, void *data );
   long onMotion( FXObject *sender, FXSelector sel, void *data );
@@ -90,9 +88,6 @@ public:
 
 protected:
   FXGWindow( ) { }
-
-  virtual void ReadConfig( );
-  virtual void WriteConfig( );
   
   ///////////////////////////////////////////////
   // Helpers methods
@@ -103,6 +98,9 @@ protected:
   void   Cursor_Set( FXDefaultCursor cursor_id ); // Change cursor
   void   RecalculateSize( );                        // Recalculte open window size
 
+  virtual void ReadConfig( );
+  virtual void WriteConfig( );
+  //virtual void Configure( );
   ///////////////////////////////////////////////
   // Helpers flags
   //

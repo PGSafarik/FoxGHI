@@ -124,6 +124,7 @@ public:
   };
 
   long onPaint( FXObject *sender, FXSelector sel, void *data );
+  long onConfigure( FXObject *sender, FXSelector sel, void *data );
   long onLeftBtnPress( FXObject *sender, FXSelector sel, void *data );
   long onLeftBtnRelease( FXObject *sender, FXSelector sel, void *data );
   long onMotion( FXObject *sender, FXSelector sel, void *data );

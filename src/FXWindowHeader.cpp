@@ -24,6 +24,7 @@ namespace FXGHI {
 // Event map and object implementation
 FXDEFMAP( FXWindowHeader ) FXWindowHeaderMap[] = {
   FXMAPFUNC( SEL_PAINT,             0,                              FXWindowHeader::onPaint ),
+  FXMAPFUNC( SEL_CONFIGURE,         0,                              FXWindowHeader::onConfigure ),
   FXMAPFUNC( SEL_MOTION,            0,                              FXWindowHeader::onMotion ),
   FXMAPFUNC( SEL_LEFTBUTTONPRESS,   0,                              FXWindowHeader::onLeftBtnPress ),
   FXMAPFUNC( SEL_LEFTBUTTONRELEASE, 0,                              FXWindowHeader::onLeftBtnRelease ),
@@ -187,8 +188,6 @@ void FXWindowHeader::recolorize( FXWindow *target )
 }
 
 /**************************************************************************************************/
-
-
 long FXWindowHeader::onPaint( FXObject *sender, FXSelector sel, void *data )
 {
   /* Reapint the Header bar */
@@ -212,6 +211,23 @@ long FXWindowHeader::onPaint( FXObject *sender, FXSelector sel, void *data )
   dc.drawLine ( 0, h , w, h  );
 
   return resh;
+}
+
+long FXWindowHeader::onConfigure( FXObject *sender, FXSelector sel, void *data )
+{
+
+  /* handler for a FXWindow configure type notify */
+  //#ifdef DEBUG 
+  //std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure]: Configure Handler for " << getClassName( ) <<  std::endl;
+  //#endif
+  
+  FXHorizontalFrame::onConfigure( sender, sel, data );
+  for( FXWindow *ch = getFirst( ); ch != NULL; ch = ch->getNext( ) ) {
+    ch->handle( this, FXSEL( SEL_CONFIGURE, 0), NULL ); 
+  }
+  layout( );
+  
+  return 1;
 }
 
 long FXWindowHeader::onLeftBtnPress( FXObject *sender, FXSelector sel, void *data )
