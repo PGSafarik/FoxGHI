@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 3.10 )
-PROJECT( FXGHI VERSION 0.3 DESCRIPTION "A small library that extends Foxtoolkit with Gnome 3-style Top-level windows" )
+PROJECT( FXGHI VERSION 0.4 DESCRIPTION "A small library that extends Foxtoolkit with Gnome 3-style Top-level windows" )
 
 # The project settings
 SET( CMAKE_INSTALL_PREFIX "/opt/foxghi/${PROJECT_VERSION}/1" )  # Install target directory
@@ -32,7 +32,7 @@ ADD_SUBDIRECTORY( "${PROJECT_SOURCE_DIR}/tests/SimpleWindow" )
 #
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION lib/ ) # libray file(s)
 INSTALL( FILES ${HEADERS} DESTINATION include/ )    # API (C++ header files)
-INSTALL( FILES src/foxghi0.3.conf DESTINATION /etc/ld.so.conf.d/ )
+INSTALL( FILES src/foxghi${PROJECT_VERSION}.conf DESTINATION /etc/ld.so.conf.d/ )
 
 #export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/lib
 INSTALL( CODE "EXECUTE_PROCESS( COMMAND /usr/sbin/ldconfig )" )
