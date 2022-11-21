@@ -1,5 +1,5 @@
 /**************************************************************************************************
-* FXGDialogBox	                                                                                  *
+* FXSecondaryWindow	                                                                                  *
 *                                                                                                 *
 * Základní Dialogove okno.                                                                        *
 * Copyryght (C) 2019 - 2022 P.G.Safarik alias D.A.Tiger                                           *
@@ -22,19 +22,19 @@
 *************************************************************************/
 #include<fox-1.7/fx.h>
 
-#include "FXGHI_defs.h"
-#include "FXGWindow.h"
+#include "fxghi_defs.h"
+#include "FXPrimaryWindow.h"
 
 namespace FXGHI {
 
-class FXGDialogBox : public FXGWindow {
-  FXDECLARE( FXGDialogBox )
+class FXSecondaryWindow : public FXPrimaryWindow {
+  FXDECLARE( FXSecondaryWindow )
 
-  FXGDialogBox( const FXDialogBox& );
-  FXGDialogBox& operator = ( const FXDialogBox& );
+  FXSecondaryWindow( const FXDialogBox& );
+  FXSecondaryWindow& operator = ( const FXDialogBox& );
 public:
-  FXGDialogBox(FXApp* a,        const FXString &name, FXuint opts = WINDOW_STATIC, FXint x = 0, FXint y = 0, FXint w = 0, FXint h = 0, FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING, FXint hs = HV_SPACING2, FXint vs = HV_SPACING2 );
-  FXGDialogBox(FXWindow* owner, const FXString &name, FXuint opts = WINDOW_STATIC, FXint x = 0, FXint y = 0, FXint w = 0, FXint h = 0, FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING, FXint hs = HV_SPACING2, FXint vs = HV_SPACING2 );
+  FXSecondaryWindow(FXApp* a,        const FXString &name, FXuint opts = WINDOW_STATIC, FXint x = 0, FXint y = 0, FXint w = 0, FXint h = 0, FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING, FXint hs = HV_SPACING2, FXint vs = HV_SPACING2 );
+  FXSecondaryWindow(FXWindow* owner, const FXString &name, FXuint opts = WINDOW_STATIC, FXint x = 0, FXint y = 0, FXint w = 0, FXint h = 0, FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING, FXint hs = HV_SPACING2, FXint vs = HV_SPACING2 );
 
   ////////////////////////////////////////////////
   // Operations
@@ -54,7 +54,7 @@ public:
   long onCmdCancel( FXObject*, FXSelector, void* );
 
 protected:
-  FXGDialogBox( ){ }
+  FXSecondaryWindow( ){ }
 };
 
 }      /* FXGHI */

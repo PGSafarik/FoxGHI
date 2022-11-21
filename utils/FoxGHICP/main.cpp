@@ -24,7 +24,7 @@
 
 
 /*** WINDOW CLASS **********************************************************************************/
-class Config : public FXGWindow {
+class Config : public FXPrimaryWindow {
 FXDECLARE( Config )
   FXIcon *ics_small[ 9 ];
   FXIcon *ics_big[ 2 ];
@@ -43,11 +43,11 @@ protected :
 
 /**************************************************************************************************/
 FXDEFMAP( Config ) CFGW_MAP[ ] = { };
-FXIMPLEMENT( Config, FXGWindow, NULL, 0 )
+FXIMPLEMENT( Config, FXPrimaryWindow, NULL, 0 )
 
 /**************************************************************************************************/
 Config::Config( FXApp *a )
-      : FXGWindow( a, "FoxGHI Control Panel", NULL, NULL, CONTROLS_STATIC | WINDOW_PRIMARY | WINDOW_STATIC , 0, 0, 550, 250  ) 
+      : FXPrimaryWindow( a, "FoxGHI Control Panel", NULL, NULL, CONTROLS_STATIC | WINDOW_MAIN | WINDOW_STATIC , 0, 0, 550, 250  ) 
 {
   // Applications static iconspack (Oxygen)
   ics_big[ 0 ] = new FXPNGIcon( getApp( ), save22 );
@@ -95,7 +95,7 @@ Config::~Config( )
 
 void Config::create( )
 {
-  FXGWindow::create( );
+  FXPrimaryWindow::create( );
   show( PLACEMENT_SCREEN );
 }
 

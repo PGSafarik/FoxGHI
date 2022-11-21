@@ -43,7 +43,7 @@ enum WinHeaderFlags {
 
 /*** WINDOW FLAGS ********************************************************************************/
 enum {
-  WINDOW_PRIMARY    = 0x00100000,	// Flag defined a primary window
+  WINDOW_MAIN       = 0x00100000,	// Flag defined a primary window
   WINDOW_CLIENTSIZE = 0x00200000,	// Enter the window size is size for client space in this window
   WINDOW_STATIC     = 0x00400000	// Disable window resizing
 };

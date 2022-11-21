@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
   FXApp a( "FXGHI_SimpleWindow", "fox-desktop" );
   a.init( argc, argv );
 
-  FXGWindow *win = new FXGWindow( &a, "Simple FoxGHI Window" );
+  FXPrimaryWindow *win = new FXPrimaryWindow( &a, "Simple FoxGHI Window" );
   win->getHeader( )->setText( "Hello World!" ); 
   new FXButton( win->getHeader( ), "\t\t TEST Button", win->getMenuIcon( ), NULL, 0, BUTTON_TOOLBAR );
   

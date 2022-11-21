@@ -1,5 +1,5 @@
 /*************************************************************************
-* FXGDialogBox.cpp; Copyright (c) 2019 - 2022 by D.A.Tiger               *
+* FXSecondaryWindow.cpp; Copyright (c) 2019 - 2022 by D.A.Tiger               *
 *                                                                        *
 * This program is free software: you can redistribute it and/or modify   *
 * it under the terms of the GNU Lesser General Public License as         *
@@ -15,36 +15,36 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 
-#include "FXGDialogBox.h"
+#include "FXSecondaryWindow.h"
 
 using namespace FXGHI;
 
 namespace FXGHI {
-FXDEFMAP( FXGDialogBox ) DialogBoxMap[ ] = {
-  FXMAPFUNC( SEL_CLOSE,   0,                       FXGDialogBox::onCmdCancel ),
-  FXMAPFUNC( SEL_COMMAND, FXGDialogBox::ID_CLOSE,  FXGDialogBox::onCmdCancel ),
-  FXMAPFUNC( SEL_COMMAND, FXGDialogBox::ID_ACCEPT, FXGDialogBox::onCmdAccept ),
-  FXMAPFUNC( SEL_CHORE,   FXGDialogBox::ID_CANCEL, FXGDialogBox::onCmdCancel ),
-  FXMAPFUNC( SEL_TIMEOUT, FXGDialogBox::ID_CANCEL, FXGDialogBox::onCmdCancel ),
-  FXMAPFUNC( SEL_COMMAND, FXGDialogBox::ID_CANCEL, FXGDialogBox::onCmdCancel ),
+FXDEFMAP( FXSecondaryWindow ) DialogBoxMap[ ] = {
+  FXMAPFUNC( SEL_CLOSE,   0,                       FXSecondaryWindow::onCmdCancel ),
+  FXMAPFUNC( SEL_COMMAND, FXSecondaryWindow::ID_CLOSE,  FXSecondaryWindow::onCmdCancel ),
+  FXMAPFUNC( SEL_COMMAND, FXSecondaryWindow::ID_ACCEPT, FXSecondaryWindow::onCmdAccept ),
+  FXMAPFUNC( SEL_CHORE,   FXSecondaryWindow::ID_CANCEL, FXSecondaryWindow::onCmdCancel ),
+  FXMAPFUNC( SEL_TIMEOUT, FXSecondaryWindow::ID_CANCEL, FXSecondaryWindow::onCmdCancel ),
+  FXMAPFUNC( SEL_COMMAND, FXSecondaryWindow::ID_CANCEL, FXSecondaryWindow::onCmdCancel ),
 };
-FXIMPLEMENT( FXGDialogBox, FXGWindow, DialogBoxMap, ARRAYNUMBER( DialogBoxMap ) )
+FXIMPLEMENT( FXSecondaryWindow, FXPrimaryWindow, DialogBoxMap, ARRAYNUMBER( DialogBoxMap ) )
 /**************************************************************************************************/
 
-FXGDialogBox::FXGDialogBox( FXApp* a, const FXString &name, FXuint opts, FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs )
-            : FXGWindow( a, name, NULL, NULL, opts, x, y, w, h, pl, pr, pt, pb, hs, vs )
+FXSecondaryWindow::FXSecondaryWindow( FXApp* a, const FXString &name, FXuint opts, FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs )
+            : FXPrimaryWindow( a, name, NULL, NULL, opts, x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   this->getAccelTable( )->addAccel( MKUINT( KEY_Escape, 0 ), this, FXSEL( SEL_COMMAND, ID_CANCEL ) );
 }
 
-FXGDialogBox::FXGDialogBox( FXWindow* owner, const FXString &name, FXuint opts, FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs )
-            : FXGWindow( owner, name, NULL, NULL, opts, x, y, w, h, pl, pr, pt, pb, hs, vs )
+FXSecondaryWindow::FXSecondaryWindow( FXWindow* owner, const FXString &name, FXuint opts, FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs )
+            : FXPrimaryWindow( owner, name, NULL, NULL, opts, x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   this->getAccelTable( )->addAccel( MKUINT( KEY_Escape, 0 ), this, FXSEL( SEL_COMMAND, ID_CANCEL ) );
 }
 
 /**************************************************************************************************/
-FXuint FXGDialogBox::execute( FXuint placement )
+FXuint FXSecondaryWindow::execute( FXuint placement )
 {
   this->create( );
   this->show( placement );
@@ -53,14 +53,14 @@ FXuint FXGDialogBox::execute( FXuint placement )
 }
 
 /**************************************************************************************************/
-long FXGDialogBox::onCmdAccept( FXObject*, FXSelector, void* )
+long FXSecondaryWindow::onCmdAccept( FXObject*, FXSelector, void* )
 {
   this->getApp( )->stopModal( this, true );
   this->hide( );
   return 1;
 }
 
-long FXGDialogBox::onCmdCancel( FXObject*, FXSelector, void* )
+long FXSecondaryWindow::onCmdCancel( FXObject*, FXSelector, void* )
 {
   this->getApp( )->stopModal( this, false );
   this->hide( );

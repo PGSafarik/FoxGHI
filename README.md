@@ -109,11 +109,13 @@ Header Bar. Its use is intended as a grouping of several similar elements with a
 (e.g. toolboxes) or standalone widgets where it is convenient to use some kind of docking base (e.g. 
 menu).  
 
+  ### 22/11/2022 Matching class names and corresponding files with GHI and Foxtoolkit (within limits)  
+
 ### It will be in the near future  
-  0) Docking boxes for FXWindowHeader
-  1) Create a documentations for this library
-  2) Examples and tests
-  3) Versioned
+  0) Versioned
+  1) Docking boxes for FXWindowHeader
+  2) Create a documentations for this library
+  3) Examples and tests
   4) Side bar 
 
 ## 5. AUTHOR AND PROJECT LICENCION:

@@ -20,12 +20,12 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
-#include<FXGHI_defs.h>
-#include<FXGWindow.h>
-#include<FXGDialogBox.h>
+#include<fxghi_defs.h>
+#include<FXPrimaryWindow.h>
+#include<FXSecondaryWindow.h>
 #include<FXWindowHeader.h>
 #include<ControlPanel.h>
-#include<HeaderBox.h>
+#include<FXHeaderBox.h>
 
 /*************************************************************************
 * GHI - Gnome Human Interface                                            *

@@ -218,7 +218,7 @@ long FXWindowHeader::onConfigure( FXObject *sender, FXSelector sel, void *data )
 
   /* handler for a FXWindow configure type notify */
   //#ifdef DEBUG 
-  //std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure]: Configure Handler for " << getClassName( ) <<  std::endl;
+  //std::cout << "[DEBUG - FXPrimaryWindow::onCmd_Reconfigure]: Configure Handler for " << getClassName( ) <<  std::endl;
   //#endif
   
   FXHorizontalFrame::onConfigure( sender, sel, data );

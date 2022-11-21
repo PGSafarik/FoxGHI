@@ -15,7 +15,7 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 
-#include "HeaderBox.h" 
+#include "FXHeaderBox.h" 
 
 using namespace FXGHI;
 
@@ -23,10 +23,10 @@ namespace FXGHI {
 /*** Base of boxes *******************************************************************************/
 
 
-FXIMPLEMENT( FXGHI_HeaderBox, FXHorizontalFrame, NULL, 0 )
+FXIMPLEMENT( FXHeaderBox, FXHorizontalFrame, NULL, 0 )
 
 /*** Konstruction / destruction *******************************************************************/
-FXGHI_HeaderBox::FXGHI_HeaderBox( FXWindowHeader *p, FXObject *tgt, FXSelector sel, FXuint opts, FXint pl, FXint pr, FXint hs )
+FXHeaderBox::FXHeaderBox( FXWindowHeader *p, FXObject *tgt, FXSelector sel, FXuint opts, FXint pl, FXint pr, FXint hs )
                 : FXHorizontalFrame( p, p->getBoxOpts( ) | opts, 0, 0, 0, 0,  
                   ( pl >= 0 ? pl : p->getBoxPl( ) ), ( pr >= 0 ? pr : p->getBoxPr( ) ), 0, 0,  
                   ( hs >= 0 ? hs : p->getBoxHs( ) ), 0 ) 
@@ -40,17 +40,17 @@ FXGHI_HeaderBox::FXGHI_HeaderBox( FXWindowHeader *p, FXObject *tgt, FXSelector s
   m_message = sel;
 }
 
-FXGHI_HeaderBox::~FXGHI_HeaderBox( )
+FXHeaderBox::~FXHeaderBox( )
 { }
 
-void FXGHI_HeaderBox::create( )
+void FXHeaderBox::create( )
 {
   FXHorizontalFrame::create( );
   m_parent->recolorize( this );
 }
 
 /**************************************************************************************************/
-long FXGHI_HeaderBox::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data )
+long FXHeaderBox::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data )
 {
   m_parent->recolorize( this );
 
@@ -58,13 +58,13 @@ long FXGHI_HeaderBox::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void 
 }
 
 /**************************************************************************************************/
-void FXGHI_HeaderBox::ReadConfig( )
+void FXHeaderBox::ReadConfig( )
 {
 
 
 }
 
-void FXGHI_HeaderBox::WriteConfig( )
+void FXHeaderBox::WriteConfig( )
 {
 
 

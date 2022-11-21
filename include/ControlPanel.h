@@ -23,7 +23,7 @@
 *************************************************************************/
 #include<iostream>
 #include<fox-1.7/fx.h>
-#include<FXGHI_defs.h>
+#include<fxghi_defs.h>
 #include<fxghi.h>
 
 

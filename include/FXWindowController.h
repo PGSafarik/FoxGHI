@@ -24,7 +24,7 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 #include<fox-1.7/fx.h>
-#include "FXGHI_defs.h"
+#include "fxghi_defs.h"
 #include "FXWindowHeader.h"
 
 namespace FXGHI {

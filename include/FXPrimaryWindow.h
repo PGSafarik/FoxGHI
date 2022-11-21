@@ -1,5 +1,5 @@
 /**************************************************************************************************
-* FXGWindow                                                                                       *
+* FXPrimaryWindow                                                                                       *
 *                                                                                                 *
 * Základní definice Top-level okna ve stylu Gnome3. Lze pouzit jako primarni, nebo zaklad pro     *
 * sekundarni okno.                                                                                *
@@ -22,14 +22,14 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 #include<fox-1.7/fx.h>
-#include "FXGHI_defs.h"
+#include "fxghi_defs.h"
 #include "FXWindowHeader.h"
 #include "FXWindowController.h"
 
 namespace FXGHI {
 
-class FXGWindow : public FXTopWindow {
-FXDECLARE( FXGWindow )
+class FXPrimaryWindow : public FXTopWindow {
+FXDECLARE( FXPrimaryWindow )
   FXuint      w_opts; // Window system and controll options;
   FXuint      w_grab; // Value of the grab Flags
   FXPoint     w_last; // Point for save last mouse position
@@ -47,22 +47,22 @@ FXDECLARE( FXGWindow )
   FXbool w_WMControl;     // True value enabled a classical window decoiration and hendlig by Window Manager (Check the documentation - when it's ready ;)
 
 public:
-  FXGWindow( FXApp *app, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
+  FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
 		         FXint x = 0, FXint y = 0, FXint w = 400, FXint h = 200,
 		         FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING,
 		         FXint hs = HV_SPACING2, FXint vs = HV_SPACING2  );
-  FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
+  FXPrimaryWindow( FXWindow *owner, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
 		         FXint x = 0, FXint y = 0, FXint w = 400, FXint h = 200,
 		         FXint pl = P_SPACING, FXint pr = P_SPACING, FXint pt = P_SPACING, FXint pb = P_SPACING,
 		         FXint hs = HV_SPACING2, FXint vs = HV_SPACING2  );
-  virtual ~FXGWindow( );
+  virtual ~FXPrimaryWindow( );
 
   ////////////////////////////////////////////////
   // Access methods
   //
   inline FXWindowHeader* getHeader( )            { return w_header; }
   FXIcon* getMenuIcon( FXbool overflov = false ) { return ( overflov ? w_omenuic : w_menuic ); }
-  FXbool  isPrimary( )                           { return w_opts & WINDOW_PRIMARY; }
+  FXbool  isPrimary( )                           { return w_opts & WINDOW_MAIN; }
   
   ////////////////////////////////////////////////
   // Operations
@@ -87,7 +87,7 @@ public:
   long onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data );
 
 protected:
-  FXGWindow( ) { }
+  FXPrimaryWindow( ) { }
   
   ///////////////////////////////////////////////
   // Helpers methods

@@ -23,13 +23,13 @@
 *************************************************************************/
 #include <iostream>
 #include <fox-1.7/fx.h>
-#include "FXGHI_defs.h"
+#include "fxghi_defs.h"
 #include "FXWindowHeader.h"
 
 namespace FXGHI {
 
-class FXGHI_HeaderBox : public FXHorizontalFrame {
-FXDECLARE( FXGHI_HeaderBox )
+class FXHeaderBox : public FXHorizontalFrame {
+FXDECLARE( FXHeaderBox )
   FXWindowHeader *m_parent; // Window header
 
   FXbool m_separe; // Separing this box
@@ -39,8 +39,8 @@ FXDECLARE( FXGHI_HeaderBox )
   FXSelector m_message; // GUI notifycation message
 
 public:
-  FXGHI_HeaderBox( FXWindowHeader *p, FXObject *tgt = NULL, FXSelector sel = 0, FXuint opts = LAYOUT_CENTER_Y, FXint pl = -1, FXint pr = -1, FXint hs = -1 );
-  virtual ~FXGHI_HeaderBox( );
+  FXHeaderBox( FXWindowHeader *p, FXObject *tgt = NULL, FXSelector sel = 0, FXuint opts = LAYOUT_CENTER_Y, FXint pl = -1, FXint pr = -1, FXint hs = -1 );
+  virtual ~FXHeaderBox( );
 
   /* Operations */
   virtual void create( );
@@ -60,7 +60,7 @@ public:
   long onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data );
 
 protected:
-  FXGHI_HeaderBox( ) { }
+  FXHeaderBox( ) { }
 
   virtual void ReadConfig( );
   virtual void WriteConfig( );

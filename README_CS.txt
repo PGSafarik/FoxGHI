@@ -110,11 +110,14 @@ Header Baru. Jeji použití je zamýšleno jako pro sdružení několika podobn�
 (např. toolboxy) nebo samostatné widgety, kde je výhodné použití nějakého dokovacího podkladu (třeba 
 menu).
 
+22/11/2022
+Sladeni nazvu trid a odpovidajicich souboru s GHI a Foxtoolkitem (v ramci moznosti)
+
 V nejbližší budoucnosti bude 
-  0) Dokovací boxy pro FXWindowHeader.
-  1) Vytvořena dokumentace ke knihovně 
-  2) Příklady & testy
-  3) verzování knihovny  
+  0) verzování knihovny 
+  1) Dokovací boxy pro FXWindowHeader.
+  2) Vytvořena dokumentace ke knihovně 
+  3) Příklady & testy
   4) Postrani subpanel tzv. "side bar" 
 
 5. AUTOR A LICENCE

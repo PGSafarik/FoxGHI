@@ -1,5 +1,5 @@
 /*************************************************************************
-* FXGWindow.cpp; Copyright (c) 2019 - 2022 by D.A.Tiger           *
+* FXPrimaryWindow.cpp; Copyright (c) 2019 - 2022 by D.A.Tiger           *
 *                                                                        *
 * This program is free software: you can redistribute it and/or modify   *
 * it under the terms of the GNU Lesser General Public License as         *
@@ -15,7 +15,7 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 #include<fox-1.7/xincs.h>
-#include "FXGWindow.h"
+#include "FXPrimaryWindow.h"
 
 using namespace FXGHI;
 
@@ -23,31 +23,31 @@ using namespace FXGHI;
 
 namespace FXGHI {
 
-FXDEFMAP( FXGWindow ) PrimaryWindowMap[ ] = {
-  FXMAPFUNC( SEL_PAINT,             0,                         FXGWindow::onPaint ),
-  FXMAPFUNC( SEL_CONFIGURE,         0,                         FXGWindow::onConfigure ),
-  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   0,                         FXGWindow::onLeftButtonPress ),
-  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   FXGWindow::ID_WINHEADER,   FXGWindow::onLeftButtonPress ),
-  FXMAPFUNC( SEL_LEFTBUTTONRELEASE, 0,                         FXGWindow::onLeftButtonRelease ),
-  FXMAPFUNC( SEL_MOTION,            0,                         FXGWindow::onMotion ),
-  FXMAPFUNC( SEL_CHANGED,           FXGWindow::ID_RECONFIGURE, FXGWindow::onCmd_Reconfigure)           
+FXDEFMAP( FXPrimaryWindow ) PrimaryWindowMap[ ] = {
+  FXMAPFUNC( SEL_PAINT,             0,                         FXPrimaryWindow::onPaint ),
+  FXMAPFUNC( SEL_CONFIGURE,         0,                         FXPrimaryWindow::onConfigure ),
+  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   0,                         FXPrimaryWindow::onLeftButtonPress ),
+  FXMAPFUNC( SEL_LEFTBUTTONPRESS,   FXPrimaryWindow::ID_WINHEADER,   FXPrimaryWindow::onLeftButtonPress ),
+  FXMAPFUNC( SEL_LEFTBUTTONRELEASE, 0,                         FXPrimaryWindow::onLeftButtonRelease ),
+  FXMAPFUNC( SEL_MOTION,            0,                         FXPrimaryWindow::onMotion ),
+  FXMAPFUNC( SEL_CHANGED,           FXPrimaryWindow::ID_RECONFIGURE, FXPrimaryWindow::onCmd_Reconfigure)           
 };
-FXIMPLEMENT( FXGWindow, FXTopWindow, PrimaryWindowMap, ARRAYNUMBER( PrimaryWindowMap ) )
+FXIMPLEMENT( FXPrimaryWindow, FXTopWindow, PrimaryWindowMap, ARRAYNUMBER( PrimaryWindowMap ) )
 
 /**************************************************************************************************/
-FXGWindow::FXGWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
+FXPrimaryWindow::FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
 		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
          : FXTopWindow( app, title, ic, mi, DECOR_RESIZE , x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   #ifdef DEBUG 
-  std::cout << "[DEBUG - FXGWindow::FXGWindow ] !!!Library is building in DEBUG MODE!!!\n";
+  std::cout << "[DEBUG - FXPrimaryWindow::FXPrimaryWindow ] !!!Library is building in DEBUG MODE!!!\n";
   #endif
 
   w_opts = opts;
   w_grab = DRAG_NONE;
   w_rect.set( 0, 0, 0, 0 );
   w_last.set( 0, 0 );
-  w_header     = new FXWindowHeader( this, FXString::null, this, FXGWindow::ID_WINHEADER, WHEADER_STANDARD | WHEADER_DELEGATE );
+  w_header     = new FXWindowHeader( this, FXString::null, this, FXPrimaryWindow::ID_WINHEADER, WHEADER_STANDARD | WHEADER_DELEGATE );
   w_controller = new FXWindowController( w_header, w_opts );
 
   this->enable( );
@@ -57,7 +57,7 @@ FXGWindow::FXGWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi,
   w_omenuic = new FXPNGIcon( getApp( ), overflow_menu_icdata );
 }
 
-FXGWindow::FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
+FXPrimaryWindow::FXPrimaryWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
 		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
          : FXTopWindow( owner, title, ic, mi, DECOR_RESIZE , x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
@@ -65,7 +65,7 @@ FXGWindow::FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon
   w_grab = DRAG_NONE;
   w_rect.set( 0, 0, 0, 0 );
   w_last.set( 0, 0 );
-  w_header     = new FXWindowHeader( this, FXString::null, this, FXGWindow::ID_WINHEADER, WHEADER_STANDARD | WHEADER_DELEGATE  );
+  w_header     = new FXWindowHeader( this, FXString::null, this, FXPrimaryWindow::ID_WINHEADER, WHEADER_STANDARD | WHEADER_DELEGATE  );
   w_controller = new FXWindowController( w_header, w_opts );
 
   this->enable( );
@@ -75,11 +75,11 @@ FXGWindow::FXGWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon
   w_omenuic = new FXPNGIcon( getApp( ), overflow_menu_icdata );
 }
 
-FXGWindow::~FXGWindow( )
+FXPrimaryWindow::~FXPrimaryWindow( )
 { }
 
 /**************************************************************************************************/
-void FXGWindow::create( )
+void FXPrimaryWindow::create( )
 {
   ReadConfig( );
 
@@ -91,7 +91,7 @@ void FXGWindow::create( )
   w_controller->create( );
   RecalculateSize( );
 
-  if( ( w_opts & WINDOW_PRIMARY ) && xid ) {
+  if( ( w_opts & WINDOW_MAIN ) && xid ) {
 	  FXApp *a = this->getApp( );
 	  if( a->isInitialized( ) ) {
 	    #ifndef WIN32
@@ -101,10 +101,10 @@ void FXGWindow::create( )
   }
 }
 
-FXbool FXGWindow::close( FXbool notify )
+FXbool FXPrimaryWindow::close( FXbool notify )
 {
   /* Close this window */
-  // Reimplement from FXTopWindow so that this function accept a primary FXGWindow like the FXMainWidow
+  // Reimplement from FXTopWindow so that this function accept a primary FXPrimaryWindow like the FXMainWidow
   FXWindow *window;
   FXbool    quit = true;
   FXbool    resh = false;
@@ -117,9 +117,9 @@ FXbool FXGWindow::close( FXbool notify )
 
     // If there was another main level window still visible, that's all we do
     for( window = getRoot( )->getFirst( ); window; window = window->getNext( ) ) {
-      if( window != this && window->isMemberOf( FXMETACLASS( FXGWindow ) ) ) {
+      if( window != this && window->isMemberOf( FXMETACLASS( FXPrimaryWindow ) ) ) {
 		  // If is the chcked window signed as primary, no closing this aplication...
-	      if( dynamic_cast<FXGWindow*>( window )->isPrimary( ) ) {
+	      if( dynamic_cast<FXPrimaryWindow*>( window )->isPrimary( ) ) {
 		      // I don't like jumping
 		      quit = false;
 		      break;
@@ -142,7 +142,7 @@ FXbool FXGWindow::close( FXbool notify )
 
 
 /*************************************************************************************************/
-long FXGWindow::onPaint( FXObject *sender, FXSelector sel, void *data )
+long FXPrimaryWindow::onPaint( FXObject *sender, FXSelector sel, void *data )
 {
   /* Rendering of the line window border. Without it, it would look "sprawling" */
   long r = FXTopWindow::onPaint( sender, sel, data );
@@ -156,7 +156,7 @@ long FXGWindow::onPaint( FXObject *sender, FXSelector sel, void *data )
   return r;
 }
 
-long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data )
+long FXPrimaryWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data )
 {
   /* Grab this window of left mouse button, begin on move or resize this window */
   long resh = 0;
@@ -167,7 +167,7 @@ long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data 
   if( isEnabled( ) && w_SelfControl ) {
 	  FXEvent *event = static_cast<FXEvent*>( data );
 
-    if( FXSELID( sel ) == FXGWindow::ID_WINHEADER ) { w_grab = DRAG_MOVE; }
+    if( FXSELID( sel ) == FXPrimaryWindow::ID_WINHEADER ) { w_grab = DRAG_MOVE; }
     else { w_grab = Where( event->win_x, event->win_y ); }
 
     if( w_grab != DRAG_NONE ) {   
@@ -183,7 +183,7 @@ long FXGWindow::onLeftButtonPress( FXObject *sender, FXSelector sel, void *data 
   return resh;
 }
 
-long FXGWindow::onLeftButtonRelease( FXObject *sender, FXSelector sel, void *data )
+long FXPrimaryWindow::onLeftButtonRelease( FXObject *sender, FXSelector sel, void *data )
 {
   /* Ungrab this window of left mouse button, end of move or resize this window */
   long resh = 0;
@@ -205,7 +205,7 @@ long FXGWindow::onLeftButtonRelease( FXObject *sender, FXSelector sel, void *dat
   return resh;
 }
 
-long FXGWindow::onMotion( FXObject *sender, FXSelector sel, void *data )
+long FXPrimaryWindow::onMotion( FXObject *sender, FXSelector sel, void *data )
 {
   /* Moving the window */
   long res = 0;
@@ -249,11 +249,11 @@ long FXGWindow::onMotion( FXObject *sender, FXSelector sel, void *data )
   return res;
 }
 
-long FXGWindow::onConfigure( FXObject *sender, FXSelector sel, void *data )
+long FXPrimaryWindow::onConfigure( FXObject *sender, FXSelector sel, void *data )
 {
   /* handler for a FXWindow configure type notify */
   // #ifdef DEBUG 
-  // std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure]: Configure Handler for " << getClassName( ) <<  std::endl;
+  // std::cout << "[DEBUG - FXPrimaryWindow::onCmd_Reconfigure]: Configure Handler for " << getClassName( ) <<  std::endl;
   // #endif
 
   FXTopWindow::onConfigure( sender, sel, data );
@@ -263,11 +263,11 @@ long FXGWindow::onConfigure( FXObject *sender, FXSelector sel, void *data )
   return 1;
 }
 
-long FXGWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data )
+long FXPrimaryWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data )
 {
   /* request to change window settings */
   #ifdef DEBUG 
-  std::cout << "[DEBUG - FXGWindow::onCmd_Reconfigure] " << getClassName( )  << std::endl;
+  std::cout << "[DEBUG - FXPrimaryWindow::onCmd_Reconfigure] " << getClassName( )  << std::endl;
   #endif
   
   ReadConfig( );
@@ -281,7 +281,7 @@ long FXGWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *data 
 
 
 /*************************************************************************************************/
-FXuint FXGWindow::Where( FXint pos_x, FXint pos_y )
+FXuint FXPrimaryWindow::Where( FXint pos_x, FXint pos_y )
 {
   /* Check out exactly where the window is captured by the mouse (from FXWM)*/
   FXuint s = DRAG_NONE;
@@ -295,7 +295,7 @@ FXuint FXGWindow::Where( FXint pos_x, FXint pos_y )
   return s;
 }
 
-void FXGWindow::Cursor_Change( )
+void FXPrimaryWindow::Cursor_Change( )
 {
   /* Determine the necessary mouse cursor change (from FXWM) */
   switch( w_grab ) {
@@ -323,13 +323,13 @@ void FXGWindow::Cursor_Change( )
   }
 }
 
-void FXGWindow::Cursor_Revert( )
+void FXPrimaryWindow::Cursor_Revert( )
 {
   /* Return the to default mouse cursor (from FXWM) */
   Cursor_Set( DEF_ARROW_CURSOR );
 }
 
-void FXGWindow::Cursor_Set( FXDefaultCursor cursor_id )
+void FXPrimaryWindow::Cursor_Set( FXDefaultCursor cursor_id )
 {
   /* Set the mouse cursor (from FXWM) */ 
   FXCursor *cursor = getApp( )->getDefaultCursor( cursor_id );
@@ -337,7 +337,7 @@ void FXGWindow::Cursor_Set( FXDefaultCursor cursor_id )
   setDragCursor( cursor );
 }
 
-void FXGWindow::RecalculateSize( )
+void FXPrimaryWindow::RecalculateSize( )
 {
   FXint width  = getPadLeft( ) + getPadRight( ) + getWidth( );
   FXint height = getPadTop( ) + getPadBottom( ) + getVSpacing( ) + getHeight( ) + w_header->getHeight( );
@@ -345,7 +345,7 @@ void FXGWindow::RecalculateSize( )
   this->resize( width, height );
 }
 
-void FXGWindow::ReadConfig( )
+void FXPrimaryWindow::ReadConfig( )
 {
   FXString cf_prefix = CFG_WINDOW_PREFIX;  
    
@@ -356,14 +356,14 @@ void FXGWindow::ReadConfig( )
    w_WMControl   = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".WMControl",    false );
 
    #ifdef DEBUG 
-   std::cout << "[DEBUG - FXGWindow::ReadConfig] border: "                 << w_border      << std::endl;
-   std::cout << "[DEBUG - FXGWindow::ReadConfig] Window selfcontrol: "     << w_SelfControl << std::endl;
-   std::cout << "[DEBUG - FXGWindow::ReadConfig] Window Manager control: " << w_WMControl << std::endl;
+   std::cout << "[DEBUG - FXPrimaryWindow::ReadConfig] border: "                 << w_border      << std::endl;
+   std::cout << "[DEBUG - FXPrimaryWindow::ReadConfig] Window selfcontrol: "     << w_SelfControl << std::endl;
+   std::cout << "[DEBUG - FXPrimaryWindow::ReadConfig] Window Manager control: " << w_WMControl << std::endl;
    #endif
 
 }
 
-void FXGWindow::WriteConfig( )
+void FXPrimaryWindow::WriteConfig( )
 {
   FXString cf_prefix = CFG_WINDOW_PREFIX; 
 
