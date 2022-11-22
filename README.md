@@ -51,7 +51,7 @@ The goal of this library is not to create a complete „Gnome 3-Like style“ fo
 some - in my opinion - innovative and interesting techniques from this environment, that I want alone to 
 use in my own projects. At this time Primary, Secondary Window (FXPrimaryWindow, FXSecondaryWindow), 
 Header bar (FXWindowHeader), Window Control Panel (FXWindowController) and FoxGHI Settings wraper 
-(FXGHI_ControllPanel) are implemented.
+(ControllPanel) are implemented.
 
 As stated above, the goal of this library is not to duplicate Gnome 3, but to implement those
 object, I am trying to start from the Gnome 3 Standard "GHI - Gnome Human Interface", according to this one
