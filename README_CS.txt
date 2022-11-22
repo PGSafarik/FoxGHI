@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  29/10/2022 
+﻿Fox Gnome Human Interface library (foxGHI)  22/11/2022 
 ============================================================
 
 Obsah:
@@ -46,9 +46,9 @@ FOX Control Panel.
  
 Cílem teto knihovny není vytvořit kompletní „Gnome 3-Like style“ pro Fox, pouze implementovat jen
 některé - podle mého názoru - inovativní a zajímavé techniky z tohoto prostředí, které chci sám 
-používat ve svých vlastních projektech. V tuto chvíli je implementováno Simple Window  (FXGWindow), 
-Header bar (FXWindowHeader), Panel pro ovládání okna (FXWindowController) a wraper pro ovládání 
-nastavení FoxGHI (FXGHI_ControllPanel). 
+používat ve svých vlastních projektech. V tuto chvíli je implementováno Primarni  a sekundarni okno 
+(FXPrimaryWindow, FXSecondaryWindow), Header bar (FXWindowHeader), Panel pro ovládání okna 
+(FXWindowController) a wraper pro ovládání nastavení FoxGHI (FXGHI_ControllPanel). 
 
 Jak bylo řečeno výše, cílem teto knihovny není duplikovat Gnome 3, nicméně při implementaci těchto 
 objektů se snažím vycházet z Gnome 3 Standardu "GHI - Gnome Human Interface", podle něhož tato

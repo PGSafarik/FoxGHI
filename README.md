@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--30/10/2022-
+-22/11/2022-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -49,8 +49,9 @@ _Img.2: The FoxGHICP - FoxGHI Control Panel utility_
 
 The goal of this library is not to create a complete „Gnome 3-Like style“ for Fox, only to implement it
 some - in my opinion - innovative and interesting techniques from this environment, that I want alone to 
-use in my own projects. At this time Simple Window (FXGWindow), Header bar (FXWindowHeader), 
-Window Control Panel (FXWindowController) and FoxGHI Settings wraper (FXGHI_ControllPanel) are implemented.
+use in my own projects. At this time Primary, Secondary Window (FXPrimaryWindow, FXSecondaryWindow), 
+Header bar (FXWindowHeader), Window Control Panel (FXWindowController) and FoxGHI Settings wraper 
+(FXGHI_ControllPanel) are implemented.
 
 As stated above, the goal of this library is not to duplicate Gnome 3, but to implement those
 object, I am trying to start from the Gnome 3 Standard "GHI - Gnome Human Interface", according to this one
