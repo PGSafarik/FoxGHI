@@ -35,7 +35,7 @@ FXDECLARE( FXHeaderBox )
   FXbool m_separe;  // Separing this box
   FXbool m_nohide;  // No hide this box, when is small space 
   FXbool m_hidden;  // Indication hide this box
-  FXbool m_colorize // false - no recolorize this box
+  FXbool m_colorize; // false - no recolorize this box
 
   FXSelector m_message; // GUI notifycation message
 
