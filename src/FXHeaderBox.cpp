@@ -31,10 +31,11 @@ FXHeaderBox::FXHeaderBox( FXWindowHeader *p, FXObject *tgt, FXSelector sel, FXui
                   ( pl >= 0 ? pl : p->getBoxPl( ) ), ( pr >= 0 ? pr : p->getBoxPr( ) ), 0, 0,  
                   ( hs >= 0 ? hs : p->getBoxHs( ) ), 0 ) 
 {
-  m_parent = p;
-  m_separe = false;
-  m_nohide = false;
-  m_hidden = false;
+  m_parent   = p;
+  m_separe   = false;
+  m_nohide   = false;
+  m_hidden   = false;
+  m_colorize = true;
 
   //setTarget( tgt ? tgt : m_parent->getBoxTarget( ) );
   m_message = sel;

@@ -32,9 +32,10 @@ class FXHeaderBox : public FXHorizontalFrame {
 FXDECLARE( FXHeaderBox )
   FXWindowHeader *m_parent; // Window header
 
-  FXbool m_separe; // Separing this box
-  FXbool m_nohide; // No hide this box, when is small space 
-  FXbool m_hidden; // Indication hide this box
+  FXbool m_separe;  // Separing this box
+  FXbool m_nohide;  // No hide this box, when is small space 
+  FXbool m_hidden;  // Indication hide this box
+  FXbool m_colorize // false - no recolorize this box
 
   FXSelector m_message; // GUI notifycation message
 
@@ -46,11 +47,13 @@ public:
   virtual void create( );
  
   /* Access Methods */
-  FXWindowHeader* getBoxFrame( ) { return m_parent;  }
-  FXbool getNohide( )            { return m_nohide;  }
-  void setNohide( FXbool value ) { m_nohide = value; }
-  FXbool getSepare( )            { return m_separe;  }
-  void setSepare( FXbool value ) { m_separe = value; }
+  FXWindowHeader* getBoxFrame( )   { return m_parent;    }
+  FXbool getNohide( )              { return m_nohide;    }
+  void setNohide( FXbool value )   { m_nohide = value;   }
+  FXbool getSepare( )              { return m_separe;    }
+  void setSepare( FXbool value )   { m_separe = value;   }
+  FXbool getColorize( )            { return m_colorize;  }
+  void setColorize( FXbool value ) { m_colorize = value; }
 
   /* GUI messages and handlers */
   enum {
