@@ -47,7 +47,7 @@ FXHeaderBox::~FXHeaderBox( )
 void FXHeaderBox::create( )
 {
   FXHorizontalFrame::create( );
-  m_parent->recolorize( this );
+  if( m_colorize ) { m_parent->recolorize( this ); }
 }
 
 /**************************************************************************************************/
