@@ -113,6 +113,7 @@ public:
   //
   virtual void create( );
   virtual void layout( );
+  void         _recolorize( FXWindow *w ); 
   void         recolorize( FXWindow *target = NULL );
 
   ////////////////////////////////////////////////

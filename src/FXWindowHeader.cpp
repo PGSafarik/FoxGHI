@@ -174,6 +174,11 @@ void FXWindowHeader::layout( )
   }
 }
 
+void FXWindowHeader::_recolorize( FXWindow *w )
+{
+  if( w ) { w->setBackColor( getBackColor( ) ); }
+}
+
 void FXWindowHeader::recolorize( FXWindow *target )
 {
   if( m_colorize ) {
@@ -182,7 +187,7 @@ void FXWindowHeader::recolorize( FXWindow *target )
     // Colorize all childerns
     for( FXWindow *w = t->getFirst( ); w != NULL; w = w->getNext( ) )
     {
-  	  if( w ) { w->setBackColor( getBackColor( ) ); }
+  	  _recolorize( w );
     }
   }
 }
