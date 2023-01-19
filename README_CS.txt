@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  22/11/2022 
+﻿Fox Gnome Human Interface library (foxGHI)  19/01/2023 
 ============================================================
 
 Obsah:
@@ -80,10 +80,17 @@ adresáře /opt/foxGHI/0.1/1/
 1. 10/09/2022 - Nefunkcni tlacitko "Maximize" - otevřene
   Na některých WM a DE (např. Gnome, Cinnamon) nemusí fungovat tlačítko maximalizace. Pravděpodobně 
   jde o chybnou komunikaci mezi aplikaci a WM, nebo chybu v nastavení WM.   
+  
+2. 19/01/2023 - Okno zobrazuje zakazany dekoracni ram
+  Od Foxlib verze 1.7.81 je-li nastavena ikona okna, nektere WM a DE (konkretne to mam potvrzene u  
+  KDE a Cinnamonu) NERESPEKTUJI pozadavek na skryti dekoracniho ramu. Bohuzel s tim v tento moment nemohu 
+  delat nic jineho, nez pridat do uzivatelskych nastaveni volbu vypinajici ikonu okna, dale preddefinovane 
+  profily vychozich nastaveni. Pro vyvojare pribude moznost prednastaveni bezne masky top-level okna, ktera 
+  se pouzije, kdyz uzivatel aktivuje volbu spravovani okna window managerem. 
 
 4. STAV PROJEKTU A PLÁNY DO BUDOUCNA
 ======================================
-Současná verze: 0.3.1 ALPHA
+Současná verze: 0.4.1 ALPHA
 
 FoxGHI v tuto chvíli implementuje základní funkcionalitu o kterou mi šlo - tzn. autonomní top-level 
 okno s integrovaným headerbarem ve stylu Gnome 3. Nicméně, je ještě co vylepšovat. Z toho důvodu 
@@ -115,10 +122,12 @@ Sladeni nazvu trid a odpovidajicich souboru s GHI a Foxtoolkitem (v ramci moznos
 
 V nejbližší budoucnosti bude 
   0) verzování knihovny 
-  1) Dokovací boxy pro FXWindowHeader.
-  2) Vytvořena dokumentace ke knihovně 
-  3) Příklady & testy
-  4) Postrani subpanel tzv. "side bar" 
+  1) Pridani moznosti prednastaveni bitmasky pro aktiaveci dekoracniho ramu
+  2) Preddefinovane zakladni rofily nastaveni FoxGHI
+  3) Dokovací boxy pro FXWindowHeader.
+  4) Vytvořena dokumentace ke knihovně 
+  5) Příklady & testy
+  6) Postrani subpanel tzv. "side bar" 
 
 5. AUTOR A LICENCE
 =====================

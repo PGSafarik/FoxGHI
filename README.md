@@ -81,6 +81,13 @@ address book /opt/foxGHI/0.3/1/
 * ### 10/09/2022 - Disfunct the "maximize" button - opened
    On some WMs and DEs (eg Gnome, Cinnamon) the maximize button may not work. Probably it is a 
    faulty communication between the application and WM, or an error in the WM settings.
+
+* ### 19/01/2023 - Window shows forbidden frame decoration
+  Since Foxlib version 1.7.81, if the window icon is set, some WM and DE (I have confirmed this for 
+  KDE and Cinnamon) DO NOT enforce the requirement to hide the decorative frame. Unfortunately, I can't do 
+  anything about it at the moment other than add an option to the user settings to disable the window icon, 
+  further predefined default settings profiles. For developers, There will be a possibility to preset a free 
+  top-level window mask, which to be used when the user activates the window manager window management option.
     
 ## 4. PROJECT STATE AND PLANS FOR THE FUTHURE
 Actual version: 0.3.1 ALPHA
@@ -114,10 +121,11 @@ menu).
 
 ### It will be in the near future  
   0) Versioned
-  1) Docking boxes for FXWindowHeader
-  2) Create a documentations for this library
-  3) Examples and tests
-  4) Side bar 
+  1) Add bitmask preset options to activate the decoration frame
+  2) Predefined basic FoxGHI setting rofiles
+  3) Create a documentations for this library
+  4) Examples and tests
+  5) Side bar 
 
 ## 5. AUTHOR AND PROJECT LICENCION:
 Copyright (C) 2019 - 2022 Pavel Šafařík <drakarax@seznam.cz>
