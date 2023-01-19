@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--22/11/2022-
+-19/01/2023-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -90,7 +90,7 @@ address book /opt/foxGHI/0.3/1/
   top-level window mask, which to be used when the user activates the window manager window management option.
     
 ## 4. PROJECT STATE AND PLANS FOR THE FUTHURE
-Actual version: 0.3.1 ALPHA
+Actual version: 0.4.1 ALPHA
 
 FoxGHI currently implements the basic, intended functionality - i.e. autonomous top-level window with
 an integrated headerbar in the style of Gnome 3. However, there is still room for improvement. For 
