@@ -45,7 +45,8 @@ FXDECLARE( FXPrimaryWindow )
   FXbool w_border;        // If true, this window draw border
   FXbool w_SelfControl;   // If true, allows handling of window resizing and moved by mouse dragging 
   FXbool w_WMControl;     // True value enabled a classical window decoiration and hendlig by Window Manager (Check the documentation - when it's ready ;)
-
+  FXuint w_WMDecor;       // FOX Decorations flags usage if enabled WM decorations 
+ 
 public:
   FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic = NULL, FXIcon *mi = NULL, FXuint opts = CONTROLS_NORMAL,
 		         FXint x = 0, FXint y = 0, FXint w = 400, FXint h = 200,
@@ -69,6 +70,8 @@ public:
   //
   virtual void   create( );
   virtual FXbool close( FXbool notify = false );
+  void    setWMDecorations( FXuint opts ) { w_WMDecor = opts; }
+  FXuint  getWMDecorations( )             { return w_WMDecor; }
 
   ////////////////////////////////////////////////
   // GUI messagess and handler

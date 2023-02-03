@@ -37,13 +37,14 @@ FXIMPLEMENT( FXPrimaryWindow, FXTopWindow, PrimaryWindowMap, ARRAYNUMBER( Primar
 /**************************************************************************************************/
 FXPrimaryWindow::FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
 		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
-         : FXTopWindow( app, title, ic, mi, DECOR_NONE /*| DECOR_RESIZE */, x, y, w, h, pl, pr, pt, pb, hs, vs )
+         : FXTopWindow( app, title, ic, mi, DECOR_NONE, x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   #ifdef DEBUG 
   std::cout << "[DEBUG - FXPrimaryWindow::FXPrimaryWindow ] !!!Library is building in DEBUG MODE!!!\n";
   #endif
 
   w_opts = opts;
+  w_WMDecor = DECOR_ALL;
   w_grab = DRAG_NONE;
   w_rect.set( 0, 0, 0, 0 );
   w_last.set( 0, 0 );
@@ -59,10 +60,11 @@ FXPrimaryWindow::FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic,
 
 FXPrimaryWindow::FXPrimaryWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
 		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
-         : FXTopWindow( owner, title, ic, mi, DECOR_NONE /*| DECOR_RESIZE */, x, y, w, h, pl, pr, pt, pb, hs, vs )
+         : FXTopWindow( owner, title, ic, mi, DECOR_NONE, x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   w_opts = opts;
   w_grab = DRAG_NONE;
+  w_WMDecor = DECOR_ALL;
   w_rect.set( 0, 0, 0, 0 );
   w_last.set( 0, 0 );
   w_header     = new FXWindowHeader( this, FXString::null, this, FXPrimaryWindow::ID_WINHEADER, WHEADER_STANDARD | WHEADER_DELEGATE  );
@@ -84,7 +86,10 @@ void FXPrimaryWindow::create( )
   ReadConfig( );
 
   if( w_WMControl ) {
-    setDecorations( DECOR_ALL );
+    #ifdef DEBUG 
+    std::cout << "[DEBUG - " <<  getClassName( ) << "::create( )]: Activate WM decorations " << w_WMDecor << std::endl;
+    #endif 
+    setDecorations( w_WMDecor );
   }
 
   FXTopWindow::create( );
@@ -271,7 +276,7 @@ long FXPrimaryWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void 
   #endif
   
   ReadConfig( );
-  setDecorations( ( w_WMControl ? DECOR_ALL : DECOR_NONE /*| DECOR_RESIZE */ ) );
+  setDecorations( ( w_WMControl ? w_WMDecor : DECOR_NONE  ) );
 
   w_controller->tryHandle( this, FXSEL( SEL_CHANGED, FXWindowController::ID_RECONFIGURE ), NULL );
   w_header->tryHandle(     this, FXSEL( SEL_CHANGED, FXWindowHeader::ID_RECONFIGURE ),     NULL );
