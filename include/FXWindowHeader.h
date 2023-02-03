@@ -47,6 +47,7 @@ FXDECLARE( FXWindowHeader )
   FXPoint m_mwp;     // Ulozena pozice okna (Memory Window Position)
 
   // Text of bar
+  FXbool    m_tvisible;         // Povolit titulek
   FXPoint   m_tcoord;           // Pozice pro vykresleni titlku
   FXPoint   m_scoord;           // Pozice pro vykresleni subtitulku
   FXString  m_stext;            // Subtitulek
@@ -94,8 +95,9 @@ public:
   void      setTitleFont( const FXString &spec );
   FXFont*   getSubtitleFont( )                    { return m_sfnt; }
   void      setSubtitleFont( const FXString &spec );
+  FXbool    isTitleVisible( )                     { return m_tvisible; }
+  void      setTitleVisible( FXbool value )       { m_tvisible = value; }
                     
-
   FXObject* getBoxTarget( )                  { return ( m_box_tgt ? m_box_tgt : m_parent ); }
   void      setBoxTarget( FXObject *target ) { m_box_tgt = target; }
   FXuint    getBoxOpts( )                    { return m_box_opts; }

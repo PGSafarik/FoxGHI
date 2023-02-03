@@ -55,6 +55,7 @@ FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( 
    m_mmp.set( 0, 0 );
 
    // Title text
+   m_tvisible      = true;
    m_stext         = text;
    m_tfnt = m_sfnt = NULL;
 
@@ -163,14 +164,16 @@ void FXWindowHeader::layout( )
   }
   
   // Recalc Titile position
-  pw = _left + _right / 2;                                                 // Urcime stred prostoru pro titulek
-  if( m_stext.empty( ) ) {                                                 // Pokud neni nastaven subtitulek
-    m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 3 ); // Umistime titulek do stredu
-  } 
-  else {                                                                                 //
-    FXint offset = wb_height / 4 + getPadTop( );                                         // Odstup z vrchu
-    m_tcoord.set( pw - ( m_tlenght  / 2 ), offset );                                     // Vypocet pozice prvniho radku
-    m_scoord.set( pw - ( m_stlenght / 2 ), wb_height - offset + 3 * ( ft_height / 4 ) ); // Vypocet pozice druheho radku
+  if( m_tvisible ) {
+    pw = _left + _right / 2;                                                 // Urcime stred prostoru pro titulek
+    if( m_stext.empty( ) ) {                                                 // Pokud neni nastaven subtitulek
+      m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 3 ); // Umistime titulek do stredu
+    } 
+    else {                                                                                 //
+      FXint offset = wb_height / 4 + getPadTop( );                                         // Odstup z vrchu
+      m_tcoord.set( pw - ( m_tlenght  / 2 ), offset );                                     // Vypocet pozice prvniho radku
+      m_scoord.set( pw - ( m_stlenght / 2 ), wb_height - offset + 3 * ( ft_height / 4 ) ); // Vypocet pozice druheho radku
+    }
   }
 }
 
@@ -200,13 +203,15 @@ long FXWindowHeader::onPaint( FXObject *sender, FXSelector sel, void *data )
   FXDCWindow dc( this );
 
   /* Drawing the haeder bar tetxs (top-level window title and subtitle - if any) */
-  dc.setForeground( getApp()->getForeColor( ) );
-  dc.setFont( m_tfnt );
+  if( m_tvisible ) {
+    dc.setForeground( getApp()->getForeColor( ) );
+    dc.setFont( m_tfnt );
 
-  dc.drawText( m_tcoord.x, m_tcoord.y, m_parent->getTitle( ) );
-  if( !m_stext.empty( ) ) {
-    dc.setFont( m_sfnt );
-    dc.drawText( m_scoord.x, m_scoord.y, m_stext );
+    dc.drawText( m_tcoord.x, m_tcoord.y, m_parent->getTitle( ) );
+    if( !m_stext.empty( ) ) {
+      dc.setFont( m_sfnt );
+      dc.drawText( m_scoord.x, m_scoord.y, m_stext );
+    }
   }
 
   /* Paint the Header bar bottom separator */
@@ -359,6 +364,7 @@ void FXWindowHeader::ReadConfig( )
    if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); }  
    fntspec_base = getApp( )->getNormalFont( )->getFont( );   
 
+   m_tvisible         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", true );  
    m_colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );  
    m_fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
    m_fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
@@ -373,7 +379,7 @@ void FXWindowHeader::ReadConfig( )
 void FXWindowHeader::WriteConfig( )
 {
   FXString cf_prefix = CFG_HEADER_PREFIX;  
-  
+  getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", m_tvisible );
   getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", m_colorize ); 
   getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       m_fntspec_title.text( ) ); 
   getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    m_fntspec_subtitle.text( ) ); 
