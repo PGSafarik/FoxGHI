@@ -33,6 +33,7 @@ FXDECLARE( GHI_ControlPanel )
    FXTextField   *htf_tfont;
    FXTextField   *htf_sfont; 
    FXCheckButton *hcb_colorize;
+   FXCheckButton *hcb_title;
    // Window
    FXCheckButton *wcb_wmcontrol;
    FXCheckButton *wcb_selfcontrol;

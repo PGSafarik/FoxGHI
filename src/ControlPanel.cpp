@@ -46,6 +46,7 @@ GHI_ControlPanel::GHI_ControlPanel( FXComposite *p, FXObject *tgt, FXSelector se
    FXButton *sbtn = new FXButton( m, "...", NULL, this, GHI_ControlPanel::SELECT_FONT );
    sbtn->setUserData( htf_sfont );
    hcb_colorize = new FXCheckButton( this, "Header colorize", this, GHI_ControlPanel::ID_CHANGE );   
+   hcb_title = new FXCheckButton( this, "Show window title", this, GHI_ControlPanel::ID_CHANGE );
 
    FXLabel *lc = new FXLabel( this, "Controller", NULL, LABEL_NORMAL | LAYOUT_FILL_X ); 
    lc->setBackColor( getApp( )->getShadowColor( ) );
@@ -81,12 +82,14 @@ void GHI_ControlPanel::readConfig( )
    FXString fntspec_base = getApp( )->getNormalFont( )->getFont( );   
    
    FXString cf_prefix = CFG_HEADER_PREFIX;
+   FXbool   _title            = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", true );              
    FXbool   _colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );  
    FXString _fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
    FXString _fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
    htf_tfont->setText( _fntspec_title );
    htf_sfont->setText( _fntspec_subtitle );
    hcb_colorize->setCheck( _colorize );
+   hcb_title->setCheck( _title );
 
    cf_prefix = CFG_CONTROLLER_PREFIX;
    FXbool _hidden = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", false );
@@ -109,6 +112,7 @@ void GHI_ControlPanel::writeConfig( )
   if( a->reg( ).existingSection( CFG_FXGHI ) ) { m_back = a->reg( ).at( CFG_FXGHI ); }
  
   FXString cf_prefix = CFG_HEADER_PREFIX;
+  a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", hcb_title->getCheck( ) );
   a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", hcb_colorize->getCheck( ) );
   a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       htf_tfont->getText( ).text( ) );
   a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    htf_sfont->getText( ).text( ) );
