@@ -62,12 +62,13 @@ public :
 
   /* GUI Messages & Handlers */
   enum {
-    SETTINGS_SAVE = FXVerticalFrame::ID_LAST,
-    SETTINGS_RESTORE,
-    SETTINGS_DEFAULT,
-    SELECT_FONT,
-    ID_CHANGE,
-    ID_LAST,
+    SETTINGS_SAVE = FXVerticalFrame::ID_LAST, // Save changes
+    SETTINGS_RESTORE,                         // Restore to previous state
+    SETTINGS_DEFAULT,                         // Default profile ( remove the all settings)
+    SETTINGS_WINMNG,                          // Active full window managment and dekoration profile
+    SELECT_FONT,                              // Dialog for select font
+    ID_CHANGE,                                // Notify of change settings widget
+    ID_LAST,                                  // ...
   };
   long onCmd_Select( FXObject *sender, FXSelector sel, void *data );
   long onCmd_Settings( FXObject *sender, FXSelector sel, void *data );

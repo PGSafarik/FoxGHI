@@ -35,7 +35,7 @@ FXDECLARE( FXPrimaryWindow )
   FXPoint     w_last; // Point for save last mouse position
   FXRectangle w_rect; // Rectangle represend the window area using for resize calculate
 
-  FXWindowHeader     *w_header;		// The window header widget
+  FXWindowHeader     *w_header;		  // The window header widget
   FXWindowController *w_controller;	// The window controller widget
 
   FXIcon *w_menuic;	   // Standard menu icon;
@@ -104,6 +104,7 @@ protected:
   virtual void ReadConfig( );
   virtual void WriteConfig( );
   //virtual void Configure( );
+
   ///////////////////////////////////////////////
   // Helpers flags
   //

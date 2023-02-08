@@ -25,6 +25,7 @@ FXDEFMAP( GHI_ControlPanel ) CP_MAP[ ] = {
   FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SETTINGS_RESTORE, GHI_ControlPanel::onCmd_Settings ),
   FXMAPFUNC( SEL_UPDATE,  GHI_ControlPanel::SETTINGS_RESTORE, GHI_ControlPanel::onUpd_Settings ),
   FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SETTINGS_DEFAULT, GHI_ControlPanel::onCmd_Settings ),
+  FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::SETTINGS_WINMNG,  GHI_ControlPanel::onCmd_Settings ),
   FXMAPFUNC( SEL_COMMAND, GHI_ControlPanel::ID_CHANGE,        GHI_ControlPanel::onCmd_Update   )
 };
 
@@ -163,7 +164,7 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
     {
       if( !m_back.empty( ) )
       {
-        if( FXMessageBox::question( this, MBOX_YES_NO, "Restore FoxGHI settings", "Do you really want to restore the original settings?" ) == MBOX_CLICKED_YES ) {
+        if( FXMessageBox::question( this, MBOX_YES_NO, "Restore FoxGHI settings", "Do you really want to restore the previous settings?" ) == MBOX_CLICKED_YES ) {
           getApp( )->reg( ).at( CFG_FXGHI ) = m_back;
           m_back.clear( );  
           readConfig( );
@@ -182,6 +183,18 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
         readConfig( );
         m_change = true;
         Notify( );
+      }
+      break;
+    }
+    case GHI_ControlPanel::SETTINGS_WINMNG :
+    {
+      if( FXMessageBox::question( this, MBOX_YES_NO, "Predefined FoxGHI settings", "Do you really want predefined settings?" ) == MBOX_CLICKED_YES ) {
+        hcb_colorize->setCheck( true );
+        hcb_title->setCheck( false );
+        wcb_border->setCheck( false );
+        wcb_selfcontrol->setCheck( false );
+        wcb_wmcontrol->setCheck( true );
+        ccb_hidden->setCheck( true );
       }
       break;
     }
