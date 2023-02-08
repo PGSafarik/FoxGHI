@@ -195,6 +195,9 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
         wcb_selfcontrol->setCheck( false );
         wcb_wmcontrol->setCheck( true );
         ccb_hidden->setCheck( true );
+        
+        m_change = true;
+        Notify( );
       }
       break;
     }
