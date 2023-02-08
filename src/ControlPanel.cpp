@@ -189,6 +189,7 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
     case GHI_ControlPanel::SETTINGS_WINMNG :
     {
       if( FXMessageBox::question( this, MBOX_YES_NO, "Predefined FoxGHI settings", "Do you really want predefined settings?" ) == MBOX_CLICKED_YES ) {
+        // FIXME GHICP_001 : For some reason the changes are not written to the 'back'
         hcb_colorize->setCheck( true );
         hcb_title->setCheck( false );
         wcb_border->setCheck( false );
@@ -202,7 +203,6 @@ long GHI_ControlPanel::onCmd_Settings( FXObject *sender, FXSelector sel, void *d
       break;
     }
   }
-
 
   return 1;
 }
