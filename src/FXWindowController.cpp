@@ -90,16 +90,15 @@ void FXWindowController::hide( )
 long FXWindowController::onCmd_WinMaximize( FXObject *sender, FXSelector sel, void *data )
 {
   FXTopWindow *win = m_parent->getTopWindow( );
-  
+    
   if( win && win->isMaximized( ) ) {
 	  if ( win->restore( ) ) { m_maximizeBtn->setIcon( ic_maximize ); }
   }
-  else {
-    /// FIXME 001: In some wm/environments (e.g. gnome) it doesn't work, win->maximize( ) behaves like win->restore( ). Find out why
-	  if ( win->maximize( true ) ) { m_maximizeBtn->setIcon( ic_restore ); }
+  else { 
+    if ( win->maximize( true ) ) { m_maximizeBtn->setIcon( ic_restore ); } 
   }
-  
   m_maximizeBtn->update( );
+  
   return 1;
 }
 

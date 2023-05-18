@@ -47,9 +47,9 @@ enum {
   WINDOW_CLIENTSIZE = 0x00200000,	// Enter the window size is size for client space in this window
   WINDOW_STATIC     = 0x00400000	// Disable window resizing
 };
-#define P_SPACING         3	// 5
-#define HV_SPACING2       2	// 2
-
+#define P_SPACING   3	// 5
+#define HV_SPACING2 2	// 2
+       
 /*** CONFIGURATIONS *******************************************************************************/
 #define CFG_FXGHI             "FoxGHI"
 #define CFG_WINDOW_PREFIX     "Window"

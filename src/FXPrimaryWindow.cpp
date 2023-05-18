@@ -37,7 +37,7 @@ FXIMPLEMENT( FXPrimaryWindow, FXTopWindow, PrimaryWindowMap, ARRAYNUMBER( Primar
 /**************************************************************************************************/
 FXPrimaryWindow::FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
 		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
-         : FXTopWindow( app, title, ic, mi, DECOR_NONE, x, y, w, h, pl, pr, pt, pb, hs, vs )
+         : FXTopWindow( app, title, ic, mi, DECOR_RESIZE, x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   #ifdef DEBUG 
   std::cout << "[DEBUG - FXPrimaryWindow::FXPrimaryWindow ] !!!Library is building in DEBUG MODE!!!\n";
@@ -60,7 +60,7 @@ FXPrimaryWindow::FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic,
 
 FXPrimaryWindow::FXPrimaryWindow( FXWindow *owner, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
 		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
-         : FXTopWindow( owner, title, ic, mi, DECOR_NONE, x, y, w, h, pl, pr, pt, pb, hs, vs )
+         : FXTopWindow( owner, title, ic, mi, DECOR_RESIZE, x, y, w, h, pl, pr, pt, pb, hs, vs )
 {
   w_opts = opts;
   w_grab = DRAG_NONE;
@@ -276,7 +276,7 @@ long FXPrimaryWindow::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void 
   #endif
   
   ReadConfig( );
-  setDecorations( ( w_WMControl ? w_WMDecor : DECOR_NONE  ) );
+  setDecorations( ( w_WMControl ? w_WMDecor : DECOR_RESIZE  ) );
 
   w_controller->tryHandle( this, FXSEL( SEL_CHANGED, FXWindowController::ID_RECONFIGURE ), NULL );
   w_header->tryHandle(     this, FXSEL( SEL_CHANGED, FXWindowHeader::ID_RECONFIGURE ),     NULL );
