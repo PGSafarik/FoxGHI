@@ -35,6 +35,7 @@ FXDEFMAP( FXPrimaryWindow ) PrimaryWindowMap[ ] = {
 FXIMPLEMENT( FXPrimaryWindow, FXTopWindow, PrimaryWindowMap, ARRAYNUMBER( PrimaryWindowMap ) )
 
 /**************************************************************************************************/
+/// FIXME FXPrimaryWindow_001 : Some WMs show a forbidden decorative frame if the application icon is set.
 FXPrimaryWindow::FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic, FXIcon *mi, FXuint opts,
 		       FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs  )
          : FXTopWindow( app, title, ic, mi, DECOR_RESIZE, x, y, w, h, pl, pr, pt, pb, hs, vs )

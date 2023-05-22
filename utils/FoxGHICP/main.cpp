@@ -64,7 +64,7 @@ Config::Config( FXApp *a )
   ics_small[ 8 ] = new FXPNGIcon( getApp( ), refresh16 );  
 
   // Set Window icons
-  setIcon( ics_small[ 1 ] );
+  //setIcon( ics_small[ 1 ] ); // FIXME GHICP_001: WM's incompatible behavior (or bug). See FXPrimaryWindow_001.
   
   // Set subtitle text
   getHeader( )->setText( ( getApp( )->getAppName( ) + " : " + getApp( )->getVendorName( ) ) );  
