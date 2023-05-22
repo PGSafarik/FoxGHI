@@ -94,9 +94,8 @@ may change over time.
 From this version, FoxGHI will default to the directory install/path/foxghi/MAJOR.MINOR/, i.e. no subdirectory with the development version will be added,
 which caused problems with library settings in ld.cache when updating development or patch versions
 
-### 20/05/2023 Side Bar widget implementation is postponed indefinitely
-
-### 28/05/2023 Fixed function of the window maximize button
+  20/05/2023 Side Bar widget implementation is postponed indefinitely - Close  
+  28/05/2023 Fixed function of the window maximize button - Open  
 Fixed the unpleasant bug of the non-functioning window maximization button, which appeared in some WMs.
 It turned out that this functionality is influenced by the decorative attributes of the FXTopWindow class.  
 
