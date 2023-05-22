@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  19/01/2023 
+﻿Fox Gnome Human Interface library (foxGHI)  18/05/2023 
 ============================================================
 
 Obsah:
@@ -76,12 +76,8 @@ Po uspěšné kompilaci a sestaveni projektu bude výsledná knihovna a hlavičk
 adresáře /opt/foxGHI/0.1/1/  
 
 3. ZNÁME CHYBY A BUGY
-======================
-1. 10/09/2022 - Nefunkcni tlacitko "Maximize" - otevřene
-  Na některých WM a DE (např. Gnome, Cinnamon) nemusí fungovat tlačítko maximalizace. Pravděpodobně 
-  jde o chybnou komunikaci mezi aplikaci a WM, nebo chybu v nastavení WM.   
-  
-2. 19/01/2023 - Okno zobrazuje zakazany dekoracni ram
+======================    
+1. 19/01/2023 - Nektere WM  zobrazuji zakazany dekoracni ram, pokud je nastavena ikona aplikace.
   Od Foxlib verze 1.7.81 je-li nastavena ikona okna, nektere WM a DE (konkretne to mam potvrzene u  
   KDE a Cinnamonu) NERESPEKTUJI pozadavek na skryti dekoracniho ramu. Bohuzel s tim v tento moment nemohu 
   delat nic jineho, nez pridat do uzivatelskych nastaveni volbu vypinajici ikonu okna, dale preddefinovane 
@@ -96,6 +92,18 @@ FoxGHI v tuto chvíli implementuje základní funkcionalitu o kterou mi šlo - t
 okno s integrovaným headerbarem ve stylu Gnome 3. Nicméně, je ještě co vylepšovat. Z toho důvodu 
 mějte prosím  na paměti, že projekt se stále nachází ve vývoji a muže jednak obsahovat bugy a může 
 se v průběhu času změnit. 
+
+21/05/2023 Zmena vychoziho instalacniho adresare
+Od teto verze se bude FoxGHI vychozi adresar install/path/foxghi/MAJOR.MINOR/, tedy nebude se pridavat subadresar s vyvojovou verzi, 
+ktery zpusoboval potize s nastavenim knihovny v ld.cache pri aktualizaci vyvojovych nebo opravnych verzi   
+
+20/05/2023 Implementace Side Bar widgetu je prozatim odložena na neurčito.
+
+18/05/2023 Opraven nepřijemný bug nefunkčniho tlačitka maximalizace okna, ktery se projevoval v u nekterych WM. 
+Ukazalo se, ze tuto funkcionalitu ovlivnuji decoracni priznaky tridy FXTopWindow.
+
+02/03/2023 Třída FXPrimaryWindow umožňuje předdefinovat příznaky dekoraci pro FXTopWindow, ktere se použijí při
+aktivaci klasicke zpravy okna.
 
 09/10/2022 Dokončen základní koncept konfigurace FoxGHI
 FoxGHI nyní poskytuje možnost standardně nastavovat chování jednotlivých widgetů v rámci teto knihovny. 
@@ -122,16 +130,14 @@ Sladeni nazvu trid a odpovidajicich souboru s GHI a Foxtoolkitem (v ramci moznos
 
 V nejbližší budoucnosti bude 
   0) verzování knihovny 
-  1) Pridani moznosti prednastaveni bitmasky pro aktiaveci dekoracniho ramu
-  2) Preddefinovane zakladni rofily nastaveni FoxGHI
-  3) Dokovací boxy pro FXWindowHeader.
-  4) Vytvořena dokumentace ke knihovně 
-  5) Příklady & testy
-  6) Postrani subpanel tzv. "side bar" 
+  1) Preddefinovane zakladni profily nastaveni FoxGHI
+  2) Vytvořena dokumentace ke knihovně 
+  3) Příklady & testy
+  
 
 5. AUTOR A LICENCE
 =====================
-Copyright (C) 2019 - 2022 Pavel Šafařík <drakarax@seznam.cz> alias D.A.Tiger
+Copyright (C) 2019 - 2023 Pavel Šafařík <drakarax@seznam.cz> alias D.A.Tiger
 všechna práva vyhrazena.
 
 Tento soubor je součástí foxGHI.

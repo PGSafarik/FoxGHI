@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--19/01/2023-
+-20/05/2023-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -78,16 +78,8 @@ After successfully compiling and building the project, the resulting library and
 address book /opt/foxGHI/0.3/1/
 
 ## 3. KNOWN ERRORS AND BUGS
-* ### 10/09/2022 - Disfunct the "maximize" button - opened
-   On some WMs and DEs (eg Gnome, Cinnamon) the maximize button may not work. Probably it is a 
-   faulty communication between the application and WM, or an error in the WM settings.
-
-* ### 19/01/2023 - Window shows forbidden frame decoration
-  Since Foxlib version 1.7.81, if the window icon is set, some WM and DE (I have confirmed this for 
-  KDE and Cinnamon) DO NOT enforce the requirement to hide the decorative frame. Unfortunately, I can't do 
-  anything about it at the moment other than add an option to the user settings to disable the window icon, 
-  further predefined default settings profiles. For developers, There will be a possibility to preset a free 
-  top-level window mask, which to be used when the user activates the window manager window management option.
+* ### 18/05/2023 - Disfunct the "maximize" button - Fixed, closed
+* ### 19/01/2023 - Some WMs show a forbidden decorative frame if the application icon is set. 
     
 ## 4. PROJECT STATE AND PLANS FOR THE FUTHURE
 Actual version: 0.4.1 ALPHA
@@ -97,35 +89,49 @@ an integrated headerbar in the style of Gnome 3. However, there is still room fo
 that reason please keep in mind that the project is still under development and may contain bugs and 
 may change over time.
 
-  ### 09/10/2022 Basic concept of FoxGHI setup completed  
+
+### 21/05/2023 Change of the default installation directory
+From this version, FoxGHI will default to the directory install/path/foxghi/MAJOR.MINOR/, i.e. no subdirectory with the development version will be added,
+which caused problems with library settings in ld.cache when updating development or patch versions
+
+### 20/05/2023 Side Bar widget implementation is postponed indefinitely
+
+### 28/05/2023 Fixed function of the window maximize button
+Fixed the unpleasant bug of the non-functioning window maximization button, which appeared in some WMs.
+It turned out that this functionality is influenced by the decorative attributes of the FXTopWindow class.  
+
+### 02/03/2023 Presets for classic window decoration
+The FXPrimaryWindow class allows you to define the FXTopWindow class flags, that will be used when 
+activating the classic window management.  
+
+### 09/10/2022 Basic concept of FoxGHI setup completed
 FoxGHI now provides the ability to set the behavior of individual widgets within this library. Of 
 course, more options will be added as the library is developed. The plan is to add a formulary class, 
 whose to change the behavior of FoxGHI directly in the application. This form will be used for create 
-a separate utility for setting up FoxGHI aka FOX Control Panel.
+a separate utility for setting up FoxGHI aka FOX Control Panel.  
 
-  ### 18/10/2022 The control panel is almost finished
+### 18/10/2022 The control panel is almost finished
 It remains to sort out the default values and how the CP class will be available in the library  
 
-  ### 29/10/2022 Implementation of FXGHI_ControlPanel class completed 
+### 29/10/2022 Implementation of FXGHI_ControlPanel class completed 
 The class providing the GUI for setting FoxGHI properties is finished and integrated into the library. Now
 will only add any configuration options as the project progresses. With this class
 FoxGHICP configuration utility has also been completed. I am therefore removing this item from the list of planned development goals.  
 
-  ### 30/10/2022 Include basic concept of docking boxes
+### 30/10/2022 Include basic concept of docking boxes
 Added horizontal panel class, designed for creating small complex widgets (Boxes) to 
 Header Bar. Its use is intended as a grouping of several similar elements with a similar focus 
 (e.g. toolboxes) or standalone widgets where it is convenient to use some kind of docking base (e.g. 
 menu).  
 
-  ### 22/11/2022 Matching class names and corresponding files with GHI and Foxtoolkit (within limits)  
+### 22/11/2022 Matching class names and corresponding files with GHI and Foxtoolkit (within limits)  
 
 ### It will be in the near future  
   0) Versioned
-  1) Add bitmask preset options to activate the decoration frame
-  2) Predefined basic FoxGHI setting rofiles
-  3) Create a documentations for this library
-  4) Examples and tests
-  5) Side bar 
+  1) Predefined basic FoxGHI setting profiles
+  2) Create a documentations for this library
+  3) Examples and tests
+ 
 
 ## 5. AUTHOR AND PROJECT LICENCION:
 Copyright (C) 2019 - 2022 Pavel Šafařík <drakarax@seznam.cz>
@@ -143,7 +149,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 <https://www.gnu.org/licenses/>.
 
 ## 6. INTERNET
-  * [Foxtoolkitu home page](http://fox-toolkit.org/)
+  * [Foxtoolkit home page](http://fox-toolkit.org/)
   * [Oxygen KDE icons theme, used in the FoxGHICP utility](https://github.com/KDE/oxygen-icons)
   * [Gnome Human Interace Guidelines](https://developer.gnome.org/hig/)
   * [Author's blog (CZ)](http://bfuplusplus.blogspot.cz/)
