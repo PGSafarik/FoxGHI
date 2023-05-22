@@ -78,8 +78,8 @@ After successfully compiling and building the project, the resulting library and
 address book /opt/foxGHI/0.3/1/
 
 ## 3. KNOWN ERRORS AND BUGS
-* ### 18/05/2023 - Disfunct the "maximize" button - Fixed, closed
-* ### 19/01/2023 - Some WMs show a forbidden decorative frame if the application icon is set. 
+* 18/05/2023 - Disfunct the "maximize" button - status fixed, closed
+* 19/01/2023 - Some WMs show a forbidden decorative frame if the application icon is set - status open
     
 ## 4. PROJECT STATE AND PLANS FOR THE FUTHURE
 Actual version: 0.4.1 ALPHA
@@ -94,8 +94,9 @@ may change over time.
 From this version, FoxGHI will default to the directory install/path/foxghi/MAJOR.MINOR/, i.e. no subdirectory with the development version will be added,
 which caused problems with library settings in ld.cache when updating development or patch versions
 
-  20/05/2023 Side Bar widget implementation is postponed indefinitely - Close  
-  28/05/2023 Fixed function of the window maximize button - Open  
+### 20/05/2023 Side Bar widget implementation is postponed indefinitely
+
+### 28/05/2023 Fixed function of the window maximize button
 Fixed the unpleasant bug of the non-functioning window maximization button, which appeared in some WMs.
 It turned out that this functionality is influenced by the decorative attributes of the FXTopWindow class.  
 
