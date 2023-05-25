@@ -195,6 +195,20 @@ void FXWindowHeader::recolorize( FXWindow *target )
   }
 }
 
+FXint FXWindowHeader::getDefaultHeight( ) 
+{
+  FXint minh = 24;
+  FXint value = 0;
+
+  if( getFirst( ) ) {  
+    FXint m = FXHorizontalFrame::getDefaultHeight( );  
+    value = ( m > minh ? m : minh ); 
+  } 
+  else { value = minh; }
+
+  return value;
+}
+
 /**************************************************************************************************/
 long FXWindowHeader::onPaint( FXObject *sender, FXSelector sel, void *data )
 {

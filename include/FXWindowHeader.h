@@ -103,6 +103,7 @@ public:
   FXuint    getBoxOpts( )                    { return m_box_opts; }
   void      setBoxOpts( FXuint opts )        { m_box_opts = opts; }
   
+  FXint getDefaultHeight( );
   FXint getBoxPl( )             { return m_box_pl;  }
   void  setBoxPl( FXint value ) { m_box_pl = value; }
   FXint getBoxPr( )             { return m_box_pr; }
