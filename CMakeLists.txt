@@ -3,7 +3,7 @@ PROJECT( FXGHI VERSION 0.4 DESCRIPTION "A small library that extends Foxtoolkit 
 
 # The project settings
 SET( CMAKE_INSTALL_PREFIX "/opt/foxghi/${PROJECT_VERSION}" )  # Install target directory
-SET( LIB_FOX   "/opt/foxlib/1.7/81" )            # Fox toolkit path
+SET( LIB_FOX   "/opt/foxlib/1.7/84" )            # Fox toolkit path
 SET( CMAKE_CXX_STANDARD 11 )                     # C++ Standard
 SET( CMAKE_CXX_STANDARD_REQUIRED True )          # C++ Standard
 #add_compile_options(-Wall -Wextra -pedantic -Werror)

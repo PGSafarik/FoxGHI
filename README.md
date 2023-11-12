@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--20/05/2023-
+-12/11/2023-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -62,7 +62,7 @@ certain effort to prevent this from happening, however, this cannot be guarantee
  
 ## 2. COMPILATION AND INSTALLATION:
 *Dependecies:*
-  [Foxtoolkit 1.7.76](http://fox-toolkit.org/ftp/fox-1.7.76.tar.gz)
+  [Foxtoolkit 1.7.84](http://fox-toolkit.org/ftp/fox-1.7.84.tar.gz)
 
 *Aditional dependencies for compilation:*
   cmake >= 3.10
@@ -75,14 +75,14 @@ After downloading the project from Github (and possibly unzipping it), go to the
   sudo make install
 ```
 After successfully compiling and building the project, the resulting library and header files will be installed into the
-address book /opt/foxGHI/0.3/1/
+directory /opt/foxghi/0.4/
 
 ## 3. KNOWN ERRORS AND BUGS
 * 18/05/2023 - Disfunct the "maximize" button - status fixed, closed
 * 19/01/2023 - Some WMs show a forbidden decorative frame if the application icon is set - status open
     
 ## 4. PROJECT STATE AND PLANS FOR THE FUTHURE
-Actual version: 0.4.1 ALPHA
+Actual version: 0.4.2 ALPHA
 
 FoxGHI currently implements the basic, intended functionality - i.e. autonomous top-level window with
 an integrated headerbar in the style of Gnome 3. However, there is still room for improvement. For 

@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  18/05/2023 
+﻿Fox Gnome Human Interface library (foxGHI)  12/11/2023 
 ============================================================
 
 Obsah:
@@ -60,7 +60,7 @@ Vezměte prosím na vědomí, že knihovna je v současné době ve vývoji a m�
 2. PŘEKLAD A INSTALACE
 ========================
 Závislosti:
-  Foxtoolkit 1.7.76 - GUI Framework http://fox-toolkit.org/ftp/fox-1.7.76.tar.gz
+  Foxtoolkit 1.7.84 - GUI Framework http://fox-toolkit.org/ftp/fox-1.7.84.tar.gz
 
 Dodatečné závislosti pro kompilaci  
   cmake >= 3.10
@@ -73,7 +73,7 @@ sekvenci příkazu:
   sudo make install
   
 Po uspěšné kompilaci a sestaveni projektu bude výsledná knihovna a hlavičkové soubory nainstalováný do 
-adresáře /opt/foxGHI/0.1/1/  
+adresáře /opt/foxghi/0.4/  
 
 3. ZNÁME CHYBY A BUGY
 ======================    
