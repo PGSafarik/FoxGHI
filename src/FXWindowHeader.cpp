@@ -69,8 +69,14 @@ void FXWindowHeader::create( )
   ReadConfig( );
 
   FXint clr_offset = 30;
-  m_backcolor      = getApp( )->getBaseColor( );
-  m_backcolor     -= FXRGB( clr_offset, clr_offset, clr_offset );
+  //m_backcolor      = getApp( )->getBaseColor( );
+  // m_backcolor     -= FXRGB( clr_offset, clr_offset, clr_offset );
+  m_backcolor = makeShadowColor( getApp( )->getBaseColor( ), clr_offset );
+  
+  #ifdef DEBUG 
+  std::cout << "[DEBUG - FXPrimaryWindow::create]: Colorize offset " << clr_offset <<  std::endl;
+  #endif
+  
 
   // Header bar colorize
   if( m_colorize ) {
