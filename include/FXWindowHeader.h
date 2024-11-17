@@ -67,7 +67,7 @@ FXDECLARE( FXWindowHeader )
   
   // Config
   FXbool m_colorize;         // 0 = off; > 0 = base_color + colorize   
-  
+  FXint  m_clrOffset;        //Base color offset - Color difference from the window's base color
 
 public:
   FXWindowHeader( FXTopWindow *parent, const FXString &text = FXString::null, FXObject *tgt = NULL, FXSelector sel = 0,  FXuint opts = WHEADER_STANDARD,

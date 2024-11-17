@@ -46,6 +46,8 @@ FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( 
    m_box_pr   = pr;
    m_box_hs   = hs;
    
+   m_clrOffset = 0;
+   
    this->enable( );
    this->setTarget( tgt );
    this->setSelector( sel );
@@ -71,10 +73,10 @@ void FXWindowHeader::create( )
   FXint clr_offset = 30;
   //m_backcolor      = getApp( )->getBaseColor( );
   // m_backcolor     -= FXRGB( clr_offset, clr_offset, clr_offset );
-  m_backcolor = makeShadowColor( getApp( )->getBaseColor( ), clr_offset );
+  m_backcolor = makeShadowColor( getApp( )->getBaseColor( ), m_clrOffset );
   
   #ifdef DEBUG 
-  std::cout << "[DEBUG - FXPrimaryWindow::create]: Colorize offset " << clr_offset <<  std::endl;
+  std::cout << "[DEBUG - FXWindowHeader::create]: Colorize offset " << m_clrOffset <<  std::endl;
   #endif
   
 
