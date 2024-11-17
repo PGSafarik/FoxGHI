@@ -70,9 +70,9 @@ void FXWindowHeader::create( )
 {
   ReadConfig( );
 
-  FXint clr_offset = 30;
-  //m_backcolor      = getApp( )->getBaseColor( );
-  // m_backcolor     -= FXRGB( clr_offset, clr_offset, clr_offset );
+   FXint clr_offset = 30;
+  //- m_backcolor      = getApp( )->getBaseColor( );
+  //- m_backcolor     -= FXRGB( clr_offset, clr_offset, clr_offset );
   m_backcolor = makeShadowColor( getApp( )->getBaseColor( ), m_clrOffset );
   
   #ifdef DEBUG 
@@ -387,7 +387,8 @@ void FXWindowHeader::ReadConfig( )
    fntspec_base = getApp( )->getNormalFont( )->getFont( );   
 
    m_tvisible         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", true );  
-   m_colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );  
+   m_colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );
+   m_clrOffset        = getApp( )->reg( ).readIntEntry(   CFG_FXGHI, cf_prefix  + ".BaseColorOffset", 30 );  
    m_fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
    m_fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
    
@@ -403,6 +404,7 @@ void FXWindowHeader::WriteConfig( )
   FXString cf_prefix = CFG_HEADER_PREFIX;  
   getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", m_tvisible );
   getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", m_colorize ); 
+  getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".BaseColorOffset", m_clrOffset ); 
   getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       m_fntspec_title.text( ) ); 
   getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    m_fntspec_subtitle.text( ) ); 
 }
