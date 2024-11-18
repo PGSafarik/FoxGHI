@@ -60,7 +60,6 @@ FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( 
    m_tvisible      = true;
    m_stext         = text;
    m_tfnt = m_sfnt = NULL;
-
  }
 
 FXWindowHeader::~FXWindowHeader( )

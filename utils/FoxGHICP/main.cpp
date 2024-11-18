@@ -47,7 +47,7 @@ FXIMPLEMENT( Config, FXPrimaryWindow, NULL, 0 )
 
 /**************************************************************************************************/
 Config::Config( FXApp *a )
-      : FXPrimaryWindow( a, "FoxGHI Control Panel", NULL, NULL, CONTROLS_STATIC | WINDOW_MAIN | WINDOW_STATIC , 0, 0, 550, 250  ) 
+      : FXPrimaryWindow( a, "FoxGHI Control Panel", NULL, NULL, CONTROLS_STATIC | WINDOW_MAIN | WINDOW_STATIC , 0, 0, 550, 310  ) 
 {
   // Applications static iconspack (Oxygen)
   ics_big[ 0 ] = new FXPNGIcon( getApp( ), save22 );
