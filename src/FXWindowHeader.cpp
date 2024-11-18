@@ -70,28 +70,30 @@ void FXWindowHeader::create( )
 {
   ReadConfig( );
 
-   FXint clr_offset = 30;
+  //- FXint clr_offset = 30;
   //- m_backcolor      = getApp( )->getBaseColor( );
   //- m_backcolor     -= FXRGB( clr_offset, clr_offset, clr_offset );
-  m_backcolor = makeShadowColor( getApp( )->getBaseColor( ), m_clrOffset );
   
-  #ifdef DEBUG 
-  std::cout << "[DEBUG - FXWindowHeader::create]: Colorize offset " << m_clrOffset <<  std::endl;
-  #endif
-  
-
   // Header bar colorize
-  if( m_colorize ) {
+  if( m_clrOffset > 0 ) {
+    m_backcolor = makeShadowColor( getApp( )->getBaseColor( ), m_clrOffset );
+    m_sepcolor = makeShadowColor( getApp( )->getBorderColor( ), m_clrOffset );
+    //- m_sepcolor = blendOverWhite( m_backcolor );
     setBackColor( m_backcolor );
 
-    // Calculate color for bottom separator
-    clr_offset += 30;
-    m_sepcolor = getApp( )->getBaseColor( ) - FXRGB( clr_offset, clr_offset, clr_offset );
+    //- Calculate color for bottom separator
+    //- clr_offset += 30;
+    //- m_sepcolor = //getApp( )->getBaseColor( ) - FXRGB( clr_offset, clr_offset, clr_offset );
+    
   }
   else { 
     m_sepcolor = getApp( )->getBorderColor( ); 
     setBackColor( getApp( )->getBaseColor( ) );
   }
+  #ifdef DEBUG 
+  std::cout << "[DEBUG - FXWindowHeader::create]: Colorize offset " << m_clrOffset <<  std::endl;
+  #endif
+
 
   // Creating
   FXHorizontalFrame::create( );
