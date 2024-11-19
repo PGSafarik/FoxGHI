@@ -127,16 +127,16 @@ void FXWindowHeader::layout( )
 /* Calculate position to the headerBar text, with change to top-level window */
   FXHorizontalFrame::layout( );
 
-  m_tlenght  = m_tfnt->getTextWidth( this->getTitle( ) );  // Sirka retezce titulku
-  m_stlenght = m_tfnt->getTextWidth( this->getText( ) );   // Sirka retezce podtitulku
+  m_tlenght  = m_tfnt->getTextWidth( this->getTitle( ) );  // Length of title string
+  m_stlenght = m_tfnt->getTextWidth( this->getText( ) );   // Length of subtitle string (aka window text)
 
-  FXint wb_height = getHeight( );                          // Delka WH
-  FXint wb_width  = getWidth( );                           // Sirka WH 
-  FXint pw        = wb_width / 2;                          // pomocna promenna
-  FXint ft_height = m_tfnt->getFontHeight( );              // Delka fontu
-  FXint _width    = 0;                                     // Potrebna sirka WH (tzn. delka vsech potomku + mezery + delka nejdelsiho textu titulku )
-  FXint _left     = 0;                                     // (pomocna promenna) Celkova delka vsech potomku na leve strane
-  FXint _right    = 0;                                     // (pomocna promenna) Pozice v ose X, kterou zacinaji potomci na pravo  
+  FXint wb_height = getHeight( );             // Height of the Header bar
+  FXint wb_width  = getWidth( );              // Width of the Header bar 
+  FXint pw        = wb_width / 2;             // Auxiliary variable
+  FXint ft_height = m_tfnt->getFontHeight( ); // Length of the used text font
+  FXint _width    = 0;                        // Required width WH (i.e. length of all children + spaces + length of longest title text)
+  FXint _left     = 0;                        // Auxiliary variable: Total length of all descendants on the left side of the panel
+  FXint _right    = 0;                        // Auxiliary variable: The position on the X axis where widgets (descendants of the panel) start on the right 
 
   // Corection a parent width, in depending on the title ( or subtitle) width and check size empty 
   // space for widow title  
@@ -380,7 +380,7 @@ void FXWindowHeader::ReadConfig( )
 
    m_tvisible         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", true );  
    m_colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );
-   m_clrOffset        = getApp( )->reg( ).readIntEntry(   CFG_FXGHI, cf_prefix  + ".BaseColorOffset", 30 );  
+   m_clrOffset        = getApp( )->reg( ).readIntEntry(   CFG_FXGHI, cf_prefix  + ".BaseColorOffset", 20 );  
    m_fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
    m_fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
    

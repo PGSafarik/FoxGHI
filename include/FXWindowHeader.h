@@ -30,40 +30,37 @@
 
 namespace FXGHI {
 
-//#define DEFAULT_DISTANCE 10                                               // Standard bounds distace
-//#define S_HEAD FRAME_NONE | LAYOUT_TOP | LAYOUT_SIDE_TOP | LAYOUT_FILL_X  // Standard header options
-
 class FXWindowHeader : public FXHorizontalFrame {
 FXDECLARE( FXWindowHeader )
-  FXTopWindow *m_parent; // Ukazatel na rodicovske okno
+  FXTopWindow *m_parent; // Pointer of the parent window 
 
   FXuint  m_opts;      // Window HeaderBar options flags
   FXColor m_sepcolor;  // Color of the bottom separator
   FXColor m_backcolor; // Backcolor for header bar   
 
-  // Moving
-  FXbool  m_dragged; // Priznak zachyceni okna mysi
-  FXPoint m_mmp;     // Ulozena pozice mysi (Memory Mouse Position)
-  FXPoint m_mwp;     // Ulozena pozice okna (Memory Window Position)
+  // Moving 
+  FXbool  m_dragged; // Flag of mouse dragged  
+  FXPoint m_mmp;     // Memory Mouse Position
+  FXPoint m_mwp;     // Memory Window Position
 
-  // Text of bar
-  FXbool    m_tvisible;         // Povolit titulek
-  FXPoint   m_tcoord;           // Pozice pro vykresleni titlku
-  FXPoint   m_scoord;           // Pozice pro vykresleni subtitulku
-  FXString  m_stext;            // Subtitulek
-  FXString  m_fntspec_title;    //  
-  FXString  m_fntspec_subtitle; //
-  FXFont   *m_tfnt;             // Font titulku
-  FXFont   *m_sfnt;             // Font subtitulku
-  FXint     m_tlenght;          // Delka titulku
-  FXint     m_stlenght;         // Delka subtitulku
+  // Title text of the Header bar
+  FXbool    m_tvisible;         // Flag of the Title enabled
+  FXPoint   m_tcoord;           // Position of the title drawing 
+  FXPoint   m_scoord;           // Position of the subtitle 
+  FXString  m_stext;            // Subtitle ( Second text of the window )
+  FXString  m_fntspec_title;    // Specifications of the title font 
+  FXString  m_fntspec_subtitle; // Specifications of the subtitle font
+  FXFont   *m_tfnt;             // The title font object
+  FXFont   *m_sfnt;             // The subtitle font object
+  FXint     m_tlenght;          // Length of the title
+  FXint     m_stlenght;         // Length of the subtitle
 
-  // For Children
-  FXObject *m_box_tgt;     // ukazatel na objekt urceny jako univerzalni prijemce GUI zprav
-  FXuint    m_box_opts;    // Seznam voleb, ktere mohou byt vyuzity pro jednotne stylovani potomku
-  FXint     m_box_pl;      // Doporuceny odstup mezi prvky : Levy okraj 
-  FXint     m_box_pr;      // Doporuceny odstup mezi prvky : Pravy okraj
-  FXint     m_box_hs;      // Doporuceny odstup mezi prvky : Mezery
+  // For Children widgets layout managment
+  FXObject *m_box_tgt;     // Pointer of a univerzal target on GUI messagess 
+  FXuint    m_box_opts;    // List of a options, List of options that can be used for uniform styling of descendants
+  FXint     m_box_pl;      // Recommended spacing between elements: Left margin
+  FXint     m_box_pr;      // Recommended spacing between elements: Right margin
+  FXint     m_box_hs;      // Recommended spacing between elements: Spaces
   
   // Config
   FXbool m_colorize;         // 0 = off; > 0 = base_color + colorize   
