@@ -1,0 +1,2 @@
+# Configure path of FoxGHI
+${CMAKE_INSTALL_PREFIX}/lib/
