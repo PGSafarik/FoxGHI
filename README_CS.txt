@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  12/11/2023 
+﻿Fox Gnome Human Interface library (foxGHI)  20/11/2024
 ============================================================
 
 Obsah:
@@ -28,14 +28,16 @@ FoxGHI nabízí několik standardních voleb ve FOX Registrech, jejichž prostř
 chovaní a vzhled většiny widgetu v teto knihovně. Jsou sdruženy do skupiny "FoxGHI" a název volby 
 se skládá z identifikátoru objektu a nazvu vlastnosti, oddělené tečkou. Nastaveni je vidět i na 
 ilustračním screenshotu k projektu. Možnosti jsou následující:
- * Window.EnableBorder   - Povolí/zakáže obkreslování okrajů okna tenkou černou linkou
- * Window.SelfControl    - Povolí/zakáže vlastni obsluhu správy stavu okna
- * Window.WMControl      - Povolí/zakáže rámování Window managerem (včetně obsluhy stavu okna)
- * Header.EnableColorize - Povolí/zakáže dobarvováni Header baru a jeho potomků 
- * Header.TitleFont      - Použije nastaveny font k zobrazeni titulku, je-li povolen
- * Header.SubTitleFont   - Zadaný font bude využit k zobrazení doplňujícího textu hlavního titulku, 
+ * Window.EnableBorder    - Povolí/zakáže obkreslování okrajů okna tenkou černou linkou
+ * Window.SelfControl     - Povolí/zakáže vlastni obsluhu správy stavu okna
+ * Window.WMControl       - Povolí/zakáže rámování Window managerem (včetně obsluhy stavu okna)
+ * Header.EnableColorize  - Povolí/zakáže dobarvováni GUI potomku Header baru
+ * Header.BaseColorOffset - Nastavuje miru ztmaveni basove barvy header baru (v %). Rozmezi
+                            hodnot je od 0 - 100, pricemz 0 ztmaveni zakaze. Vychozi nastaveni je 20.
+ * Header.TitleFont       - Použije nastaveny font k zobrazeni titulku, je-li povolen
+ * Header.SubTitleFont    - Zadaný font bude využit k zobrazení doplňujícího textu hlavního titulku,
                            je-li povolen a nastaven.
- * Controller.Hidden     - Zobrazí/skryje ovládací tlačítka okna na HeaderBaru 
+ * Controller.Hidden      - Zobrazí/skryje ovládací tlačítka okna na HeaderBaru
 
 K usnadnění konfigurace knihovny, FoxGHI nabízí třídu ControlPanel, která implementuje GUI wraper 
 FoxGHI konfigurace. ControlPanel je navržen tak, aby jej bylo snadné integrovat do libovolného projektu 
@@ -128,8 +130,11 @@ menu).
 22/11/2022
 Sladeni nazvu trid a odpovidajicich souboru s GHI a Foxtoolkitem (v ramci moznosti)
 
+20/11/2024
+Přidání verze projektu do knihovny a rozšíření možnosti nastavení dobarveni (ztmavení) Header baru v registrech Foxlib.
+
 V nejbližší budoucnosti bude 
-  0) verzování knihovny 
+  0) Dokončeno nastaveni kolorizace Header Baru ve třídě FXGHI::ControllPanel.
   1) Preddefinovane zakladni profily nastaveni FoxGHI
   2) Vytvořena dokumentace ke knihovně 
   3) Příklady & testy

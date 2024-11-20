@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--12/11/2023-
+-20/11/2024-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -31,7 +31,9 @@ can be seen in the illustrative screenshot of the project. The options are as fo
  * Window.EnableBorder - Enables/disables bordering of the window with a thin black line
  * Window.SelfControl - Enables/disables the window state management
  * Window.WMControl - Enables/disables Window manager framing (including window status handling)
- * Header.EnableColorize - Enables/disables coloring of the Header bar and its children 
+ * Header.EnableColorize - Enables/disables GUI coloring of Header bar child
+ * Header.BaseColorOffset - Sets the amount of dimming of the header bar bass color (in %). The range
+                            is from 0 - 100, with 0 disabling dimming. The default setting is 20.
  * Header.TitleFont - Uses the set font to display the title bar, if enabled
  * Header.SubTitleFont - The specified font will be used to display the additional text of the main title, 
                            if enabled and set.
@@ -126,8 +128,11 @@ menu).
 
 ### 22/11/2022 Matching class names and corresponding files with GHI and Foxtoolkit (within limits)  
 
+### 20/11/2024 Adding a project version to the library
+Expanding the options for setting the Header bar color (darkening) in Foxlib registers.
+
 ### It will be in the near future  
-  0) Versioned
+  0) Completed Header Bar colorization setup in FXGHI::ControllPanel class
   1) Predefined basic FoxGHI setting profiles
   2) Create a documentations for this library
   3) Examples and tests
