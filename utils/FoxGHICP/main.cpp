@@ -14,13 +14,23 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
+#include<iostream>
 
 #include <fox-1.7/fx.h>
 #include <fxghi.h>
-//#include "cp.h"
+
 #include "icons.h"
 
 /*** UTILS ****************************************************************************************/
+void Info( )
+{
+  //std::cout << "=== " << "FoxGHI Control Panel" << " ========================================" << std::endl;
+  std::cout << "FoxGHI Control Panel" << std::endl;
+  std::cout << "Copyright " << FXGHI::Version::DATE << "/" << FXGHI::Version::MONTH << "/" << FXGHI::Version::YEAR << " " << FXGHI::Version::PROJECT_COPYRIGHT << ", " <<  FXGHI::Version::PROJECT_LICENSION << std::endl;
+  std::cout << "lib Fox: " << FOX_MAJOR << "." << FOX_MINOR << "." << FOX_LEVEL << std::endl;
+  std::cout << FXGHI::Version::PROJECT_NAME << " : " << FXGHI::Version::FULLVERSION_STRING << std::endl;
+  //std::cout << "=== Message =========================================\n" << std::endl;
+}
 
 
 /*** WINDOW CLASS **********************************************************************************/
@@ -103,23 +113,31 @@ void Config::create( )
 /*** MAIN *****************************************************************************************/
   
 int main( int argc, char **argv ) {
+  FXbool   exit      = false;
   FXString appvendor = "FOX-DESKTOP";
   FXString appname   = "ControlPanel";
 
   for( FXint i = 0; i != argc; i++ ) {
-	    if( strcmp( argv[ i ], "--vendor" ) == 0 ) {
+	  if( strcmp( argv[ i ], "--vendor" ) == 0 ) {
 	    i++;
 	    appvendor = argv[ i ];
 	  }
-	    if( strcmp( argv[ i ], "--name" ) == 0 ) {
+	  if( strcmp( argv[ i ], "--name" ) == 0 ) {
 	    i++;
 	    appname = argv[ i ];
 	  }
+    if( strcmp( argv[ i ], "--version" ) == 0 ) {
+      Info( );
+      exit = true;
+    }  
 	}
+
+  if( exit ) { return 0; }
 
   //FXApp app( "ControlPanel", "FOX-DESKTOP" );
   FXApp app( appname, appvendor );
   app.init( argc, argv );
+  
   new Config( &app );
   app.create( );
 
