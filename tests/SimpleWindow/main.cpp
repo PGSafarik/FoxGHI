@@ -19,14 +19,15 @@
 * Example 01 - Simple main Window with FoxGHI                            *
 * Copyright (c) 10/09/2022 D.A.Tiger <drakarax@seznam.cz>                *
 *************************************************************************/
-
+#include<iostream>
 #include<fox-1.7/fx.h>
 #include<fxghi.h>
 
 int main(int argc, char **argv) {
   FXApp a( "FXGHI_SimpleWindow", "fox-desktop" );
   a.init( argc, argv );
-
+  std::cout << FXGHI::Version::PROJECT_NAME << ": " << FXGHI::Version::FULLVERSION_STRING <<  std::endl;
+  
   FXPrimaryWindow *win = new FXPrimaryWindow( &a, "Simple FoxGHI Window" );
   win->getHeader( )->setText( "Hello World!" ); 
   new FXButton( win->getHeader( ), "\t\t TEST Button", win->getMenuIcon( ), NULL, 0, BUTTON_TOOLBAR );
