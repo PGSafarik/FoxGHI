@@ -34,13 +34,13 @@ namespace Version{
 	static const long BUILD    = ${FXGHI_VER_BUILD};
 
 	//Miscellaneous Version Types
-	#define RC_FILEVERSION ${FXGHI_VER_MAJOR},${FXGHI_VER_MINOR},${FXGHI_VER_REVISION},${FXGHI_VER_BUILD}
-	#define RC_FILEVERSION_STRING "${FXGHI_VER_MAJOR}, ${FXGHI_VER_MINOR}, ${FXGHI_VER_REVISION}, ${FXGHI_VER_BUILD}\0"
+	//#define RC_FILEVERSION ${FXGHI_VER_MAJOR},${FXGHI_VER_MINOR},${FXGHI_VER_REVISION},${FXGHI_VER_BUILD}
+	//#define RC_FILEVERSION_STRING "${FXGHI_VER_MAJOR}, ${FXGHI_VER_MINOR}, ${FXGHI_VER_REVISION}, ${FXGHI_VER_BUILD}\0"
 	static const char FULLVERSION_STRING[] = "${PROJECT_VERSION_FULL}";
 
 	//These values are to keep track of your versioning and testing state.
-    static const long TEST_COUNT    = 0;
-    static const long TEST_HISTORY  = 0;
+  static const long TEST_COUNT    = 0;
+  static const long TEST_HISTORY  = 0;
 }       /* version */
 }       /* FXGHI */
 
