@@ -7,6 +7,6 @@ cmake-build-Debug/
 .codelite/
 .ctagsd/
 .build/
-
+include/version.h
 *~
 

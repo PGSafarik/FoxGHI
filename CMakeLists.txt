@@ -2,18 +2,21 @@ CMAKE_MINIMUM_REQUIRED( VERSION 3.10 )
 PROJECT( FXGHI DESCRIPTION "A small library that extends Foxtoolkit with Gnome 3-style Top-level windows" )
 
 # Project Version
-SET( FXGHI_VER_DATE 20 )
-SET( FXGHI_VER_MONTH 11 )
-SET( FXGHI_VER_YEAR 2024 )
+FILE( STRINGS version.data FXGHI_VER_DATA  )
+
+LIST( GET FXGHI_VER_DATA 0 FXGHI_VER_DATE  )
+LIST( GET FXGHI_VER_DATA 1 FXGHI_VER_MONTH  )
+LIST( GET FXGHI_VER_DATA 2 FXGHI_VER_YEAR  )
+
+LIST( GET FXGHI_VER_DATA 3 FXGHI_VER_MAJOR  )
+LIST( GET FXGHI_VER_DATA 4 FXGHI_VER_MINOR  )
+LIST( GET FXGHI_VER_DATA 5 FXGHI_VER_REVISION  )
+LIST( GET FXGHI_VER_DATA 6 FXGHI_VER_BUILD  )
+
+LIST( GET FXGHI_VER_DATA 7 FXGHI_VER_FLAG  )
+LIST( GET FXGHI_VER_DATA 8 FXGHI_VER_SHFLAG  )
+
 SET( PROJECT_VERSION_UBUNTU 24.${FXGHI_VER_MONTH} )
-
-SET( FXGHI_VER_MAJOR 0 )
-SET( FXGHI_VER_MINOR 4 )
-SET( FXGHI_VER_REVISION 4 )
-SET( FXGHI_VER_BUILD 1 )
-SET( FXGHI_VER_FLAG "ALPHA" )
-SET( FXGHI_VER_SHFLAG "a" )
-
 SET( PROJECT_VERSION ${FXGHI_VER_MAJOR}.${FXGHI_VER_MINOR}.${FXGHI_VER_REVISION} )
 SET( PROJECT_VERSION_FULL "${PROJECT_VERSION_UBUNTU} ${PROJECT_VERSION}.${FXGHI_VER_BUILD} ${FXGHI_VER_FLAG}" )
 
@@ -30,8 +33,8 @@ FILE( GLOB SOURCES src/*.cpp )                          # List of implementation
 FILE( GLOB HEADERS include/*.h )                        # List of C++ header files (for install - API)
 INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/include" )  # Insert include directory for building
 
-configure_file( version.h.in src/version.h ) # generate file for ldconfig
-configure_file( foxghi.conf.in src/foxghi${PROJECT_VERSION}.conf ) # generate file for ldconfig
+CONFIGURE_FILE( version.h.in "${PROJECT_SOURCE_DIR}/include/version.h" )    # generate version.h file
+CONFIGURE_FILE( foxghi.conf.in src/foxghi${PROJECT_VERSION}.conf )          # generate file for ldconfig
 
 # Add directories for project dependency
 INCLUDE_DIRECTORIES( "${LIB_FOX}/include/" )    # foxlib API
