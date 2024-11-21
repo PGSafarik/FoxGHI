@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED( VERSION 3.10 )
 PROJECT( FXGHI DESCRIPTION "A small library that extends Foxtoolkit with Gnome 3-style Top-level windows" )
 
 # Project Version
-FILE( STRINGS version.data FXGHI_VER_DATA  )
+file( STRINGS version.data FXGHI_VER_DATA  )
 
 LIST( GET FXGHI_VER_DATA 0 FXGHI_VER_DATE  )
 LIST( GET FXGHI_VER_DATA 1 FXGHI_VER_MONTH  )
@@ -33,8 +33,10 @@ FILE( GLOB SOURCES src/*.cpp )                          # List of implementation
 FILE( GLOB HEADERS include/*.h )                        # List of C++ header files (for install - API)
 INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/include" )  # Insert include directory for building
 
-CONFIGURE_FILE( version.h.in "${PROJECT_SOURCE_DIR}/include/version.h" )    # generate version.h file
-CONFIGURE_FILE( foxghi.conf.in src/foxghi${PROJECT_VERSION}.conf )          # generate file for ldconfig
+SET( LDCFG_FILE_NAME "foxghi${PROJECT_VERSION}.conf" )  # set filename for ldconfig
+
+configure_file( version.h.in "${PROJECT_SOURCE_DIR}/include/version.h" )        # generate version.h file
+configure_file( foxghi.conf.in "${PROJECT_SOURCE_DIR}/src/${LDCFG_FILE_NAME}" ) # generate file for ldconfig
 
 # Add directories for project dependency
 INCLUDE_DIRECTORIES( "${LIB_FOX}/include/" )    # foxlib API
@@ -53,7 +55,7 @@ ADD_SUBDIRECTORY( "${PROJECT_SOURCE_DIR}/tests/SimpleWindow" )
 # Install build project
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION lib/ ) # libray file(s)
 INSTALL( FILES ${HEADERS} DESTINATION include/ )    # API (C++ header files)
-INSTALL( FILES src/foxghi${PROJECT_VERSION}.conf DESTINATION /etc/ld.so.conf.d/ )
+INSTALL( FILES "${PROJECT_SOURCE_DIR}/src/${LDCFG_FILE_NAME}" DESTINATION /etc/ld.so.conf.d/ )
 INSTALL( CODE "EXECUTE_PROCESS( COMMAND /usr/sbin/ldconfig )" )
 #EXECUTE_PROCESS( COMMAND /usr/sbin/ldconfig )
 
