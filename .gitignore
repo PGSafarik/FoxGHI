@@ -8,5 +8,6 @@ cmake-build-Debug/
 .ctagsd/
 .build/
 include/version.h
+src/foxghi*.conf
 *~
 
