@@ -2,9 +2,9 @@ CMAKE_MINIMUM_REQUIRED( VERSION 3.10 )
 PROJECT( FXGHI DESCRIPTION "A small library that extends Foxtoolkit with Gnome 3-style Top-level windows" )
 
 # Project Version
-SET( FXGHI_VER_DATE  20 )
-SET( FXGHI_VER_MONTH 11 )
-SET( FXGHI_VER_YEAR  24)
+SET( FXGHI_VER_DATE  18 )
+SET( FXGHI_VER_MONTH 02 )
+SET( FXGHI_VER_YEAR  25)
 
 SET( FXGHI_VER_MAJOR    0 )
 SET( FXGHI_VER_MINOR    4 )
