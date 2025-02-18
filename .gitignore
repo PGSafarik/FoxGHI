@@ -2,12 +2,14 @@ bin/
 obj/
 build/
 tmp/
-cmake-build-Debug/
+cmake-build-*/
 .build-debug/
 .codelite/
 .ctagsd/
 .build/
+.idea/
 include/version.h
 src/foxghi*.conf
+.gitignore
 *~
 
