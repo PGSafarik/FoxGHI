@@ -33,7 +33,7 @@ INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/include" )  # Insert include directo
 
 SET( LDCFG_FILE_NAME "foxghi${PROJECT_VERSION}.conf" )  # set filename for ldconfig
 
-configure_file( version.h.in "${PROJECT_SOURCE_DIR}/include/version.h" )        # generate version.h file
+configure_file( version.h.in "${PROJECT_SOURCE_DIR}/include/Core/version.h" )        # generate version.h file
 configure_file( foxghi.conf.in "${PROJECT_SOURCE_DIR}/src/${LDCFG_FILE_NAME}" ) # generate file for ldconfig
 
 # Add directories for project dependency

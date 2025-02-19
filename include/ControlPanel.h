@@ -21,10 +21,10 @@
 * Deklarace FoxGHI Control Panel                                         *
 * Copyright (c) 10/10/2022 D.A.Tiger <drakarax@seznam.cz>                *
 *************************************************************************/
-#include<iostream>
-#include<fox-1.7/fx.h>
-#include<fxghi_defs.h>
-#include<fxghi.h>
+//!#include<iostream>
+//!#include<fox-1.7/fx.h>
+#include<Core.h>
+//!#include<fxghi.h>
 
 
 class GHI_ControlPanel : public FXVerticalFrame {

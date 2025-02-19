@@ -6,7 +6,7 @@
   2. [Compilation and installation](#2-compilation-and-installation)
   3. [Known errors and bugs](#3-known-errors-and-bugs)
   4. [The project state and plans for the future](#4-project-state-and-plans-for-the-futhure)
-  5. [Author and project licencion](#5-Author-and-project-licencion)
+  5. [Author and project licence](#5-Author-and-project-licencion)
   6. [Internet](#6-internet)
 
 _Img.1: An FoxGHI window examles_
@@ -33,7 +33,7 @@ can be seen in the illustrative screenshot of the project. The options are as fo
  * Window.WMControl - Enables/disables Window manager framing (including window status handling)
  * Header.EnableColorize - Enables/disables GUI coloring of Header bar child
  * Header.BaseColorOffset - Sets the amount of dimming of the header bar bass color (in %). The range
-                            is from 0 - 100, with 0 disabling dimming. The default setting is 20.
+                            is from 0 to 100, with 0 disabling dimming. The default setting is 20.
  * Header.TitleFont - Uses the set font to display the title bar, if enabled
  * Header.SubTitleFont - The specified font will be used to display the additional text of the main title, 
                            if enabled and set.
@@ -49,10 +49,10 @@ FOX Control Panel.
 _Img.2: The FoxGHICP - FoxGHI Control Panel utility_
 <p align="center"><img src="doc/images/ControlPanel.png?raw=true"/>  
 
-The goal of this library is not to create a complete „Gnome 3-Like style“ for Fox, only to implement it
+The goal of this library is not to create a complete "Gnome 3-Like style“ for Fox, only to implement it
 some - in my opinion - innovative and interesting techniques from this environment, that I want alone to 
 use in my own projects. At this time Primary, Secondary Window (FXPrimaryWindow, FXSecondaryWindow), 
-Header bar (FXWindowHeader), Window Control Panel (FXWindowController) and FoxGHI Settings wraper 
+Header bar (FXWindowHeader), Window Control Panel (FXWindowController) and FoxGHI Settings wrapper 
 (ControllPanel) are implemented.
 
 As stated above, the goal of this library is not to duplicate Gnome 3, but to implement those
@@ -69,7 +69,7 @@ certain effort to prevent this from happening, however, this cannot be guarantee
 *Aditional dependencies for compilation:*
   cmake >= 3.10
   
-After downloading the project from Github (and possibly unzipping it), go to the folder with the project and enter the following command sequence:
+After downloading the project from GitHub (and possibly unzipping it), go to the folder with the project and enter the following command sequence:
 ```
   mkdir build
   cd build && cmake .. 
@@ -132,10 +132,10 @@ menu).
 Expanding the options for setting the Header bar color (darkening) in Foxlib registers.
 
 ### It will be in the near future  
-  0) Completed Header Bar colorization setup in FXGHI::ControllPanel class
-  1) Predefined basic FoxGHI setting profiles
-  2) Create a documentations for this library
-  3) Examples and tests
+  1) Completed Header Bar colorization setup in FXGHI::ControllPanel class
+  2) Predefined basic FoxGHI setting profiles
+  3) Create a documentations for this library
+  4) Examples and tests
  
 
 ## 5. AUTHOR AND PROJECT LICENCION:

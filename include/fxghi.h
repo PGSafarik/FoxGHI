@@ -1,11 +1,3 @@
-/**************************************************************************************************
-* FXGHI                                                                                           *
-*                                                                                                 *
-* Knihovna rozsirujici Fox lib o Top-level okna ve stylu Gnome 3                                  *
-* Copyryght (C) 2019 - 2021 P.G.Safarik alias D.A.Tiger                                           *
-**************************************************************************************************/
-#ifndef __FXGHI_H
-#define __FXGHI_H
 /*************************************************************************
 * This program is free software: you can redistribute it and/or modify   *
 * it under the terms of the GNU Lesser General Public License as         *
@@ -20,24 +12,35 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
-#include<iostream>
+#ifndef FXGHI_H
+#define FXGHI_H
 
-#include<version.h>
-#include<fxghi_defs.h>
+/***************************************************************************************************
+* File:      fxghi.h                                                                               *
+* Project:   FXGHI                                                                                 *
+* Copyright: Copyriright (C) 2019 - 2025 by D.A.Tiger GNU GPL v3                                   *
+* Author(s): D.A.Tiger ( drakarax@seznam.cz )                                                      *
+* Note:      A library extending Fox lib with Gnome 3 style top-level windows                      *
+****************************************************************************************************
+* GHI - Gnome Human Interface                                                                      *
+* HIG - (Gnome) Human Interace Guidelines                                                          *
+* https://developer.gnome.org/hig/                                                                 *
+***************************************************************************************************/
+//! #include<version.h>
+
+//#include <version.h>
+#include <Core.h>
+
 #include<FXPrimaryWindow.h>
 #include<FXSecondaryWindow.h>
 #include<FXWindowHeader.h>
 #include<ControlPanel.h>
 #include<FXHeaderBox.h>
 
-/*************************************************************************
-* GHI - Gnome Human Interface                                            *
-* HIG - (Gnome) Human Interace Guidelines                                *
-* https://developer.gnome.org/hig/                                       *
-*************************************************************************/
+
 
 #ifndef FX_NO_GLOBAL_NAMESPACE
 using namespace FXGHI;
 #endif
 
-#endif // __FXGHI_H
+#endif /* FXGHI_H */

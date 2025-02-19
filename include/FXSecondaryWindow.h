@@ -20,9 +20,9 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
-#include<fox-1.7/fx.h>
+//! #include<fox-1.7/fx.h>
 
-#include "fxghi_defs.h"
+#include "Core.h"
 #include "FXPrimaryWindow.h"
 
 namespace FXGHI {

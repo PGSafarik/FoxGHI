@@ -13,10 +13,9 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 
-
 /*********** Generated on 2021/05/08 11:01:47 by reswrap version 6.0.0 *********/
-#ifndef __ICONS_H
-#define __ICONS_H
+#ifndef FXGHI_ICONS_H
+#define FXGHI_ICONS_H
 
 /* Created by reswrap from file find.png
 const unsigned char find[]={
@@ -306,4 +305,5 @@ const unsigned char winrestore[]={
   0x8f,0xa9,0xbb,0xe1,0x1f,0x18,0x7c,0x32,0x45,0x3b,0xe3,0x45,0x59,0xab,0x6d,0x50,
   0xd6,0xd8,0x90,0x5f,0xc6,0xa4,0xea,0xca,0x16,0x00,0x3b
 };
-#endif /*__ICONS_H */
+
+#endif /* FXGHI_ICONS_H */
