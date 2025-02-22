@@ -33,39 +33,37 @@ FXDEFMAP( FXWindowHeader ) FXWindowHeaderMap[] = {
 FXIMPLEMENT( FXWindowHeader, FXHorizontalFrame, FXWindowHeaderMap, ARRAYNUMBER( FXWindowHeaderMap ) )
 
 /**************************************************************************************************/
- FXWindowHeader::FXWindowHeader( FXTopWindow *parent, const FXString &text, FXObject *tgt, FXSelector sel, FXuint opts,
+FXWindowHeader::FXWindowHeader( FXTopWindow *parent, const FXString &text, FXObject *tgt, FXSelector sel, FXuint opts,
 				         FXint x, FXint y, FXint w, FXint h, FXint pl, FXint pr, FXint pt, FXint pb, FXint hs, FXint vs )
                : FXHorizontalFrame( parent, opts, x, y, w, h, pl, pr, pt, pb, hs, vs )
- {
-   m_parent = parent;
-   m_opts   = opts;
+{
+  this->enable( );
+  this->setTarget( tgt );
+  this->setSelector( sel );
+  m_parent = parent;
+  m_opts   = opts;
 
-   m_box_tgt  = NULL;
-   m_box_opts = 0;
-   m_box_pl   = pl;
-   m_box_pr   = pr;
-   m_box_hs   = hs;
-   
-   m_clrOffset = 0;
-   
-   this->enable( );
-   this->setTarget( tgt );
-   this->setSelector( sel );
+  m_box_tgt  = NULL;
+  m_box_opts = 0;
+  m_box_pl   = pl;
+  m_box_pr   = pr;
+  m_box_hs   = hs;
 
-   // Window mouse grab and moving
-   m_dragged   = false;
-   m_mmp.set( 0, 0 );
+  // Header style
+  m_clrOffset    = 0;
+  m_sepClrOffset = 0;
+  m_separate     = true;
+  m_colorize     = true;
 
-   // Title text
-   m_tvisible      = true;
-   m_stext         = text;
-   m_tfnt = m_sfnt = NULL;
+  // Window mouse grab and moving
+  m_dragged   = false;
+  m_mmp.set( 0, 0 );
 
-  // Draw options
-  //if( opts & WHEADER_SEPAREOFF  ) { m_separate = false; } else { m_separate = true; }
-  //std::cout << m_separate << std::endl;
-  m_separate   = true;
- }
+  // Title text
+  m_tvisible      = true;
+  m_stext         = text;
+  m_tfnt = m_sfnt = NULL;
+}
 
 FXWindowHeader::~FXWindowHeader( )
 { }
@@ -75,9 +73,9 @@ void FXWindowHeader::create( )
   ReadConfig( );
   
   // Header bar colorize
-  if( m_clrOffset > 0 ) {
-    m_backcolor = makeShadowColor( getApp( )->getBaseColor( ), m_clrOffset );
-    m_sepcolor = makeShadowColor( getApp( )->getBorderColor( ), m_clrOffset );
+  if( m_colorize ) {
+    m_backcolor = ColorIntensityCorrection( getApp( )->getBaseColor( ), m_clrOffset );
+    m_sepcolor  = ColorIntensityCorrection( getApp( )->getBorderColor(  ), m_sepClrOffset );
 
     setBackColor( m_backcolor );
   }
@@ -85,10 +83,6 @@ void FXWindowHeader::create( )
     m_sepcolor = getApp( )->getBorderColor( ); 
     setBackColor( getApp( )->getBaseColor( ) );
   }
-  #ifdef DEBUG 
-  std::cout << "[DEBUG - FXWindowHeader::create]: Colorize offset " << m_clrOffset <<  std::endl;
-  #endif
-
 
   // Creating
   FXHorizontalFrame::create( );
@@ -346,8 +340,7 @@ long FXWindowHeader::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *
     setBackColor( m_backcolor );
 
     // Calculate color for bottom separator
-    FXint clr_offset = 60;
-    m_sepcolor = getApp( )->getBorderColor( ) - FXRGB( clr_offset, clr_offset, clr_offset );
+    m_sepcolor = ColorIntensityCorrection( getApp( )->getBorderColor( ), m_sepClrOffset );
     }
   else { 
     m_sepcolor = getApp( )->getBorderColor( ); 
@@ -379,24 +372,28 @@ void FXWindowHeader::UpdateTitle( )
 
 void FXWindowHeader::ReadConfig( )
 {
-   FXString cf_prefix = CFG_HEADER_PREFIX;  
-   FXString fntspec_base;
+  FXString cf_prefix = CFG_HEADER_PREFIX;
+  FXString fntspec_base;
 
-   if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); }  
-   fntspec_base = getApp( )->getNormalFont( )->getFont( );   
+  if ( getApp( )->reg( ).used( ) < 1 ) { getApp( )->reg( ).read( ); }
+  fntspec_base = getApp( )->getNormalFont( )->getFont( );
 
-   m_tvisible         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", true );  
-   m_colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );
-   m_clrOffset        = getApp( )->reg( ).readIntEntry(    CFG_FXGHI, cf_prefix + ".BaseColorOffset", 20 );
-   m_fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
-   m_fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
-   m_separate         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableSeparator", true );
-   
-   #ifdef DEBUG 
-   std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Enable colorize:  " << m_colorize << std::endl;
-   std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Title Font:  "      << m_fntspec_title.text( )  << std::endl;
-   std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Subtitle Font:  "   << m_fntspec_subtitle.text( )  << std::endl;
-   #endif 
+  m_tvisible         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle",       true );
+  m_colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );
+  m_fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
+  m_fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
+  m_separate         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableSeparator", true );
+
+  m_clrOffset    = static_cast<FXfloat>( getApp( )->reg( ).readRealEntry( CFG_FXGHI, cf_prefix + ".BaseColorOffset", -0.85 ) );
+  m_sepClrOffset = static_cast<FXfloat>( getApp( )->reg( ).readRealEntry( CFG_FXGHI, cf_prefix + ".SepColorOffset",  0.45 ) );
+
+  #ifdef DEBUG
+  std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Enable colorize:  "              << m_colorize << std::endl;
+  std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Title Font:  "                   << m_fntspec_title.text( )  << std::endl;
+  std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Subtitle Font:  "                << m_fntspec_subtitle.text( )  << std::endl;
+  std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Frame base color offset: "       << m_clrOffset  << std::endl;
+  std::cout << "[DEBUG - FXWindowHeader::ReadConfig] Separator shadow color offset: " << m_sepClrOffset  << std::endl;
+  #endif
 }
 
 void FXWindowHeader::WriteConfig( )
@@ -404,7 +401,8 @@ void FXWindowHeader::WriteConfig( )
   FXString cf_prefix = CFG_HEADER_PREFIX;  
   getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle",       m_tvisible );
   getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", m_colorize ); 
-  getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".BaseColorOffset", m_clrOffset ); 
+  getApp( )->reg( ).writeRealEntry(   CFG_FXGHI, cf_prefix + ".BaseColorOffset", static_cast<FXdouble>( m_clrOffset ) );
+  getApp( )->reg( ).writeRealEntry(   CFG_FXGHI, cf_prefix + ".SepColorOffset",  static_cast<FXdouble>( m_sepClrOffset ) );
   getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",   m_fntspec_title.text( ) );
   getApp( )->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",m_fntspec_subtitle.text( ) );
   getApp( )->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableSeparator", m_separate );
@@ -417,6 +415,28 @@ FXFont* FXWindowHeader::CreateFont( const FXString &spec )
    return fnt;
 }
 
+FXColor FXWindowHeader::ColorIntensityCorrection( FXColor clr, FXfloat offset )
+{
+  FXint nr, ng, nb;
+
+  const FXfloat r = static_cast<FXfloat>( FXREDVAL( clr ) );
+  const FXfloat g = static_cast<FXfloat>( FXREDVAL( clr ) );
+  const FXfloat b = static_cast<FXfloat>( FXREDVAL( clr ) );
+
+  if( offset > 0 ) { // tint (lightening)
+    nr = r + ( 255 - r ) * offset;
+    ng = g + ( 255 - g ) * offset;
+    nb = b + ( 255 - b ) * offset;
+  }
+  else { // shadow (darkening)
+    offset = -offset;
+    nr = r * offset;
+    ng = g * offset;
+    nb = b * offset;
+  }
+
+  return FXRGB( nr, ng, nb );
+}
 
 } /* FXGHI */
 

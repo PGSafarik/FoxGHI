@@ -61,9 +61,10 @@ FXDECLARE( FXWindowHeader )
   FXint     m_box_hs;      // Recommended spacing between elements: Spaces
   
   // Config
-  FXbool m_separate;         // true = drawing a separator line at the bottom side of this bar
-  FXbool m_colorize;         // 0 = off; > 0 = base_color + colorize   
-  FXint  m_clrOffset;        //Base color offset - Color difference from the window's base color
+  FXbool  m_separate;     // true = drawing a separator line at the bottom side of this bar
+  FXbool  m_colorize;     // Enable/disable header bar colorization. False -> using window's base color
+  FXfloat m_clrOffset;    // Base color offset - Color difference from the window's base color
+  FXfloat m_sepClrOffset; // Separator color Offset - Color intensity difference from the window's shadow color
 
 public:
   FXWindowHeader( FXTopWindow *parent, const FXString &text = FXString::null, FXObject *tgt = NULL, FXSelector sel = 0,  FXuint opts = WHEADER_STANDARD,
@@ -139,6 +140,8 @@ protected:
 
   virtual void ReadConfig( );
   virtual void WriteConfig( );
+
+  FXColor ColorIntensityCorrection( FXColor clr, FXfloat offset );
   
 };
 
