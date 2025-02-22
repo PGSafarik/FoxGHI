@@ -10,6 +10,8 @@ cmake-build-*/
 .idea/
 include/version.h
 src/foxghi*.conf
+include/Core/version.h
 .gitignore
 *~
+
 

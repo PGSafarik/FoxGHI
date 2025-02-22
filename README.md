@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--18/02/2025-
+-22/02/2025-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -84,7 +84,7 @@ directory /opt/foxghi/0.4/
 * 19/01/2023 - Some WMs show a forbidden decorative frame if the application icon is set - status open
     
 ## 4. PROJECT STATE AND PLANS FOR THE FUTHURE
-Actual version: 25.02 0.4.4.2 ALPHA
+Actual version: 25.02 0.5.0.0 ALPHA
 
 FoxGHI currently implements the basic, intended functionality - i.e. autonomous top-level window with
 an integrated headerbar in the style of Gnome 3. However, there is still room for improvement. For 
