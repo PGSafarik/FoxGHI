@@ -47,6 +47,7 @@ GHI_ControlPanel::GHI_ControlPanel( FXComposite *p, FXObject *tgt, FXSelector se
    sbtn->setUserData( htf_sfont );
    hcb_colorize = new FXCheckButton( this, "Header colorize", this, GHI_ControlPanel::ID_CHANGE );   
    hcb_title = new FXCheckButton( this, "Show window title", this, GHI_ControlPanel::ID_CHANGE );
+   hcb_separator = new FXCheckButton( this, "Enable bottom separator", this, GHI_ControlPanel::ID_CHANGE );
 
    FXLabel *lc = new FXLabel( this, "Controller", NULL, LABEL_NORMAL | LAYOUT_FILL_X ); 
    lc->setBackColor( getApp( )->getShadowColor( ) );
@@ -86,10 +87,12 @@ void GHI_ControlPanel::readConfig( )
    FXbool   _colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );  
    FXString _fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
    FXString _fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
+   FXbool   _separator        = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableSeparator", true );
    htf_tfont->setText( _fntspec_title );
    htf_sfont->setText( _fntspec_subtitle );
    hcb_colorize->setCheck( _colorize );
    hcb_title->setCheck( _title );
+   hcb_separator->setCheck( _separator );
 
    cf_prefix = CFG_CONTROLLER_PREFIX;
    FXbool _hidden = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", false );
@@ -116,6 +119,7 @@ void GHI_ControlPanel::writeConfig( )
   a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", hcb_colorize->getCheck( ) );
   a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       htf_tfont->getText( ).text( ) );
   a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    htf_sfont->getText( ).text( ) );
+  a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableSeparator", hcb_separator->getCheck( ) );
 
   cf_prefix = CFG_CONTROLLER_PREFIX;
   a->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", ccb_hidden->getCheck( ) );

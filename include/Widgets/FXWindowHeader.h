@@ -61,6 +61,7 @@ FXDECLARE( FXWindowHeader )
   FXint     m_box_hs;      // Recommended spacing between elements: Spaces
   
   // Config
+  FXbool m_separate;         // true = drawing a separator line at the bottom side of this bar
   FXbool m_colorize;         // 0 = off; > 0 = base_color + colorize   
   FXint  m_clrOffset;        //Base color offset - Color difference from the window's base color
 
@@ -92,6 +93,8 @@ public:
   void      setSubtitleFont( const FXString &spec );
   FXbool    isTitleVisible( )                     { return m_tvisible; }
   void      setTitleVisible( FXbool value )       { m_tvisible = value; }
+  void      setSeparating( FXbool value )         { m_separate = value; }
+  FXbool    getSeparating( )                      { return m_separate; }
                     
   FXObject* getBoxTarget( )                  { return ( m_box_tgt ? m_box_tgt : m_parent ); }
   void      setBoxTarget( FXObject *target ) { m_box_tgt = target; }
