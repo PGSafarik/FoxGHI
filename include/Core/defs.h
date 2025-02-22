@@ -1,16 +1,8 @@
-/**************************************************************************************************
-* FXGHI_Defs                                                                                      *
-*                                                                                                 *
-* Preddefinovane konstanty a ridici priznaky.                                                     *
-* Copyryght (C) 2019 - 2021 P.G.Safarik alias D.A.Tiger                                           *
-**************************************************************************************************/
-#ifndef __GHI_DEFS_
-#define __GHI_DEFS_
 /*************************************************************************
 * This program is free software: you can redistribute it and/or modify   *
 * it under the terms of the GNU Lesser General Public License as         *
 * published by the Free Software Foundation, either version 3 of the     *
-* License, or (at your option) any later version.                        *                               
+* License, or (at your option) any later version.                        *
 *                                                                        *
 * This program is distributed in the hope that it will be useful,        *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of         *
@@ -20,8 +12,15 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
-#include<fox-1.7/fx.h>
-#include "icons.h"
+#ifndef FXGHI_DEFS_H
+#define FXGHI_DEFS_H
+
+/**************************************************************************************************
+* defs.h                                                                                          *
+*                                                                                                 *
+* Predefined constants and control attributes.                                                    *
+* Copyryght (C) 2019 - 2025 P.G.Safarik alias D.A.Tiger                                           *
+**************************************************************************************************/
 
 namespace FXGHI {
 /*** WINDOW CONTROLLER ***************************************************************************/
@@ -58,6 +57,6 @@ enum {
 #define CFG_BOXES_PREFIX      "Box"
 
 }      /* FXGHI       */
-#endif /* __GHI_DEFS_ */
+#endif /* FXGHI_DEFS_H */
 
 /*** END *****************************************************************************************/

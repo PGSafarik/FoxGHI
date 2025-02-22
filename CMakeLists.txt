@@ -27,9 +27,9 @@ SET( CMAKE_CXX_STANDARD_REQUIRED True )          # C++ Standard
 #add_compile_options(-Wall -pedantic)
 
 # Configure project
-FILE( GLOB SOURCES src/*.cpp )                          # List of implementation files
-FILE( GLOB HEADERS include/*.h )                        # List of C++ header files (for install - API)
-INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/include" )  # Insert include directory for building
+FILE( GLOB SOURCES src/*.cpp  src/Widgets/*.cpp src/Windows/*.cpp )  # List of implementation files
+FILE( GLOB HEADERS include/*.h )                                     # List of C++ header files (for install - API)
+INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/include" )               # Insert include directory for building
 
 SET( LDCFG_FILE_NAME "foxghi${PROJECT_VERSION}.conf" )  # set filename for ldconfig
 
@@ -41,7 +41,8 @@ INCLUDE_DIRECTORIES( "${LIB_FOX}/include/" )    # foxlib API
 LINK_DIRECTORIES(    "${LIB_FOX}/lib/" )        # foxlib shared 
 
 # Add to the shared library
-ADD_LIBRARY( ${PROJECT_NAME} SHARED ${SOURCES} )  # Make project shared lib (.so)
+ADD_LIBRARY( ${PROJECT_NAME} SHARED ${SOURCES}
+        include/Windows.h)  # Make project shared lib (.so)
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} FOX-1.7 )  # Linked project with dependecies libs
 
 # Build utils 

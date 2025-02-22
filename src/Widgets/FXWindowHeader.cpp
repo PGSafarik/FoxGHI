@@ -15,8 +15,8 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
 
-#include<fox-1.7/xincs.h>
-#include "FXWindowHeader.h"
+
+#include "Widgets/FXWindowHeader.h"
 #define DISPLAY( app ) ( ( Display* ) ( app->getDisplay( ) ) )
 using namespace FXGHI;
 

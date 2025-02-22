@@ -1,12 +1,12 @@
 /**************************************************************************************************
 * FXGHI                                                                                           *
 *                                                                                                 *
-* Compositor pro male boxiky, pouzivany nejcasteji jako toolbar v toplevel oknech. Obdoba menu v  *
-* Gnome3 applikacich.                                                                             *
-* Copyryght (C) 2017 - 2022 P.G.Safarik alias D.A.Tiger                                           *
+* Basic compositor for small HeaderBar boxes                                                      *
+* Copyryght (C) 2017 - 2025 P.G.Safarik alias D.A.Tiger                                           *
 **************************************************************************************************/
-#ifndef __HEDERBOX_H
-#define __HEADERBOX_H
+#ifndef FXGHI_HEDERBOX_H
+#define FXGHI_HEADERBOX_H
+
 /*************************************************************************
 * This program is free software: you can redistribute it and/or modify   *
 * it under the terms of the GNU Lesser General Public License as         *
@@ -21,8 +21,6 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
-//! #include <iostream>
-//! #include <fox-1.7/fx.h>
 #include "Core.h"
 #include "FXWindowHeader.h"
 
@@ -70,5 +68,5 @@ protected:
   
 };
 
-} /* FXGHI */
-#endif /* __HEADERBOX_H */
+}      /* FXGHI */
+#endif /* FXGHI_HEADERBOX_H */

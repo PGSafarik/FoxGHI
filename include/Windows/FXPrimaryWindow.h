@@ -23,8 +23,8 @@
 *************************************************************************/
 //! #include<fox-1.7/fx.h>
 #include "Core.h"
-#include "FXWindowHeader.h"
-#include "FXWindowController.h"
+#include "Widgets.h"
+
 
 namespace FXGHI {
 

@@ -1,6 +1,5 @@
 /**************************************************************************************************
-* WINDOW HEADER BAR                                                                               *
-* FXWindowHeader                                                                                  *
+* FXWindowHeader.h                                                                                *
 *                                                                                                 *
 * Ovladaci prvek a spravce layoutu ve stylu Gnome 3, ktery poskutuje top-level oknu bez dekoraci  *
 * moznost ovladani pozice, okenni titulek a zaroven funguje jako prostor pro ovladaci prvky okna. *
@@ -8,8 +7,9 @@
 * ovladaci prvek. Dalsi informace viz dokumentace.                                                *
 * Copyryght (C) 2019 - 2022 P.G.Safarik alias D.A.Tiger                                           *
 **************************************************************************************************/
-#ifndef __GNOME3_HEADER_
-#define __GNOME3_HEADER_
+#ifndef FXGHI_WINDOWHEADER_H
+#define FXGHI_WINDOWHEADER_H
+
 /*************************************************************************
 * This program is free software: you can redistribute it and/or modify   *
 * it under the terms of the GNU Lesser General Public License as         *
@@ -24,8 +24,6 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
-//! #include<iostream>
-//! #include<fox-1.7/fx.h>
 #include "Core.h"
 
 namespace FXGHI {
@@ -85,7 +83,7 @@ public:
   FXString  getTitle( ) const                     { return m_parent->getTitle( );    }
   FXbool    hasTitle( )                           { return getTitle( ).empty( );     }
   void      setTitle( const FXString &text );  
-  FXString  getText( ) const                      { return m_stext;                  }
+  FXString  getText( ) const                      { return m_stext;               }
   FXbool    hasText( )                            { return getText( ).empty( );      }
   void      setText( const FXString &text ); 
   FXFont*   getTitleFont( )                       { return m_tfnt; }
@@ -142,4 +140,4 @@ protected:
 };
 
 }      /* FXGHI */
-#endif /*__GNOME3_HEADER_ */
+#endif /*FXGHI_WINDOWHEADER_H */

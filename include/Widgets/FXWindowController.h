@@ -1,14 +1,13 @@
 /**************************************************************************************************
-* WINDOW CONTROLLER                                                                               *
-* FXWindowController                                                                              *
+* FXWindowController.h                                                                              *
 *                                                                                                 *
-* Ovladaci prvek ve stylu Gnome 3, urcenych k integraci do FXWindowHeader. Objekt poskytuje sadu  *
-* prededefinovanych prvku pro ovladani stavu top-level okna (ikonifikace, maximalizace, zavreni). *
-* Dalsi informace viz dokumentace.                                                                *
-* Copyryght (C) 2019 - 2022 P.G.Safarik alias D.A.Tiger                                           *
+* A box in the Header Bar controlling the state of the parent top-level window (iconification,    *
+* closing, maximizing, etc...)                                                                    *
+* Copyryght (C) 2019 - 2025 P.G.Safarik alias D.A.Tiger                                           *
 **************************************************************************************************/
-#ifndef __GHI_CONTROLLER_
-#define __GHI_CONTROLLER_
+#ifndef FXGHI_CONTROLLER_H
+#define FXGHI_CONTROLLER_H
+
 /*************************************************************************
 * This program is free software: you can redistribute it and/or modify   *
 * it under the terms of the GNU Lesser General Public License as         *
@@ -23,7 +22,6 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
-//! #include<fox-1.7/fx.h>
 #include "Core.h"
 #include "FXWindowHeader.h"
 
@@ -85,4 +83,4 @@ protected:
 };
 
 }      /* FXGHI */
-#endif /*__GHI_CONTROLLER_H */
+#endif /* FXGHI_CONTROLLER_H */

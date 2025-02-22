@@ -12,20 +12,16 @@
 * You should have received a copy of the GNU General Public License      *
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. *
 *************************************************************************/
+#ifndef FXGHI_CP_H
+#define FXGHI_CP_H
 
-#ifndef __CP_H
-#define __CP_H
 /*************************************************************************
-* cp.h                                                                   *
+* ControlPanel.h                                                         *
 *                                                                        *
-* Deklarace FoxGHI Control Panel                                         *
-* Copyright (c) 10/10/2022 D.A.Tiger <drakarax@seznam.cz>                *
+* Declaration of the FoxGHI Control Panel                                *
+* Copyright (c) 2022 - 2025 D.A.Tiger <drakarax@seznam.cz>               *
 *************************************************************************/
-//!#include<iostream>
-//!#include<fox-1.7/fx.h>
 #include<Core.h>
-//!#include<fxghi.h>
-
 
 class GHI_ControlPanel : public FXVerticalFrame {
 FXDECLARE( GHI_ControlPanel )  
@@ -44,7 +40,7 @@ FXDECLARE( GHI_ControlPanel )
    // internal data
    FXbool             m_change;
    FXStringDictionary m_back;    // Original values backup
-   //FXStringDictionary m_def;   // Deafult values   
+   //FXStringDictionary m_def;   // Default values
 
 public :
   GHI_ControlPanel( FXComposite *p, FXObject *tgt = NULL, FXSelector sel = 0, FXuint opts = FRAME_NONE | LAYOUT_FILL );
@@ -65,7 +61,7 @@ public :
     SETTINGS_SAVE = FXVerticalFrame::ID_LAST, // Save changes
     SETTINGS_RESTORE,                         // Restore to previous state
     SETTINGS_DEFAULT,                         // Default profile ( remove the all settings)
-    SETTINGS_WINMNG,                          // Active full window managment and dekoration profile
+    SETTINGS_WINMNG,                          // Active full window management and decoration profile
     SELECT_FONT,                              // Dialog for select font
     ID_CHANGE,                                // Notify of change settings widget
     ID_LAST,                                  // ...
@@ -82,4 +78,4 @@ protected :
   void Notify( FXuint t = SEL_CHANGED ) { if( target ) { target->tryHandle( this, FXSEL( t, message ), NULL ); } } 
 };
 
-#endif
+#endif /* FXGHI_CP_H */

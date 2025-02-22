@@ -24,9 +24,10 @@
 ***************************************************************************************************/
 #include <iostream>
 #include <fox-1.7/fx.h>
+#include <fox-1.7/xincs.h>
 
 #include <Core/defs.h>
 #include <Core/icons.h>
 #include <Core/version.h>
 
-#endif /*FXGHI_CORE_H */
+#endif /* FXGHI_CORE_H */
