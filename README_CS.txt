@@ -131,14 +131,32 @@ menu).
 Sladeni nazvu trid a odpovidajicich souboru s GHI a Foxtoolkitem (v ramci moznosti)
 
 20/11/2024
-Přidání verze projektu do knihovny a rozšíření možnosti nastavení dobarveni (ztmavení) Header baru v registrech Foxlib.
+Přidání verze projektu do knihovny a rozšíření možnosti nastavení dobarveni (ztmavení/zesvetleni) Header baru v registrech
+Foxlib.
 
-V nejbližší budoucnosti bude 
-  0) Dokončeno nastaveni kolorizace Header Baru ve třídě FXGHI::ControllPanel.
-  1) Preddefinovane zakladni profily nastaveni FoxGHI
-  2) Vytvořena dokumentace ke knihovně 
-  3) Příklady & testy
-  
+22/02/2025
+Reorganizace projektu. Jednotlive hlavicky (a odpovidajici implementacni soubory ) jsou roztrideny do adresaru nekolika
+kategorii : Core, Widgets a Windows, pro snazsi orientaci v projektu a dalsi vyvoj. Vsechny hlavicky z dane katogorie
+jsou nasledne seskupeny v odpovidajicim hlavickovem souboru (napr. Core.h) a ty jsou vsechny includovany do centralniho
+hlavickoveho souboru knihovny (fxghi.h). Pokud byl v klientskem projektu vyuzivan, nemela by tato zmena samotna znamenat
+zadne nepredvidatelne potize.
+
+Verze projektu se nyni zadava pri vyvoji primo do CMakeList.txt. Veskere soubory nejak navazujici na verzovaci udaje
+(include/Core/version.h a src/foxghiM.M.B.conf) jsou od ted generovany az pri prvni kompilaci projektu.
+
+Zvyseni cisla vyvojove verze (0.5.0.0)
+
+23/02/2025
+Dokoncena funkce kolorizace  - dobarvovani, tj. moznost ztmaveni/zesvetleni header baru oproti systemove zakladni barve
+panelu a nasledne nastveni takto upravene hodnoty do vsech potomku header baru. Odpovidajici volby byly implementovany
+do ControllPanel, takze si tuto vlastnost muze uzivatel nasledne pro kazdou aplikaci vyuzivajici FXGHI nastavit podle
+sveho uvazeni.
+
+V nejbližší budoucnosti bude
+  0) Preddefinovane zakladni profily nastaveni FoxGHI
+  1) Vytvořena dokumentace ke knihovně
+  2) Příklady & testy
+  3) Implementace kontextu a jejich prepinani v header baru
 
 5. AUTOR A LICENCE
 =====================
