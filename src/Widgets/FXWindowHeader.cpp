@@ -337,10 +337,11 @@ long FXWindowHeader::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *
 
   // Header bar colorize
   if( m_colorize ) {
-    setBackColor( m_backcolor );
+    // Calculate and set colors tint
+    m_backcolor = ColorIntensityCorrection( getApp( )->getBaseColor( ), m_clrOffset );
+    m_sepcolor  = ColorIntensityCorrection( getApp( )->getBorderColor( ), m_sepClrOffset );
 
-    // Calculate color for bottom separator
-    m_sepcolor = ColorIntensityCorrection( getApp( )->getBorderColor( ), m_sepClrOffset );
+    setBackColor( m_backcolor );
     }
   else { 
     m_sepcolor = getApp( )->getBorderColor( ); 

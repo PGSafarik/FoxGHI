@@ -36,24 +36,36 @@ GHI_ControlPanel::GHI_ControlPanel( FXComposite *p, FXObject *tgt, FXSelector se
 {
    FXLabel *lh = new FXLabel( this, "Haeader bar", NULL, LABEL_NORMAL | LAYOUT_FILL_X );
    lh->setBackColor( getApp( )->getShadowColor( ) );
+   hcb_title = new FXCheckButton( this, "Show window title", this, GHI_ControlPanel::ID_CHANGE );
    FXMatrix *m = new FXMatrix( this, 3, MATRIX_BY_COLUMNS | LAYOUT_FILL_X );   
    new FXLabel( m, "Main title font", NULL, LABEL_NORMAL );
    htf_tfont = new FXTextField( m, 51, this, GHI_ControlPanel::ID_CHANGE, TEXTFIELD_NORMAL | LAYOUT_FILL_X ); 
-   FXButton *tbtn = new FXButton( m, "...", NULL, this, GHI_ControlPanel::SELECT_FONT ); 
+   FXButton *tbtn = new FXButton( m, "...", NULL, this, GHI_ControlPanel::SELECT_FONT, BUTTON_NORMAL | LAYOUT_FILL_X );
    tbtn->setUserData( htf_tfont );
    new FXLabel( m, "Subtitle font", NULL, LABEL_NORMAL );
    htf_sfont = new FXTextField( m, 51, this, GHI_ControlPanel::ID_CHANGE, TEXTFIELD_NORMAL | LAYOUT_FILL_X  ); 
-   FXButton *sbtn = new FXButton( m, "...", NULL, this, GHI_ControlPanel::SELECT_FONT );
+   FXButton *sbtn = new FXButton( m, "...", NULL, this, GHI_ControlPanel::SELECT_FONT, BUTTON_NORMAL | LAYOUT_FILL_X );
    sbtn->setUserData( htf_sfont );
-   hcb_colorize = new FXCheckButton( this, "Header colorize", this, GHI_ControlPanel::ID_CHANGE );   
-   hcb_title = new FXCheckButton( this, "Show window title", this, GHI_ControlPanel::ID_CHANGE );
-   hcb_separator = new FXCheckButton( this, "Enable bottom separator", this, GHI_ControlPanel::ID_CHANGE );
 
-   FXLabel *lc = new FXLabel( this, "Controller", NULL, LABEL_NORMAL | LAYOUT_FILL_X ); 
+   hcb_colorize = new FXCheckButton( m, "Enable coloring", this, GHI_ControlPanel::ID_CHANGE );
+   new FXLabel( m, "Colorize (dark/light) offset:", NULL, JUSTIFY_RIGHT | LAYOUT_FILL_X);
+   hcb_colOffset = new FXSpinner( m, 3, this, GHI_ControlPanel::ID_CHANGE, SPIN_NORMAL );
+   hcb_colOffset->setRange( -100, 100 );
+   hcb_colOffset->setValue( 0 );
+   hcb_colOffset->setIncrement( 5 );
+
+  hcb_separator = new FXCheckButton( m, "Enable bottom separator", this, GHI_ControlPanel::ID_CHANGE );
+  new FXLabel( m, "Colorize (dark/light) offset:", NULL, JUSTIFY_RIGHT | LAYOUT_FILL_X);
+  hcb_sepColOffset = new FXSpinner( m, 3, this, GHI_ControlPanel::ID_CHANGE, SPIN_NORMAL );
+  hcb_sepColOffset->setRange( -100, 100 );
+  hcb_sepColOffset->setValue( 0 );
+  hcb_sepColOffset->setIncrement( 5 );
+
+   FXLabel *lc = new FXLabel( this, "Controll box", NULL, LABEL_NORMAL | LAYOUT_FILL_X );
    lc->setBackColor( getApp( )->getShadowColor( ) );
-   ccb_hidden = new FXCheckButton( this, "Hide Controller", this, GHI_ControlPanel::ID_CHANGE );
+   ccb_hidden = new FXCheckButton( this, "Disable Controller", this, GHI_ControlPanel::ID_CHANGE );
 
-   FXLabel *lw = new FXLabel( this, "Window", NULL, LABEL_NORMAL | LAYOUT_FILL_X );
+   FXLabel *lw = new FXLabel( this, "Top level Window", NULL, LABEL_NORMAL | LAYOUT_FILL_X );
    lw->setBackColor( getApp( )->getShadowColor( ) );
    wcb_border      = new FXCheckButton( this, "Enable window border", this, GHI_ControlPanel::ID_CHANGE );
    wcb_wmcontrol   = new FXCheckButton( this, "Enable WM frame", this, GHI_ControlPanel::ID_CHANGE );
@@ -88,11 +100,16 @@ void GHI_ControlPanel::readConfig( )
    FXString _fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
    FXString _fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
    FXbool   _separator        = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableSeparator", true );
+   FXdouble  _base_tintoffset = getApp( )->reg( ).readRealEntry(   CFG_FXGHI, cf_prefix + ".BaseColorOffset", -0.85 );
+   FXdouble  _sep_tintoffset  = getApp( )->reg( ).readRealEntry(   CFG_FXGHI, cf_prefix + ".SepColorOffset",  0.45 );
+
    htf_tfont->setText( _fntspec_title );
    htf_sfont->setText( _fntspec_subtitle );
    hcb_colorize->setCheck( _colorize );
    hcb_title->setCheck( _title );
    hcb_separator->setCheck( _separator );
+   hcb_sepColOffset->setValue( static_cast<int>( _sep_tintoffset * 100 ) );
+   hcb_colOffset->setValue( static_cast<int>( _base_tintoffset * 100 ) );
 
    cf_prefix = CFG_CONTROLLER_PREFIX;
    FXbool _hidden = getApp( )->reg( ).readBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", false );
@@ -120,6 +137,9 @@ void GHI_ControlPanel::writeConfig( )
   a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       htf_tfont->getText( ).text( ) );
   a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    htf_sfont->getText( ).text( ) );
   a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableSeparator", hcb_separator->getCheck( ) );
+
+  getApp( )->reg( ).writeRealEntry(   CFG_FXGHI, cf_prefix + ".BaseColorOffset", static_cast<FXdouble>( hcb_colOffset->getValue( ) ) / 100  );
+  getApp( )->reg( ).writeRealEntry(   CFG_FXGHI, cf_prefix + ".SepColorOffset",  static_cast<FXdouble>( hcb_sepColOffset->getValue( ) ) / 100  );
 
   cf_prefix = CFG_CONTROLLER_PREFIX;
   a->reg( ).writeBoolEntry( CFG_FXGHI, cf_prefix + ".Hidden", ccb_hidden->getCheck( ) );

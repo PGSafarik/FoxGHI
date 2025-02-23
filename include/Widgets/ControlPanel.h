@@ -31,6 +31,8 @@ FXDECLARE( GHI_ControlPanel )
    FXCheckButton *hcb_colorize;
    FXCheckButton *hcb_title;
    FXCheckButton *hcb_separator;
+   FXSpinner     *hcb_colOffset;
+   FXSpinner     *hcb_sepColOffset;
 
    // Window
    FXCheckButton *wcb_wmcontrol;
