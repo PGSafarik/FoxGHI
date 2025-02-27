@@ -133,12 +133,10 @@ void FXWindowHeader::layout( )
   FXHorizontalFrame::layout( );
 
   m_tlenght  = m_tfnt->getTextWidth( this->getTitle( ) );  // Length of title string
-  m_stlenght = m_tfnt->getTextWidth( this->getText( ) );   // Length of subtitle string (aka window text)
+  m_stlenght = m_tfnt->getTextWidth( m_stext );   // Length of subtitle string (aka window text)
 
   FXint wb_height = getHeight( );             // Height of the Header bar
   FXint wb_width  = getWidth( );              // Width of the Header bar
-  //std::cout << "W:" << wb_width << std::endl;
-  //std::cout << "H:" << wb_height << std::endl;
 
   FXint pw        = wb_width / 2;             // Auxiliary variable
   FXint ft_height = m_tfnt->getFontHeight( ); // Length of the used text font
@@ -156,7 +154,7 @@ void FXWindowHeader::layout( )
       int x = ch->getX( );                                             // Pozice potomka v ose X
       int w = ch->getWidth( );                                         // Sirka potomka    
 
-      _width += w + DEFAULT_SPACING;                                   // K pozadovane sirce panelu prictem sirku widgetu a odstup mezi widgety
+      _width += w + vspacing;                                          // K pozadovane sirce panelu prictem sirku widgetu a odstup mezi widgety
       if ( _right == 0 ) {                                             // Dokud nezacalo pocitani widgetu zprava
         if ( x + w < pw ) { _left = _width; } else { _right = x; }     // Pokud pozice widgetu a jeho sirka nepresahne polovinu sirky baneru,   --
                                                                        // sirka na levo je rovna celkove sirce. V opacnem pripade si ulozime    --
@@ -165,13 +163,7 @@ void FXWindowHeader::layout( )
       }
     }
   }
-/*
-  _width += ( m_tlenght >= m_stlenght ? m_tlenght : m_stlenght ) + 2 * DEFAULT_SPACING; // K pozadovane sice panelu prictem nejdelsi z obou radku titulku
 
-  if ( _width > getParent( )->getWidth( ) ) {  // Pokud pozadovana sirka presahne celkovou sirku potomka (top-lewel okna)
-    getParent( )->setWidth( _width );          // Nastvime sirku potomka shodnou se sirkou panelu
-  }
-*/
   // Recalc Titile position
   if( m_tvisible ) {
     pw = _left + _right / 2;                                                 // Urcime stred prostoru pro titulek
@@ -185,7 +177,7 @@ void FXWindowHeader::layout( )
       //FXint offset = vspacing + ft_height / 4;
       //FXint beg = wb_height / 2;
       m_tcoord.set( pw - ( m_tlenght  / 2 ), beg );                                     // Vypocet pozice prvniho radku
-      m_scoord.set( pw - ( m_stlenght / 2 ),  beg + offset + vspacing * 2 );             // Vypocet pozice druheho radku
+      m_scoord.set( pw - ( m_stlenght / 2 ),  beg + offset + hspacing * 2 );             // Vypocet pozice druheho radku
 
     }
   }
@@ -215,7 +207,7 @@ FXint FXWindowHeader::getDefaultHeight( )
   FXint fh = m_tfnt->getFontHeight( );               // Height for used font
 
   if ( m_tvisible ) {
-    FXint th = ( !getText( ).empty( ) ? m_scoord.y + fh : fh );
+    FXint th = ( !m_stext.empty( ) ? m_scoord.y + fh : fh );
     value = ( value > th ) ? value : th;
   }
 
@@ -229,8 +221,10 @@ FXint FXWindowHeader::getDefaultWidth() {
     FXint tw = m_tfnt->getTextWidth( this->getTitle( ) );
     value = value > tw ? value : tw;
 
-    tw = m_tfnt->getTextWidth( this->getText( ) );
-    value = value > tw ? value : tw;
+    if( !m_stext.empty( ) ) {
+      tw = m_tfnt->getTextWidth( m_stext );
+      value = value > tw ? value : tw;
+    }
   }
 
   return value;
@@ -320,7 +314,7 @@ long FXWindowHeader::onLeftBtnRelease( FXObject *sender, FXSelector sel, void *d
 
   if( m_opts & WHEADER_DELEGATE ) {
 	FXObject  *target   = getTarget( );
-    FXSelector selector = getSelector( );
+  FXSelector selector = getSelector( );
 
 	if( target ) { target->tryHandle( this, FXSEL( SEL_LEFTBUTTONRELEASE, selector ), data ); }
   }
