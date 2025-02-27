@@ -28,8 +28,7 @@ int main(int argc, char **argv) {
   a.init( argc, argv );
   std::cout << FXGHI::Version::PROJECT_NAME << ": " << FXGHI::Version::FULLVERSION_STRING <<  std::endl;
   
-  FXPrimaryWindow *win = new FXPrimaryWindow( &a, "Simple FoxGHI Window" );
-  win->getHeader( )->setText( "Hello World!" ); 
+  FXPrimaryWindow *win = new FXPrimaryWindow( &a, "Simple FoxGHI Window: Hello World!" );
   new FXButton( win->getHeader( ), "\t\t TEST Button", win->getMenuIcon( ), NULL, 0, BUTTON_TOOLBAR );
   
   a.create( );
