@@ -28,7 +28,10 @@ SET( CMAKE_CXX_STANDARD_REQUIRED True )          # C++ Standard
 
 # Configure project
 FILE( GLOB SOURCES src/*.cpp  src/Widgets/*.cpp src/Windows/*.cpp )  # List of implementation files
-FILE( GLOB HEADERS include/*.h )                                     # List of C++ header files (for install - API)
+FILE( GLOB HEADERS include/*.h )
+FILE( GLOB CORE_HEADERS include/Core/*.h )
+FILE( GLOB WIDGETS_HEADERS include/Widgets/*.h )
+FILE( GLOB WINDOWS_HEADERS include/Windows/*.h )
 INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/include" )               # Insert include directory for building
 
 SET( LDCFG_FILE_NAME "foxghi${PROJECT_VERSION}.conf" )  # set filename for ldconfig
@@ -54,8 +57,11 @@ ADD_SUBDIRECTORY( "${PROJECT_SOURCE_DIR}/tests/SimpleWindow" )
 # Install build project
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION lib/ ) # libray file(s)
 INSTALL( FILES ${HEADERS} DESTINATION include/ )    # API (C++ header files)
+INSTALL( FILES ${CORE_HEADERS} DESTINATION include/Core/ )
+INSTALL( FILES ${WIDGETS_HEADERS} DESTINATION include/Widgets/ )
+INSTALL( FILES ${WINDOWS_HEADERS} DESTINATION include/Windows/ )
+
 INSTALL( FILES "${PROJECT_SOURCE_DIR}/src/${LDCFG_FILE_NAME}" DESTINATION /etc/ld.so.conf.d/ )
 INSTALL( CODE "EXECUTE_PROCESS( COMMAND /usr/sbin/ldconfig )" )
-#EXECUTE_PROCESS( COMMAND /usr/sbin/ldconfig )
 
 ### END ###
