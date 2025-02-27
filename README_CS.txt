@@ -1,4 +1,4 @@
-﻿Fox Gnome Human Interface library (foxGHI)  22/02/2025
+﻿Fox Gnome Human Interface library (foxGHI)  27/02/2025
 ============================================================
 
 Obsah:
@@ -88,7 +88,7 @@ adresáře /opt/foxghi/0.4/
 
 4. STAV PROJEKTU A PLÁNY DO BUDOUCNA
 ======================================
-Současná verze: 25.02 0.5.0.0 ALPHA
+Současná verze: 25.02 0.5.2.0 ALPHA
 
 FoxGHI v tuto chvíli implementuje základní funkcionalitu o kterou mi šlo - tzn. autonomní top-level 
 okno s integrovaným headerbarem ve stylu Gnome 3. Nicméně, je ještě co vylepšovat. Z toho důvodu 
