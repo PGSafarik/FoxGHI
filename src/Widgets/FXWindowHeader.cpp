@@ -182,8 +182,10 @@ void FXWindowHeader::layout( )
       //! FXint offset = wb_height / 4 + padtop + border;                                         // Odstup z vrchu
       FXint offset = ft_height / 2;
       FXint beg = offset + padtop + border;
+      //FXint offset = vspacing + ft_height / 4;
+      //FXint beg = wb_height / 2;
       m_tcoord.set( pw - ( m_tlenght  / 2 ), beg );                                     // Vypocet pozice prvniho radku
-      m_scoord.set( pw - ( m_stlenght / 2 ),  beg + offset + vspacing * 2);             // Vypocet pozice druheho radku
+      m_scoord.set( pw - ( m_stlenght / 2 ),  beg + offset + vspacing * 2 );             // Vypocet pozice druheho radku
 
     }
   }
@@ -209,26 +211,30 @@ void FXWindowHeader::recolorize( FXWindow *target )
 
 FXint FXWindowHeader::getDefaultHeight( ) 
 {
-  FXint value = 0;
-  FXint m = FXHorizontalFrame::getDefaultHeight( );  // Default height for Horizontal frame
+  FXint value = FXHorizontalFrame::getDefaultHeight( );  // Default height for Horizontal frame
   FXint fh = m_tfnt->getFontHeight( );               // Height for used font
 
   if ( m_tvisible ) {
-    value = ( !getText( ).empty( ) ? m_scoord.y + fh : fh );
-    value = ( value > m ) ? value : m;
+    FXint th = ( !getText( ).empty( ) ? m_scoord.y + fh : fh );
+    value = ( value > th ) ? value : th;
   }
-  else { value = m; }
-
-  std::cout << "Horizonatal Frame default Height: " << m << std::endl;
-  std::cout << "Header Bar default Height: " << value << std::endl;
 
   return value;
 }
 
 FXint FXWindowHeader::getDefaultWidth() {
-  return FXHorizontalFrame::getDefaultWidth( );
-}
+  FXint value = FXHorizontalFrame::getDefaultWidth( );
 
+  if ( m_tvisible ) {
+    FXint tw = m_tfnt->getTextWidth( this->getTitle( ) );
+    value = value > tw ? value : tw;
+
+    tw = m_tfnt->getTextWidth( this->getText( ) );
+    value = value > tw ? value : tw;
+  }
+
+  return value;
+}
 
 /**************************************************************************************************/
 long FXWindowHeader::onPaint( FXObject *sender, FXSelector sel, void *data )
