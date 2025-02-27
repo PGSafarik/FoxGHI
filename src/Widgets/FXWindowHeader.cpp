@@ -219,7 +219,8 @@ FXint FXWindowHeader::getDefaultHeight( )
   } 
   else { value = minh; }
   */
-  FXint m = FXHorizontalFrame::getHeight( );
+
+  FXint m = FXHorizontalFrame::getDefaultHeight( );
   std::cout << "Horizonatal Frame default Height: " << m << std::endl;
 
   FXint fh = m_tfnt->getFontHeight( );
