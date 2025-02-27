@@ -176,7 +176,7 @@ void FXWindowHeader::layout( )
   if( m_tvisible ) {
     pw = _left + _right / 2;                                                 // Urcime stred prostoru pro titulek
     if( m_stext.empty( ) ) {                                                 // Pokud neni nastaven subtitulek
-      m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 3 ); // Umistime titulek do stredu
+      m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 4 ); // Umistime titulek do stredu
     } 
     else {                                                                                 //
       //! FXint offset = wb_height / 4 + padtop + border;                                         // Odstup z vrchu
@@ -209,23 +209,17 @@ void FXWindowHeader::recolorize( FXWindow *target )
 
 FXint FXWindowHeader::getDefaultHeight( ) 
 {
-  FXint minh = 24;
   FXint value = 0;
+  FXint m = FXHorizontalFrame::getDefaultHeight( );  // Default height for Horizontal frame
+  FXint fh = m_tfnt->getFontHeight( );               // Height for used font
 
-  /*
-  if( getFirst( ) ) {  
-    FXint m = FXHorizontalFrame::getDefaultHeight( );  
-    value = ( m > minh ? m : minh ); 
-  } 
-  else { value = minh; }
-  */
+  if ( m_tvisible ) {
+    value = ( !getText( ).empty( ) ? m_scoord.y + fh : fh );
+    value = ( value > m ) ? value : m;
+  }
+  else { value = m; }
 
-  FXint m = FXHorizontalFrame::getDefaultHeight( );
   std::cout << "Horizonatal Frame default Height: " << m << std::endl;
-
-  FXint fh = m_tfnt->getFontHeight( );
-  value = ( !getText( ).empty( ) ? m_scoord.y + fh : fh );
-  value = ( value > m ) ? value : m;
   std::cout << "Header Bar default Height: " << value << std::endl;
 
   return value;
