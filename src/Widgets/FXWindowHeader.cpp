@@ -71,7 +71,13 @@ FXWindowHeader::~FXWindowHeader( )
 void FXWindowHeader::create( )
 {
   ReadConfig( );
-  
+
+  // Vertical center all childerns widgets at Y axis
+  for( FXWindow *w = getFirst( ); w != NULL; w = w->getNext( ) ) {
+    FXuint hints = w->getLayoutHints( );
+    if ( !( hints & LAYOUT_CENTER_Y  ) ) { w->setLayoutHints( hints | LAYOUT_CENTER_Y ); }
+  }
+
   // Header bar colorize
   if( m_colorize ) {
     m_backcolor = ColorIntensityCorrection( getApp( )->getBaseColor( ), m_clrOffset );
@@ -130,7 +136,10 @@ void FXWindowHeader::layout( )
   m_stlenght = m_tfnt->getTextWidth( this->getText( ) );   // Length of subtitle string (aka window text)
 
   FXint wb_height = getHeight( );             // Height of the Header bar
-  FXint wb_width  = getWidth( );              // Width of the Header bar 
+  FXint wb_width  = getWidth( );              // Width of the Header bar
+  //std::cout << "W:" << wb_width << std::endl;
+  //std::cout << "H:" << wb_height << std::endl;
+
   FXint pw        = wb_width / 2;             // Auxiliary variable
   FXint ft_height = m_tfnt->getFontHeight( ); // Length of the used text font
   FXint _width    = 0;                        // Required width WH (i.e. length of all children + spaces + length of longest title text)
@@ -140,6 +149,7 @@ void FXWindowHeader::layout( )
   // Corection a parent width, in depending on the title ( or subtitle) width and check size empty 
   // space for widow title  
   FXint i = 0;
+
   for( FXWindow *ch = getFirst( ); ch != NULL; ch = ch->getNext( ) ) { // Pro vsechny potomky
     if( ch ) {                                                         // Pokud skutecne existuje
       i++;  
@@ -155,13 +165,13 @@ void FXWindowHeader::layout( )
       }
     }
   }
-
+/*
   _width += ( m_tlenght >= m_stlenght ? m_tlenght : m_stlenght ) + 2 * DEFAULT_SPACING; // K pozadovane sice panelu prictem nejdelsi z obou radku titulku
- 
+
   if ( _width > getParent( )->getWidth( ) ) {  // Pokud pozadovana sirka presahne celkovou sirku potomka (top-lewel okna)
     getParent( )->setWidth( _width );          // Nastvime sirku potomka shodnou se sirkou panelu
   }
-  
+*/
   // Recalc Titile position
   if( m_tvisible ) {
     pw = _left + _right / 2;                                                 // Urcime stred prostoru pro titulek
@@ -169,9 +179,12 @@ void FXWindowHeader::layout( )
       m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 3 ); // Umistime titulek do stredu
     } 
     else {                                                                                 //
-      FXint offset = wb_height / 4 + getPadTop( );                                         // Odstup z vrchu
-      m_tcoord.set( pw - ( m_tlenght  / 2 ), offset );                                     // Vypocet pozice prvniho radku
-      m_scoord.set( pw - ( m_stlenght / 2 ), wb_height - offset + 3 * ( ft_height / 4 ) ); // Vypocet pozice druheho radku
+      //! FXint offset = wb_height / 4 + padtop + border;                                         // Odstup z vrchu
+      FXint offset = ft_height / 2;
+      FXint beg = offset + padtop + border;
+      m_tcoord.set( pw - ( m_tlenght  / 2 ), beg );                                     // Vypocet pozice prvniho radku
+      m_scoord.set( pw - ( m_stlenght / 2 ),  beg + offset + vspacing * 2);             // Vypocet pozice druheho radku
+
     }
   }
 }
@@ -199,14 +212,28 @@ FXint FXWindowHeader::getDefaultHeight( )
   FXint minh = 24;
   FXint value = 0;
 
+  /*
   if( getFirst( ) ) {  
     FXint m = FXHorizontalFrame::getDefaultHeight( );  
     value = ( m > minh ? m : minh ); 
   } 
   else { value = minh; }
+  */
+  FXint m = FXHorizontalFrame::getHeight( );
+  std::cout << "Horizonatal Frame default Height: " << m << std::endl;
+
+  FXint fh = m_tfnt->getFontHeight( );
+  value = ( !getText( ).empty( ) ? m_scoord.y + fh : fh );
+  value = ( value > m ) ? value : m;
+  std::cout << "Header Bar default Height: " << value << std::endl;
 
   return value;
 }
+
+FXint FXWindowHeader::getDefaultWidth() {
+  return FXHorizontalFrame::getDefaultWidth( );
+}
+
 
 /**************************************************************************************************/
 long FXWindowHeader::onPaint( FXObject *sender, FXSelector sel, void *data )
