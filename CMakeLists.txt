@@ -20,7 +20,7 @@ SET( PROJECT_VERSION_FULL "${PROJECT_VERSION_UBUNTU} ${PROJECT_VERSION}.${FXGHI_
 
 # The project settings
 SET( CMAKE_INSTALL_PREFIX "/opt/foxghi/${FXGHI_VER_MAJOR}.${FXGHI_VER_MINOR}/${FXGHI_VER_REVISION}" )  # Install target directory
-SET( LIB_FOX   "/opt/foxlib/1.7/84" )            # Fox toolkit path
+SET( LIB_FOX   "/opt/foxlib/1.7/86" )            # Fox toolkit path
 SET( CMAKE_CXX_STANDARD 11 )                     # C++ Standard
 SET( CMAKE_CXX_STANDARD_REQUIRED True )          # C++ Standard
 #add_compile_options(-Wall -Wextra -pedantic -Werror)
@@ -36,7 +36,7 @@ INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/include" )               # Insert in
 
 SET( LDCFG_FILE_NAME "foxghi${PROJECT_VERSION}.conf" )  # set filename for ldconfig
 
-configure_file( version.h.in "${PROJECT_SOURCE_DIR}/include/Core/version.h" )        # generate version.h file
+configure_file( version.h.in "${PROJECT_SOURCE_DIR}/include/Core/version.h" )   # generate version.h file
 configure_file( foxghi.conf.in "${PROJECT_SOURCE_DIR}/src/${LDCFG_FILE_NAME}" ) # generate file for ldconfig
 
 # Add directories for project dependency
