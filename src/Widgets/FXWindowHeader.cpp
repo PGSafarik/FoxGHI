@@ -63,6 +63,8 @@ FXWindowHeader::FXWindowHeader( FXTopWindow *parent, const FXString &text, FXObj
   m_tvisible      = true;
   m_stext         = text;
   m_tfnt = m_sfnt = NULL;
+  m_protectTitle  = false;
+  m_titleMargin   = DEFAULT_SPACING * 2;
 }
 
 FXWindowHeader::~FXWindowHeader( )
@@ -217,17 +219,47 @@ FXint FXWindowHeader::getDefaultHeight( )
 FXint FXWindowHeader::getDefaultWidth() {
   FXint value = FXHorizontalFrame::getDefaultWidth( );
 
-  if ( m_tvisible ) {
-    FXint tw = m_tfnt->getTextWidth( this->getTitle( ) );
-    value = value > tw ? value : tw;
+  if(!m_tvisible || !m_tfnt) return value;
 
-    if( !m_stext.empty( ) ) {
-      tw = m_tfnt->getTextWidth( m_stext );
-      value = value > tw ? value : tw;
-    }
+  FXint titleWidth = m_tfnt->getTextWidth(getTitle());
+
+  if(!m_stext.empty() && m_sfnt) {
+    FXint subtitleWidth = m_sfnt->getTextWidth(m_stext);
+    titleWidth = FXMAX(titleWidth, subtitleWidth);
   }
 
-  return value;
+  if(!m_protectTitle) {
+    return FXMAX(value, titleWidth);
+  }
+
+  FXint childrenWidth = 0;
+
+  for(FXWindow *ch = getFirst(); ch; ch = ch->getNext()) {
+    if(!ch->shown()) continue;
+
+    FXuint hints = ch->getLayoutHints();
+
+    if(hints & LAYOUT_FIX_WIDTH) {
+      childrenWidth += ch->getWidth();
+    }
+    else {
+      childrenWidth += ch->getDefaultWidth();
+    }
+
+    childrenWidth += m_box_hs;
+  }
+
+  if(childrenWidth > 0) {
+    childrenWidth -= m_box_hs;
+  }
+
+  FXint protectedWidth =
+      padleft + padright + border * 2
+    + childrenWidth
+    + titleWidth
+    + 2 * m_titleMargin;
+
+  return FXMAX(value, protectedWidth);
 }
 
 /**************************************************************************************************/

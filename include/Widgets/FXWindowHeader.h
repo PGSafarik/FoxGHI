@@ -52,6 +52,8 @@ FXDECLARE( FXWindowHeader )
   FXFont   *m_sfnt;             // The subtitle font object
   FXint     m_tlenght;          // Length of the title
   FXint     m_stlenght;         // Length of the subtitle
+  FXbool    m_protectTitle;     // Flag of the protection title (default wdith)
+  FXint     m_titleMargin;      // Size of the title protection space (default width)
 
   // For Children widgets layout managment
   FXObject *m_box_tgt;     // Pointer of a univerzal target on GUI messagess 
@@ -96,7 +98,9 @@ public:
   void      setTitleVisible( FXbool value )       { m_tvisible = value; }
   void      setSeparating( FXbool value )         { m_separate = value; }
   FXbool    getSeparating( )                      { return m_separate; }
-                    
+  void      setTitleProtect( FXbool value )       { m_protectTitle = value; }
+  FXbool    isTitleProtect( )                     { return m_protectTitle; }
+
   FXObject* getBoxTarget( )                  { return ( m_box_tgt ? m_box_tgt : m_parent ); }
   void      setBoxTarget( FXObject *target ) { m_box_tgt = target; }
   FXuint    getBoxOpts( )                    { return m_box_opts; }
