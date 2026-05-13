@@ -128,61 +128,47 @@ void FXWindowHeader::setSubtitleFont( const FXString &spec )
   m_sfnt = CreateFont( spec );
 }
 
-
 void FXWindowHeader::layout( )
 {
 /* Calculate position to the headerBar text, with change to top-level window */
   FXHorizontalFrame::layout( );
 
-  m_tlenght  = m_tfnt->getTextWidth( this->getTitle( ) );  // Length of title string
-  m_stlenght = m_tfnt->getTextWidth( m_stext );   // Length of subtitle string (aka window text)
+  if(!m_tvisible || !m_tfnt) return;
 
-  FXint wb_height = getHeight( );             // Height of the Header bar
-  FXint wb_width  = getWidth( );              // Width of the Header bar
+  const FXString title = getTitle();
 
-  FXint pw        = wb_width / 2;             // Auxiliary variable
-  FXint ft_height = m_tfnt->getFontHeight( ); // Length of the used text font
-  FXint _width    = 0;                        // Required width WH (i.e. length of all children + spaces + length of longest title text)
-  FXint _left     = 0;                        // Auxiliary variable: Total length of all descendants on the left side of the panel
-  FXint _right    = 0;                        // Auxiliary variable: The position on the X axis where widgets (descendants of the panel) start on the right 
+  m_tlenght = m_tfnt->getTextWidth(title);
+  m_stlenght = (m_sfnt ? m_sfnt->getTextWidth(m_stext) : 0);
 
-  // Corection a parent width, in depending on the title ( or subtitle) width and check size empty 
-  // space for widow title  
-  FXint i = 0;
+  FXint wb_width  = getWidth();
+  FXint wb_height = getHeight();
 
-  for( FXWindow *ch = getFirst( ); ch != NULL; ch = ch->getNext( ) ) { // Pro vsechny potomky
-    if( ch ) {                                                         // Pokud skutecne existuje
-      i++;  
-      int x = ch->getX( );                                             // Pozice potomka v ose X
-      int w = ch->getWidth( );                                         // Sirka potomka    
+  FXint centerX = wb_width / 2;
 
-      _width += w + vspacing;                                          // K pozadovane sirce panelu prictem sirku widgetu a odstup mezi widgety
-      if ( _right == 0 ) {                                             // Dokud nezacalo pocitani widgetu zprava
-        if ( x + w < pw ) { _left = _width; } else { _right = x; }     // Pokud pozice widgetu a jeho sirka nepresahne polovinu sirky baneru,   --
-                                                                       // sirka na levo je rovna celkove sirce. V opacnem pripade si ulozime    --
-                                                                       // pozici widgetu na pravou stranu. Timto postupem je urcen prostor mezi --
-                                                                       // potomky urceny pro texty titulku.  
-      }
-    }
+  FXint titleH = m_tfnt->getFontHeight();
+  FXint titleA = m_tfnt->getFontAscent();
+
+  if(m_stext.empty() || !m_sfnt) {
+    FXint x = centerX - m_tlenght / 2;
+    FXint y = (wb_height - titleH) / 2 + titleA;
+
+    m_tcoord.set(x, y);
+    return;
   }
 
-  // Recalc Titile position
-  if( m_tvisible ) {
-    pw = _left + _right / 2;                                                 // Urcime stred prostoru pro titulek
-    if( m_stext.empty( ) ) {                                                 // Pokud neni nastaven subtitulek
-      m_tcoord.set( pw - ( m_tlenght / 2 ), wb_height / 2 + ft_height / 4 ); // Umistime titulek do stredu
-    } 
-    else {                                                                                 //
-      //! FXint offset = wb_height / 4 + padtop + border;                                         // Odstup z vrchu
-      FXint offset = ft_height / 2;
-      FXint beg = offset + padtop + border;
-      //FXint offset = vspacing + ft_height / 4;
-      //FXint beg = wb_height / 2;
-      m_tcoord.set( pw - ( m_tlenght  / 2 ), beg );                                     // Vypocet pozice prvniho radku
-      m_scoord.set( pw - ( m_stlenght / 2 ),  beg + offset + hspacing * 2 );             // Vypocet pozice druheho radku
+  FXint subH = m_sfnt->getFontHeight();
+  FXint subA = m_sfnt->getFontAscent();
 
-    }
-  }
+  FXint gap = 2; // případně konfigurovatelné, nebo max(1, vspacing / 2)
+
+  FXint totalH = titleH + gap + subH;
+  FXint top = (wb_height - totalH) / 2;
+
+  m_tcoord.set(centerX - m_tlenght / 2,
+               top + titleA);
+
+  m_scoord.set(centerX - m_stlenght / 2,
+               top + titleH + gap + subA);
 }
 
 void FXWindowHeader::_recolorize( FXWindow *w )
@@ -415,9 +401,6 @@ long FXWindowHeader::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *
   setTitleFont( m_fntspec_title );
   setSubtitleFont( m_fntspec_subtitle );
   UpdateTitle( );
-
-  // Colorized children for this frame
-  recolorize( );
 
   return 1;
 }
