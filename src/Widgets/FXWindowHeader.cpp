@@ -187,7 +187,11 @@ void FXWindowHeader::layout( )
 
 void FXWindowHeader::_recolorize( FXWindow *w )
 {
-  if( w ) { w->setBackColor( getBackColor( ) ); }
+  if( w ) {
+    w->setBackColor( getBackColor( ) );
+    w->update( );
+    w->repaint( );
+  }
 }
 
 void FXWindowHeader::recolorize( FXWindow *target )
@@ -198,7 +202,7 @@ void FXWindowHeader::recolorize( FXWindow *target )
     // Colorize all childerns
     for( FXWindow *w = t->getFirst( ); w != NULL; w = w->getNext( ) )
     {
-  	  _recolorize( w );
+      if( w->shown( ) ) { _recolorize( w ); }
     }
   }
 }
@@ -305,7 +309,8 @@ long FXWindowHeader::onConfigure( FXObject *sender, FXSelector sel, void *data )
     ch->handle( this, FXSEL( SEL_CONFIGURE, 0), NULL ); 
   }
   layout( );
-  
+  recolorize( this );
+
   return 1;
 }
 
@@ -403,6 +408,9 @@ long FXWindowHeader::onCmd_Reconfigure( FXObject *sender, FXSelector sel, void *
   }
 
 
+  // Colorized children for this frame
+  recolorize( );
+
   // Update title
   setTitleFont( m_fntspec_title );
   setSubtitleFont( m_fntspec_subtitle );
@@ -475,19 +483,22 @@ FXColor FXWindowHeader::ColorIntensityCorrection( FXColor clr, FXfloat offset )
   FXint nr, ng, nb;
 
   const FXfloat r = static_cast<FXfloat>( FXREDVAL( clr ) );
-  const FXfloat g = static_cast<FXfloat>( FXREDVAL( clr ) );
-  const FXfloat b = static_cast<FXfloat>( FXREDVAL( clr ) );
+  const FXfloat g = static_cast<FXfloat>( FXGREENVAL( clr ) );
+  const FXfloat b = static_cast<FXfloat>( FXBLUEVAL( clr ) );
 
-  if( offset > 0 ) { // tint (lightening)
-    nr = r + ( 255 - r ) * offset;
-    ng = g + ( 255 - g ) * offset;
-    nb = b + ( 255 - b ) * offset;
+  if( offset > 1.0f ) { offset = 1.0f; }
+  if( offset < -1.0f ) { offset = -1.0f; }
+
+  if( offset >= 0.0f ) { // tint (lightening)
+    nr = static_cast<FXint>( r + ( 255 - r ) * offset );
+    ng = static_cast<FXint>( g + ( 255 - g ) * offset );
+    nb = static_cast<FXint>( b + ( 255 - b ) * offset );
   }
   else { // shadow (darkening)
-    offset = -offset;
-    nr = r * offset;
-    ng = g * offset;
-    nb = b * offset;
+    FXfloat amount = -offset;
+    nr = static_cast<FXint>( r * ( 1.0f - amount ) );
+    ng = static_cast<FXint>( g * ( 1.0f - amount ) );
+    nb = static_cast<FXint>( b * ( 1.0f - amount ) );
   }
 
   return FXRGB( nr, ng, nb );
