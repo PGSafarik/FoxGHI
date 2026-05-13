@@ -44,7 +44,8 @@ enum WinHeaderFlags {
 enum {
   WINDOW_MAIN       = 0x00100000,	// Flag defined a primary window
   WINDOW_CLIENTSIZE = 0x00200000,	// Enter the window size is size for client space in this window
-  WINDOW_STATIC     = 0x00400000	// Disable window resizing
+  WINDOW_STATIC     = 0x00400000,	// Disable window resizing
+  WINDOW_TITLEPROT  = 0x00800000, // Disables the child header bar's overlapping title bar, even at the cost of resizing the toplevel window
 };
 #define P_SPACING   3	// 5
 #define HV_SPACING2 2	// 2

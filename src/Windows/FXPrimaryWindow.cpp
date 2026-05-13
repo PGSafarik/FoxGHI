@@ -53,6 +53,7 @@ FXPrimaryWindow::FXPrimaryWindow( FXApp *app, const FXString &title, FXIcon *ic,
 
   this->enable( );
   if( opts & WINDOW_CLIENTSIZE ) { RecalculateSize( ); }
+  if( opts & WINDOW_TITLEPROT ) { w_header->setTitleProtect( true ); }
 
   w_menuic  = new FXPNGIcon( getApp( ), window_menu_icdata );
   w_omenuic = new FXPNGIcon( getApp( ), overflow_menu_icdata );
@@ -72,6 +73,7 @@ FXPrimaryWindow::FXPrimaryWindow( FXWindow *owner, const FXString &title, FXIcon
 
   this->enable( );
   if( opts & WINDOW_CLIENTSIZE ) { RecalculateSize( ); }
+  if( opts & WINDOW_TITLEPROT ) { w_header->setTitleProtect( true ); }
 
   w_menuic = new FXPNGIcon( getApp( ), window_menu_icdata );
   w_omenuic = new FXPNGIcon( getApp( ), overflow_menu_icdata );
