@@ -37,6 +37,7 @@ GHI_ControlPanel::GHI_ControlPanel( FXComposite *p, FXObject *tgt, FXSelector se
    FXLabel *lh = new FXLabel( this, "Haeader bar", NULL, LABEL_NORMAL | LAYOUT_FILL_X );
    lh->setBackColor( getApp( )->getShadowColor( ) );
    hcb_title = new FXCheckButton( this, "Show window title", this, GHI_ControlPanel::ID_CHANGE );
+   hcb_titleProt = new FXCheckButton( this, "Disables window title overlay", this, GHI_ControlPanel::ID_CHANGE );
    FXMatrix *m = new FXMatrix( this, 3, MATRIX_BY_COLUMNS | LAYOUT_FILL_X );   
    new FXLabel( m, "Main title font", NULL, LABEL_NORMAL );
    htf_tfont = new FXTextField( m, 51, this, GHI_ControlPanel::ID_CHANGE, TEXTFIELD_NORMAL | LAYOUT_FILL_X ); 
@@ -95,7 +96,8 @@ void GHI_ControlPanel::readConfig( )
    FXString fntspec_base = getApp( )->getNormalFont( )->getFont( );   
    
    FXString cf_prefix = CFG_HEADER_PREFIX;
-   FXbool   _title            = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", true );              
+   FXbool   _title            = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", true );
+   FXbool   _titleProt        = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".TitleProt", false );
    FXbool   _colorize         = getApp( )->reg( ).readBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", true );  
    FXString _fntspec_title    = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       fntspec_base.text( ) );
    FXString _fntspec_subtitle = getApp( )->reg( ).readStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    fntspec_base.text( ) );
@@ -107,6 +109,7 @@ void GHI_ControlPanel::readConfig( )
    htf_sfont->setText( _fntspec_subtitle );
    hcb_colorize->setCheck( _colorize );
    hcb_title->setCheck( _title );
+   hcb_titleProt->setCheck( _titleProt );
    hcb_separator->setCheck( _separator );
    hcb_sepColOffset->setValue( static_cast<int>( _sep_tintoffset * 100 ) );
    hcb_colOffset->setValue( static_cast<int>( _base_tintoffset * 100 ) );
@@ -133,6 +136,7 @@ void GHI_ControlPanel::writeConfig( )
  
   FXString cf_prefix = CFG_HEADER_PREFIX;
   a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".ShowTitle", hcb_title->getCheck( ) );
+  a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".TitleProt", hcb_titleProt->getCheck( ) );
   a->reg( ).writeBoolEntry(   CFG_FXGHI, cf_prefix + ".EnableColorized", hcb_colorize->getCheck( ) );
   a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".TitleFont",       htf_tfont->getText( ).text( ) );
   a->reg( ).writeStringEntry( CFG_FXGHI, cf_prefix + ".SubTitleFont",    htf_sfont->getText( ).text( ) );

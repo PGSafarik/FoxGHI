@@ -30,6 +30,7 @@ FXDECLARE( GHI_ControlPanel )
    FXTextField   *htf_sfont; 
    FXCheckButton *hcb_colorize;
    FXCheckButton *hcb_title;
+   FXCheckButton *hcb_titleProt;
    FXCheckButton *hcb_separator;
    FXSpinner     *hcb_colOffset;
    FXSpinner     *hcb_sepColOffset;
