@@ -24,5 +24,6 @@
 ***************************************************************************************************/
 #include<Windows/FXPrimaryWindow.h>
 #include<Windows/FXSecondaryWindow.h>
+#include<Windows/FXDesktopWidget.h>
 
 #endif /* FXGHI_WINDOWS_H */
