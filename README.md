@@ -1,5 +1,5 @@
 # Fox Gnome Human Interface library (foxGHI)  
--27/02/2025-
+-15/05/2025-
 
 *Content:*
   1. [General info](#1-general-info)
@@ -130,6 +130,9 @@ menu).
 
 ### 20/11/2024 Adding a project version to the library
 Expanding the options for setting the Header bar color (darkening) in Foxlib registers.
+
+### 15/05/2026 Adding the new window type FXDesktopWindow
+The new window type FXDesktopWindow is added to the library, for small applications running on the desktop. 
 
 ### It will be in the near future  
   1) Completed Header Bar colorization setup in FXGHI::ControllPanel class
