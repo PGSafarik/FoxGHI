@@ -53,6 +53,7 @@ ADD_SUBDIRECTORY( "${PROJECT_SOURCE_DIR}/utils/FoxGHICP" )
 
 # Build test  
 ADD_SUBDIRECTORY( "${PROJECT_SOURCE_DIR}/tests/SimpleWindow" )
+ADD_SUBDIRECTORY( "${PROJECT_SOURCE_DIR}/tests/SimpleDesktopWidget" )
 
 # Install build project
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION lib/ ) # libray file(s)
